@@ -1,8 +1,8 @@
 {
-  "name": "hoshi",
+  "name": "heimdall",
   "version": "1.0.0",
-  "description": "A starboard bot",
-  "main": "hoshi.js",
+  "description": "A multipurose bot",
+  "main": "heimdall.js",
   "scripts": {
     "test": "eslint ./"
   },
@@ -21,7 +21,6 @@
     "discord.js": "github:hydrabolt/discord.js",
     "moment": "^2.22.2",
     "pg": "^6.4.2",
-    "raven": "^2.6.3",
     "sequelize": "^4.38.0"
   }
 }
