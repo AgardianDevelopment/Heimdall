@@ -9,7 +9,7 @@ class StatsCommand extends Command {
       aliases: ['stats'],
       category: 'general',
       clientPermissions: ['EMBED_LINKS'],
-      description: { content: 'Displays Hoshi\'s statistics.' }
+      description: { content: 'Displays Heimdall\'s statistics.' }
     })
   }
 

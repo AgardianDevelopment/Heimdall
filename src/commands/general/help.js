@@ -70,6 +70,7 @@ class HelpCommand extends Command {
       const title = {
         general: '📝\u2000General',
         moderation: '🚔\u2000Moderation',
+        nsfw: '🔞\u2000NSFW',
         reputation: '💕\u2000Reputation',
         setup: '🛠️\u2000Setup',
         starboard: '⭐\u2000Starboard'
@@ -84,7 +85,7 @@ class HelpCommand extends Command {
       await message.author.send({ embed })
       if (shouldReply) return message.util.reply('I\'ve sent you a DM with the command list.')
     } catch (err) {
-      if (shouldReply) return message.util.reply('I could not send you the command list in DMs.')
+      if (shouldReply) return message.util.send({ embed })
     }
 
     return undefined
