@@ -70,6 +70,7 @@ class HelpCommand extends Command {
       const title = {
         general: '📝\u2000General',
         reputation: '💕\u2000Reputation',
+        setup: '🛠️\u2000Setup',
         starboard: '⭐\u2000Starboard'
       }[category.id]
 

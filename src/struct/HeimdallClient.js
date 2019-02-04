@@ -18,7 +18,7 @@ class HeimdallClient extends AkairoClient {
     this.commandHandler = new CommandHandler(this, {
       directory: path.join(__dirname, '..', 'commands'),
       aliasReplacement: /-/g,
-      prefix: message => this.settings.get(message.guild, 'prefix', '?'),
+      prefix: message => this.settings.get(message.guild, 'prefix', '-'),
       allowMention: true,
       fetchMembers: true,
       commandUtil: true,
