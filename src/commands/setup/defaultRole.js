@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo')
 
 class DefaultRoleCommand extends Command {
-  constructor() {
+  constructor () {
     super('defaultrole', {
       aliases: ['defaultrole', 'defrole'],
       category: 'setup',
@@ -28,7 +28,7 @@ class DefaultRoleCommand extends Command {
     })
   }
 
-  async exec(msg, { roleName }) {
+  async exec (msg, { roleName }) {
     await this.client.settings.set(msg.guild, 'defaultRole', roleName.id)
     return msg.util.reply(`The default role has been set to ${roleName}`)
   }

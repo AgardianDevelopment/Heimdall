@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo')
 
 class NSFWCommand extends Command {
-  constructor() {
+  constructor () {
     super('nsfw', {
       aliases: ['nsfw'],
       category: 'setup',
@@ -28,7 +28,7 @@ class NSFWCommand extends Command {
     })
   }
 
-  async exec(msg, { yesOrNo }) {
+  async exec (msg, { yesOrNo }) {
     if (yesOrNo.match[0] === 'true') {
       await this.client.settings.set(msg.guild, 'nsfw', true)
       return msg.util.send('NSFW has been to **TRUE** for you server.')

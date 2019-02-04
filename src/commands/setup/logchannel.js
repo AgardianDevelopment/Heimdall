@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo')
 
 class LogChannelCommand extends Command {
-  constructor() {
+  constructor () {
     super('logchannel', {
       aliases: ['logchannel', 'logchan'],
       category: 'setup',
@@ -28,7 +28,7 @@ class LogChannelCommand extends Command {
     })
   }
 
-  async exec(msg, { channelName }) {
+  async exec (msg, { channelName }) {
     await this.client.settings.set(msg.guild, 'logChannel', channelName.id)
     return msg.util.reply(`The log channel has been set to **${channelName}**.`)
   }

@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo')
 
 class AnnounceChannelCommand extends Command {
-  constructor() {
+  constructor () {
     super('announcechannel', {
       aliases: ['announcechannel', 'annchan'],
       category: 'setup',
@@ -28,7 +28,7 @@ class AnnounceChannelCommand extends Command {
     })
   }
 
-  async exec(msg, { channelName }) {
+  async exec (msg, { channelName }) {
     await this.client.settings.set(msg.guild.id, 'newsChannel', channelName.id)
     return msg.util.reply(`The announcements channel has been set to ${channelName}`)
   }
