@@ -11,6 +11,10 @@ const Setting = db.define('settings', {
     'type': Sequelize.JSONB,
     'allowNull': false,
     'default': {}
+  },
+  caseNumber: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1
   }
 })
 

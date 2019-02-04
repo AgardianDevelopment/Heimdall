@@ -27,7 +27,7 @@ class SettingsCommand extends Command {
     console.log(newsChan)
 
     const embed = this.client.util.embed()
-      .setColor(0xFFAC33)
+      .setColor(0xfacb3e)
       .setTitle('Settings')
       .setDescription([
         `**Prefix**: \`${prefix}\``,
@@ -39,6 +39,8 @@ class SettingsCommand extends Command {
         `**Blacklist**: ${blacklist.join(', ') || 'None'}`,
         `**NSFW Mode**: \`${nsfw}\``
       ])
+      .setTimestamp()
+      .setFooter(`Requested by ${msg.author.tag}`, `${msg.author.displayAvatarURL()}`)
 
     return msg.util.send({ embed })
   }
