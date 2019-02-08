@@ -13,14 +13,14 @@ class PurgeCommand extends Command {
           id: 'limit',
           type: 'number',
           prompt: {
-            start: 'How many messages would you like to delete (1-100)?',
+            start: 'How many messages would you like to delete (1-99)?',
             retry: 'Please enter a number between 1 and 100.'
           }
         }
       ],
       description: {
         content: [
-          'Purges a selected amount of messages.'
+          'Purges a selected amount of messages. Adjust for amount + 1 for command.'
         ],
         useage: '<prefix>',
         examples: ['25']
@@ -29,8 +29,8 @@ class PurgeCommand extends Command {
   }
 
   async exec (msg, { limit }) {
-    if (limit < 1 || limit > 100) {
-      return msg.util.reply('Please try again with a number between 1 and 100')
+    if (limit > 99) {
+      return msg.util.reply('Please try again with a number between 1 and 99')
     }
 
     const fetched = await msg.channel.messages.fetch({ limit: limit + 1 })

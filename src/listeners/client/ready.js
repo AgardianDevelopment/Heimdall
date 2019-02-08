@@ -13,7 +13,7 @@ class ReadyListener extends Listener {
 
   exec () {
     Logger.info(`${this.client.user.tag} is ready to serve!`)
-    this.client.user.setActivity('@Heimdall help')
+    this.client.user.setActivity(`Over ${this.client.users.size} Mortals`, { type: 'WATCHING' })
 
     for (const guild of this.client.guilds.values()) {
       const starboard = new Starboard(guild)

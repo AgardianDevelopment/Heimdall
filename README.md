@@ -1,7 +1,7 @@
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=for-the-badge)
 ![node](https://img.shields.io/badge/Node-%3E10.0.0-yellow.svg?style=for-the-badge)
 
-[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
+[![Bots for Discord](https://botsfordiscord.com/api/bot/391050398850613250/widget)](https://botsfordiscord.com/bots/391050398850613250)
 
 # Heimdall
 

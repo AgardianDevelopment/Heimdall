@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "chalk": "^2.4.1",
+    "delay": "^4.1.0",
     "discord-akairo": "github:1computer1/discord-akairo",
     "discord.js": "github:hydrabolt/discord.js",
     "moment": "^2.22.2",

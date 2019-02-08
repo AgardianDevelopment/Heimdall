@@ -21,7 +21,7 @@ class NekoCommand extends Command {
     const loading = await this.client.emojis.get('541151509946171402')
     let m = await msg.channel.send(`${loading} **Sexy anime kitties.**`)
 
-    const { body } = await get('https://nekobot.xyz/api/image?type=neko')
+    const { body } = await get('https://nekobot.xyz/api/image?type=lewdneko')
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
