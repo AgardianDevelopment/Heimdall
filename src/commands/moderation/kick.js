@@ -39,6 +39,7 @@ class KickCommand extends Command {
     guildMember.kick().catch(console.error)
 
     const logChan = this.client.settings.get(msg.guild.id, 'logChannel', [])
+    if (!logChan) return msg.util.reply(`${member.tag} has been kicked.`)
     const logSend = msg.guild.channels.get(logChan)
 
     const guildID = await guildSettings.findOne({ where: { guildID: msg.guild.id } })

@@ -36,9 +36,10 @@ class BanCommand extends Command {
 
   async exec (msg, { member, reason }) {
     let guildMember = msg.guild.member(member)
-    // guildMember.ban().catch(console.error)
+    guildMember.ban().catch(console.error)
 
     const logChan = this.client.settings.get(msg.guild.id, 'logChannel', [])
+    if (!logChan) return msg.util.reply(`${member.tag} has been banned.`)
     const logSend = msg.guild.channels.get(logChan)
 
     const guildID = await guildSettings.findOne({ where: { guildID: msg.guild.id } })

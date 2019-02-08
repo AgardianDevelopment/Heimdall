@@ -37,6 +37,7 @@ class PurgeCommand extends Command {
     msg.channel.bulkDelete(fetched.array().reverse()).catch(err => msg.util.reply(`Messages not deleted due to error: ${err}`))
 
     const logChan = this.client.settings.get(msg.guild.id, 'logChannel', [])
+    if (!logChan) return msg.util.reply(`${fetched.size} of ${limit + 1} messages deleted.`)
     const logSend = msg.guild.channels.get(logChan)
 
     const guildID = await guildSettings.findOne({ where: { guildID: msg.guild.id } })
