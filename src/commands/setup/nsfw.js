@@ -31,10 +31,10 @@ class NSFWCommand extends Command {
   async exec (msg, { yesOrNo }) {
     if (yesOrNo.match[0] === 'true') {
       await this.client.settings.set(msg.guild, 'nsfw', true)
-      return msg.util.send('NSFW has been to **TRUE** for you server.')
+      return msg.util.reply('NSFW has been to **TRUE** for you server.')
     } else {
       await this.client.settings.set(msg.guild, 'nsfw', false)
-      return msg.util.send('NSFW has been to **FALSE** for you server.')
+      return msg.util.reply('NSFW has been to **FALSE** for you server.')
     }
   }
 }

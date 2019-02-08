@@ -3,7 +3,7 @@ const { get } = require('snekfetch')
 const { imgurAPI } = require(`../../../config.json`)
 
 class BlowJobCommand extends Command {
-  constructor() {
+  constructor () {
     super('blowjob', {
       aliases: ['blowjob'],
       category: 'nsfw',
@@ -15,7 +15,7 @@ class BlowJobCommand extends Command {
     })
   }
 
-  async exec(msg) {
+  async exec (msg) {
     const nsfwMode = this.client.settings.get(msg.guild.id, 'nsfw', [])
     if (!nsfwMode || nsfwMode === false || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
 
@@ -48,15 +48,14 @@ class BlowJobCommand extends Command {
       var imagePhoto = image.data[i].link
     }
 
-
     const embed = this.client.util.embed()
-    .setTitle('Image didn\'t load click here.')
-    .setURL(imagePhoto)
-    .setColor(0xfacb3e)
-    .setTimestamp()
-    .setImage(imagePhoto)
-    .setFooter(`Requested by ${msg.author.tag} | imgur API`, `${msg.author.displayAvatarURL()}`)
-    
+      .setTitle('Image didn\'t load click here.')
+      .setURL(imagePhoto)
+      .setColor(0xfacb3e)
+      .setTimestamp()
+      .setImage(imagePhoto)
+      .setFooter(`Requested by ${msg.author.tag} | imgur API`, `${msg.author.displayAvatarURL()}`)
+
     m.edit({ embed })
   }
 }

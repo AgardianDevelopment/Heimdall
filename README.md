@@ -1,5 +1,5 @@
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=for-the-badge)
-![node](https://img.shields.io/badge/Node-%3E8.0.0-yellow.svg?style=for-the-badge)
+![node](https://img.shields.io/badge/Node-%3E10.0.0-yellow.svg?style=for-the-badge)
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
@@ -28,7 +28,7 @@ Once you invite Heimdall to your server you will need to do a little setup if yo
 
 ## Self-hosting
 
-Asgaridan Development highly reccomends you invite this bot instead of self-hosting. Self-hosting aka running the bot provided within this repo on your own is permitted but not supported by Asgaridan Development. Source code is provided in the interest of being open with our community. Ultimately no help of guidance will be provided for setup, editing, or any actions from running the bot within your own self-hosted enviroment. You are more then welcome to join the support server but understand any issues or questions stemming from self-hosting may be ignored or disregarded entirely. If you still wish to continue to self host the bot you will need at the very least the following:
+Asgaridan Development highly reccomends you invite this bot instead of self-hosting. Self-hosting aka running the bot provided within this repo on your own is permitted but not supported by Asgaridan Development. Source code is provided in the interest of being open with our community. Ultimately no help or guidance will be provided for setup, editing, or any actions from running the bot within your own self-hosted enviroment. You are more then welcome to join the support server but understand any issues or questions stemming from self-hosting may be ignored or disregarded entirely. If you still wish to continue to self host the bot you will need at the very least the following:
 
 - Discord Developer Application
 - Node v10.0.0+

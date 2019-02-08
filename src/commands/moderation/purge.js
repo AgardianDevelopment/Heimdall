@@ -46,7 +46,7 @@ class PurgeCommand extends Command {
       .setColor(0xfacb3e)
       .setTimestamp()
       .setFooter(`Case: ${guildID.caseNumber} | Recorded by ${msg.author.tag}`, `${msg.author.displayAvatarURL()}`)
-      .addField('Messages Purged :scissors:', [
+      .addField('Messages Purged', [
         `**Requested Purge**: ${limit + 1}`,
         `**Actual Purge**: ${fetched.size}`
       ])

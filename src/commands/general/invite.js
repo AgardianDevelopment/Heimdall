@@ -6,28 +6,14 @@ class InviteCommand extends Command {
       aliases: ['invite'],
       category: 'general',
       clientPermissions: ['EMBED_LINKS'],
-      description: { content: 'Gets the bot invite for Hoshi.' }
+      description: { content: 'Gets the bot invite for Heimdall.' }
     })
-  }
-
-  async fetchInvite () {
-    if (this.invite) return this.invite
-    const invite = await this.client.generateInvite([
-      'VIEW_CHANNEL',
-      'MANAGE_MESSAGES',
-      'READ_MESSAGE_HISTORY',
-      'SEND_MESSAGES',
-      'EMBED_LINKS'
-    ])
-
-    this.invite = invite
-    return invite
   }
 
   async exec (message) {
     const embed = this.client.util.embed()
       .setColor(0xFFAC33)
-      .setDescription(`**[Add Hoshi to your server!](${await this.fetchInvite()})**`)
+      .setDescription(`**[Add Heimdall to your server!](https://discordapp.com/oauth2/authorize/?permissions=536341718&scope=bot&client_id=391050398850613250)**`)
 
     return message.util.send({ embed })
   }
