@@ -27,7 +27,7 @@ class BestStarCommand extends Command {
       order: Sequelize.literal('"starCount" DESC')
     })
 
-    const embed = this.client.util.embed().setColor(0xFFAC33)
+    const embed = this.client.util.embed().setColor(process.env.EMBED)
 
     if (bestStar) {
       const msg = await message.guild.channels.get(bestStar.channelID)

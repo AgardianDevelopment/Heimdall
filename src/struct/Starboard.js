@@ -2,7 +2,7 @@ const { Collection } = require('discord.js')
 const path = require('path')
 const Star = require('../models/stars')
 const Queue = require('./Queue')
-const { selfstarWarningTimeout } = require('../../config.json')
+const selfstarWarningTimeout = process.env.TIMEOUT
 
 class Starboard {
   constructor (guild) {
@@ -307,7 +307,7 @@ class Starboard {
   buildStarboardEmbed (message, starCount = 1) {
     const star = Starboard.getStarEmoji(starCount)
     const embed = this.client.util.embed()
-      .setColor(0xFFAC33)
+      .setColor(process.env.EMBED)
       .addField('Author', message.author, true)
       .addField('Channel', message.channel, true)
       .setThumbnail(message.author.displayAvatarURL())

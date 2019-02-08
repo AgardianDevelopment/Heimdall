@@ -15,7 +15,7 @@ class AboutCommand extends Command {
     const asgard = this.client.guilds.get('540671346728763392')
 
     const embed = this.client.util.embed()
-      .setColor(0xFFAC33)
+      .setColor(process.env.EMBED)
       .setTitle('About Heimdall')
       .setDescription([
         `Heimdall is developed by **${asgard}** and is a fork of Hoshi by **1computer1** and **vzwgrey**.`,
@@ -23,7 +23,9 @@ class AboutCommand extends Command {
         'Heimdall uses the **[Discord.js](https://discord.js.org)** library and the **[Akairo](https://1computer1.github.io/discord-akairo)** framework.',
         'You can find the Github repo for Heimdall **[here](https://github.com/AgardianDevelopment/heimdall)**.',
         '',
-        `Use \`${prefix}stats\` for statistics and \`${prefix}invite\` for an invite link.`
+        `Use \`${prefix}stats\` for statistics and \`${prefix}invite\` for an invite link.`,
+        '',
+        'Join the community server [server](https://discord.gg/E9cJjvw)to learn more!'
       ])
 
     return message.util.send({ embed })

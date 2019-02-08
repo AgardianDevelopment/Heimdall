@@ -26,7 +26,7 @@ class PollCommand extends Command {
 
     const embed = this.client.util.embed()
       .setTitle(`Server Poll | React to Vote`)
-      .setColor(0xfacb3e)
+      .setColor(process.env.EMBED)
       .setDescription(question)
       .setTimestamp()
       .setFooter(`Requested by ${msg.author.tag}`, `${msg.author.displayAvatarURL()}`)

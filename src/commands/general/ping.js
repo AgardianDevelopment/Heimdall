@@ -15,7 +15,7 @@ class PingCommand extends Command {
 
       const embed = this.client.util.embed()
         .setTitle('🔔 Pong!')
-        .setColor(0xFFAC33)
+        .setColor(process.env.EMBED)
         .addField('📶 Latency', `${diff}ms`, true)
 
       m.edit({ embed })

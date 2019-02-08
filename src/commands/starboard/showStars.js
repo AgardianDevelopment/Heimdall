@@ -48,7 +48,7 @@ class ShowStarsCommand extends Command {
     const plural = (num, str) => Math.abs(num) === 1 ? `${num} ${str}` : `${num} ${str}s`
 
     const embed = this.client.util.embed()
-      .setColor(0xFFAC33)
+      .setColor(process.env.EMBED)
       .setThumbnail(member.user.displayAvatarURL())
       .setTitle(`User Information for ${member.user.tag}`)
       .addField('Star Count', [

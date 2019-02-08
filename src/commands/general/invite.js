@@ -12,7 +12,7 @@ class InviteCommand extends Command {
 
   async exec (message) {
     const embed = this.client.util.embed()
-      .setColor(0xFFAC33)
+      .setColor(process.env.EMBED)
       .setDescription(`**[Add Heimdall to your server!](https://discordapp.com/oauth2/authorize/?permissions=536341718&scope=bot&client_id=391050398850613250)**`)
 
     return message.util.send({ embed })

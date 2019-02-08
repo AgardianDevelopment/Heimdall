@@ -1,4 +1,4 @@
-const { dbURL } = require('../../config.json')
+const dbURL = process.env.DATABASE
 const Logger = require('../util/Logger')
 const path = require('path')
 const readdir = require('util').promisify(require('fs').readdir)

@@ -1,6 +1,7 @@
 require('./src/util/Extensions')
+require('dotenv').config()
 
-const config = require('./config.json')
+const config = process.env.config
 const HeimdallClient = require('./src/struct/HeimdallClient')
 const Logger = require('./src/util/Logger')
 

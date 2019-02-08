@@ -26,7 +26,7 @@ class AssCommand extends Command {
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
       .setURL(body.message)
-      .setColor(0xfacb3e)
+      .setColor(process.env.EMBED)
       .setTimestamp()
       .setImage(body.message)
       .setFooter(`Requested by ${msg.author.tag} | NekoBot API`, `${msg.author.displayAvatarURL()}`)

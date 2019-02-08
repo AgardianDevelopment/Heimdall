@@ -48,7 +48,7 @@ class RoleRemoveCommand extends Command {
     guildID.increment('caseNumber')
 
     const embed = this.client.util.embed()
-      .setColor(0xfacb3e)
+      .setColor(process.env.EMBED)
       .setTimestamp()
       .setFooter(`Case: ${guildID.caseNumber} | Recorded by ${msg.author.tag}`, `${msg.author.displayAvatarURL()}`)
       .addField('User Role Removed', [

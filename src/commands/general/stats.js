@@ -35,7 +35,7 @@ class StatsCommand extends Command {
 
   async exec (message) {
     const embed = this.client.util.embed()
-      .setColor(0xFFAC33)
+      .setColor(process.env.EMBED)
       .setTitle('Hoshi Statistics')
       .addField('Discord', [
         `**Guilds**: ${this.client.guilds.size}`,

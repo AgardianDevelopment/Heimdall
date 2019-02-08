@@ -7,7 +7,7 @@ const Setting = require('../models/settings')
 
 class HeimdallClient extends AkairoClient {
   constructor (config) {
-    super({ ownerID: config.owner }, {
+    super({ ownerID: process.env.BOT_OWNERS }, {
       messageCacheMaxSize: 50,
       messageCacheLifetime: 300,
       messageSweepInterval: 900,
@@ -70,7 +70,7 @@ class HeimdallClient extends AkairoClient {
   async start () {
     await Database.authenticate()
     await this.settings.init()
-    return this.login(this.config.token)
+    return this.login(process.env.BOT_TOKEN)
   }
 }
 

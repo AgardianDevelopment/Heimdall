@@ -1,4 +1,5 @@
 node_modules
 .vscode
-config.json
 /src/commands/owner/nekos.js
+/.env
+/config.json.back

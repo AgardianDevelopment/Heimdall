@@ -77,7 +77,7 @@ class TopStarsCommand extends Command {
     }))
 
     const embed = this.client.util.embed()
-      .setColor(0xFFAC33)
+      .setColor(process.env.EMBED)
       .setTitle(`Star Leaderboard — Page ${page} of ${Math.ceil(total / this.perPage)}`)
 
     if (users.length) {

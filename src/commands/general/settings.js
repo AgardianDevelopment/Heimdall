@@ -27,7 +27,7 @@ class SettingsCommand extends Command {
     console.log(newsChan)
 
     const embed = this.client.util.embed()
-      .setColor(0xfacb3e)
+      .setColor(process.env.EMBED)
       .setTitle('Settings')
       .setDescription([
         `**Prefix**: \`${prefix}\``,

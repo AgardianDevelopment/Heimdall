@@ -69,7 +69,7 @@ class TopRepsCommand extends Command {
     }))
 
     const embed = this.client.util.embed()
-      .setColor(0xFFAC33)
+      .setColor(process.env.EMBED)
       .setTitle(`Reputation Leaderboard — Page ${page} of ${Math.ceil(total / this.perPage)}`)
 
     if (users.length) {

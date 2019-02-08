@@ -26,7 +26,7 @@ class HBoobsCommand extends Command {
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
       .setURL(body.url)
-      .setColor(0xfacb3e)
+      .setColor(process.env.EMBED)
       .setTimestamp()
       .setImage(body.url)
       .setFooter(`Requested by ${msg.author.tag} | Nekos.life API`, `${msg.author.displayAvatarURL()}`)

@@ -40,7 +40,7 @@ class AnnouncementCommand extends Command {
     const embed = this.client.util.embed()
       .setTitle(title)
       .setDescription(content)
-      .setColor(0xfacb3e)
+      .setColor(process.env.EMBED)
       .setTimestamp()
       .setFooter(`By ${msg.author.tag}`, `${msg.author.displayAvatarURL()}`)
 

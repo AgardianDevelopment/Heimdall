@@ -65,7 +65,7 @@ class SetupCommand extends Command {
     }
     const embed = this.client.util.embed()
       .setAuthor('Server Setting Wizard')
-      .setColor(0xfacb3e)
+      .setColor(process.env.EMBED)
       .setDescription('Server Settings', [
         `**Default Role**: ${roleName}`,
         `**Log Channel**: ${logChannel}`,

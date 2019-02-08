@@ -26,7 +26,7 @@ class BoobsCommand extends Command {
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
       .setURL(`http://media.oboobs.ru/${body[0].preview}`)
-      .setColor(0xfacb3e)
+      .setColor(process.env.EMBED)
       .setTimestamp()
       .setImage(`http://media.oboobs.ru/${body[0].preview}`)
       .setFooter(`Requested by ${msg.author.tag} | oboobs.ru API`, `${msg.author.displayAvatarURL()}`)

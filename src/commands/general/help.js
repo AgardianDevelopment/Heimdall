@@ -26,10 +26,10 @@ class HelpCommand extends Command {
     })
   }
 
-  exec (message, { command }) {
-    if (!command) return this.execCommandList(message)
+  exec (msg, { command }) {
+    if (!command) return this.execCommandList(msg)
 
-    const prefix = this.handler.prefix(message)
+    const prefix = this.handler.prefix(msg)
     const description = Object.assign({
       content: 'No description available.',
       usage: '',
@@ -38,7 +38,7 @@ class HelpCommand extends Command {
     }, command.description)
 
     const embed = this.client.util.embed()
-      .setColor(0xFFAC33)
+      .setColor(process.env.EMBED)
       .setTitle(`\`${prefix}${command.aliases[0]} ${description.usage}\``)
       .addField('Description', description.content)
 
@@ -53,12 +53,12 @@ class HelpCommand extends Command {
       embed.addField('Aliases', `\`${command.aliases.join('` `')}\``, true)
     }
 
-    return message.util.send({ embed })
+    return msg.util.send({ embed }).then(msg.delete())
   }
 
-  async execCommandList (message) {
+  async execCommandList (msg) {
     const embed = this.client.util.embed()
-      .setColor(0xFFAC33)
+      .setColor(process.env.EMBED)
       .addField('Command List',
         [
           'This is a list of commands.',
@@ -79,13 +79,13 @@ class HelpCommand extends Command {
       if (title) embed.addField(title, `\`${category.map(cmd => cmd.aliases[0]).join('` `')}\``)
     }
 
-    const shouldReply = message.guild && message.channel.permissionsFor(this.client.user).has('SEND_MESSAGES')
+    const shouldReply = msg.guild && msg.channel.permissionsFor(this.client.user).has('SEND_msgS')
 
     try {
-      await message.author.send({ embed })
-      if (shouldReply) return message.util.reply('I\'ve sent you a DM with the command list.')
+      await msg.author.send({ embed })
+      if (shouldReply) return msg.util.reply('I\'ve sent you a DM with the command list.').then(msg.delete())
     } catch (err) {
-      if (shouldReply) return message.util.send({ embed })
+      if (shouldReply) return msg.util.send({ embed }).then(msg.delete())
     }
 
     return undefined

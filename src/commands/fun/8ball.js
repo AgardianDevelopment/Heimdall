@@ -33,14 +33,14 @@ class EightBallCommand extends Command {
 
     const embed = this.client.util.embed()
       .setAuthor('Magic 8-ball', 'https://just.vulgarity.xyz/a1kTyH4S7GgxTvAN.png')
-      .setColor(0xfacb3e)
+      .setColor(process.env.EMBED)
       .setTimestamp()
       .setFooter(`Requested by ${msg.author.tag}`, `${msg.author.displayAvatarURL()}`)
       .addField('Your Results', [
         `**Question**: ${question}`,
         `**Answer**: ${answer}`
       ])
-    msg.channel.send({ embed })
+    msg.channel.send({ embed }).then(msg.delete())
   }
 }
 module.exports = EightBallCommand

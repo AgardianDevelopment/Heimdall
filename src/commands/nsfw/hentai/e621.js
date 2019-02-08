@@ -43,7 +43,7 @@ class E61Command extends Command {
       .setTitle('Image didn\'t load click here.')
       .setURL(`https://e621.net/post/show/${result.id}`)
       .setDescription(`Created by ${result.artist[0]}\n**Description:** ${result.description.substring(0, 450)}...`)
-      .setColor(0xfacb3e)
+      .setColor(process.env.EMBED)
       .setTimestamp()
       .setImage(result.file_url)
       .setFooter(`Requested by ${msg.author.tag} | via e621`, `${msg.author.displayAvatarURL()}`)
