@@ -16,11 +16,11 @@ class AboutCommand extends Command {
 
     const embed = this.client.util.embed()
       .setColor(process.env.EMBED)
-      .setTitle('About Heimdall')
+      .setTitle('About Heimdallr')
       .setDescription([
-        `Heimdall is developed by **${asgard}** and is a fork of Hoshi by **1computer1** and **vzwgrey**.`,
+        `Heimdallr is developed by **${asgard}** and is a fork of Hoshi by **1computer1** and **vzwgrey**.`,
         '',
-        'Heimdall uses the **[Discord.js](https://discord.js.org)** library and the **[Akairo](https://1computer1.github.io/discord-akairo)** framework.',
+        'Heimdallr uses the **[Discord.js](https://discord.js.org)** library and the **[Akairo](https://1computer1.github.io/discord-akairo)** framework.',
         'You can find our more on our **[wiki](https://github.com/AgardianDevelopment/heimdall/wiki)**.',
         '',
         `Use \`${prefix}stats\` for statistics and \`${prefix}invite\` for an invite link.`,
