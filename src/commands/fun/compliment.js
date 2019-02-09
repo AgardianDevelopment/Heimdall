@@ -34,7 +34,6 @@ class ComplimentCommand extends Command {
     let m = await msg.channel.send(`${loading} looking for a heart warming compliment!`)
 
     const { body } = await get(`https://complimentr.com/api`)
-    console.log(body.compliment)
     if (!body.compliment) return msg.util.reply(`${ohNo} There seems to be a problem sorry.`).then(msg.delete())
 
     m.edit(`${member}, ${body.compliment}!`).then(msg.delete())

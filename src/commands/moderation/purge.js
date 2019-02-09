@@ -4,7 +4,7 @@ const guildSettings = require('../../models/settings')
 class PurgeCommand extends Command {
   constructor () {
     super('purge', {
-      aliases: ['purge'],
+      aliases: ['purge', 'clear', 'clean'],
       category: 'moderation',
       channel: 'guild',
       userPermissions: ['MANAGE_MESSAGES'],

@@ -31,7 +31,7 @@ class BoobsCommand extends Command {
       .setImage(`http://media.oboobs.ru/${body[0].preview}`)
       .setFooter(`Requested by ${msg.author.tag} | oboobs.ru API`, `${msg.author.displayAvatarURL()}`)
 
-    m.edit({ embed })
+    m.edit({ embed }).then(msg.delete())
   }
 }
 module.exports = BoobsCommand

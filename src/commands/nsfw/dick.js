@@ -1,16 +1,17 @@
 const { Command } = require('discord-akairo')
 const { get } = require('snekfetch')
 
-class BlowJobCommand extends Command {
+class DickCommand extends Command {
   constructor () {
-    super('blowjob', {
-      aliases: ['blowjob'],
+    super('dick', {
+      aliases: ['dick'],
       category: 'nsfw',
       description: {
-        content: 'Random result here to give you head.'
+        content: 'Returns a random result with a long boi.'
       },
       cooldown: 3000,
       ratelimit: 2
+
     })
   }
 
@@ -20,11 +21,13 @@ class BlowJobCommand extends Command {
 
     const loading = await this.client.emojis.get('541151509946171402')
     const ohNo = await this.client.emojis.get('541151482599440385')
-    let m = await msg.channel.send(`${loading} **Cradle the balls, stroke the shaft, work the pipe, swallow the gravy.**`)
+    let m = await msg.channel.send(`${loading} **Is that a dick in your pocket or....**`)
 
     let subreddits = [
-      'Blowjobs',
-      'blowjobsandwich'
+      'curved_cock',
+      'dicks',
+      'penis',
+      'MalesMasturbating'
     ]
 
     let img_sub = subreddits[Math.round(Math.random() * (subreddits.length - 1))]
@@ -36,7 +39,7 @@ class BlowJobCommand extends Command {
     }
 
     if (image.status == 403) {
-      return m.edit(`${ohNo} Looks like something went wrong.`).then(msg.delete())
+      return m.edit(`${ohNo} Looks like something went wrong.`)
     }
 
     var i = Math.floor(Math.random() * image.data.length)
@@ -55,7 +58,7 @@ class BlowJobCommand extends Command {
       .setImage(imagePhoto)
       .setFooter(`Requested by ${msg.author.tag} | imgur API`, `${msg.author.displayAvatarURL()}`)
 
-    m.edit({ embed }).then(msg.delete())
+    m.edit({ embed }).then(msg.delete()).then(msg.delete())
   }
 }
-module.exports = BlowJobCommand
+module.exports = DickCommand

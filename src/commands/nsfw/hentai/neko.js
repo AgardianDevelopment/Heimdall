@@ -31,7 +31,7 @@ class NekoCommand extends Command {
       .setImage(body.message)
       .setFooter(`Requested by ${msg.author.tag} | NekoBot API`, `${msg.author.displayAvatarURL()}`)
 
-    m.edit({ embed })
+    m.edit({ embed }).then(msg.delete())
   }
 }
 module.exports = NekoCommand

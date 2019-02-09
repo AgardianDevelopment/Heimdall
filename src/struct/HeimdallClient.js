@@ -7,7 +7,7 @@ const Setting = require('../models/settings')
 
 class HeimdallClient extends AkairoClient {
   constructor (config) {
-    super({ ownerID: process.env.BOT_OWNERS }, {
+    super({ ownerID: process.env.BOT_OWNERS.split(' ') }, {
       messageCacheMaxSize: 50,
       messageCacheLifetime: 300,
       messageSweepInterval: 900,

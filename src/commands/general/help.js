@@ -71,6 +71,7 @@ class HelpCommand extends Command {
         general: '📝\u2000General',
         moderation: '🚔\u2000Moderation',
         nsfw: '🔞\u2000NSFW',
+        query: '🔍\u2000Query',
         reputation: '💕\u2000Reputation',
         setup: '🛠️\u2000Setup',
         starboard: '⭐\u2000Starboard'

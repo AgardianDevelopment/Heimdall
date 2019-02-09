@@ -32,7 +32,7 @@ class E61Command extends Command {
 
     const blacklist = ['loli', 'shota', 'cub', 'young', 'child', 'baby']
 
-    const { body } = await get(`https://e621.net/post/index.json?limit=100&tags=${encodeURI(searchTerm)}`)
+    const { body } = await get(`https://e621.net/post/index.json?limit=100&rating=explicit&tags=${encodeURI(searchTerm)}`)
     const i = Math.floor(Math.random() * body.length)
     const result = body[i]
     if (!result) return m.edit(`${ohNo} Looks like your dreams were too big.`)
@@ -42,13 +42,13 @@ class E61Command extends Command {
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
       .setURL(`https://e621.net/post/show/${result.id}`)
-      .setDescription(`Created by ${result.artist[0]}\n**Description:** ${result.description.substring(0, 450)}...`)
+      .setDescription(`**Artist:** ${result.artist[0]}\n**Description:** ${result.description.substring(0, 450)}...`)
       .setColor(process.env.EMBED)
       .setTimestamp()
       .setImage(result.file_url)
-      .setFooter(`Requested by ${msg.author.tag} | via e621`, `${msg.author.displayAvatarURL()}`)
+      .setFooter(`Requested by ${msg.author.tag} | e621 API`, `${msg.author.displayAvatarURL()}`)
 
-    m.edit({ embed })
+    m.edit({ embed }).then(msg.delete())
   }
 }
 module.exports = E61Command
