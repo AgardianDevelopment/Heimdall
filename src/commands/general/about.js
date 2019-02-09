@@ -21,7 +21,7 @@ class AboutCommand extends Command {
         `Heimdall is developed by **${asgard}** and is a fork of Hoshi by **1computer1** and **vzwgrey**.`,
         '',
         'Heimdall uses the **[Discord.js](https://discord.js.org)** library and the **[Akairo](https://1computer1.github.io/discord-akairo)** framework.',
-        'You can find the Github repo for Heimdall **[here](https://github.com/AgardianDevelopment/heimdall)**.',
+        'You can find our more on our **[wiki](https://github.com/AgardianDevelopment/heimdall/wiki)**.',
         '',
         `Use \`${prefix}stats\` for statistics and \`${prefix}invite\` for an invite link.`,
         '',
