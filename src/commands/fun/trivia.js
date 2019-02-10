@@ -55,7 +55,7 @@ class TriviaCommand extends Command {
     if (!body.results[0].question) return sent.edit(`${ohNo} I couldn't find any trivia.`).then(msg.delete())
     const encoded = JSON.stringify(body.results[0])
     const decoded = await decodeEntities(encoded)
-    const results = await JSON.parse(decoded)
+    const results = await JSON.parse(decoded).then(sent.edit(`${ohNo} Something went wrong, please excuse us this is a beta command.`).then(msg.delete()))
 
     const question = results.question
 
