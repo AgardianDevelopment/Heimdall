@@ -25,7 +25,7 @@ class AboutCommand extends Command {
         '',
         `Use \`${prefix}stats\` for statistics and \`${prefix}invite\` for an invite link.`,
         '',
-        'Join the community server [server](https://discord.gg/E9cJjvw)to learn more!'
+        'Join the community server [server](https://discord.gg/E9cJjvw) to learn more!'
       ])
 
     return message.util.send({ embed })
