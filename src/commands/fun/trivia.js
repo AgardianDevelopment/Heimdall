@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo')
 const { get } = require('snekfetch')
 const shuffle = require('shuffle-array')
-const decodeEntities = require('decode-entities')
+const he = require('he')
 
 class TriviaCommand extends Command {
   constructor () {
@@ -53,13 +53,11 @@ class TriviaCommand extends Command {
     }
     
     if (!body.results[0].question) return sent.edit(`${ohNo} I couldn't find any trivia.`).then(msg.delete())
-    const encoded = JSON.stringify(body.results[0])
-    const decoded = await decodeEntities(encoded)
-    const results = await JSON.parse(decoded).then(sent.edit(`${ohNo} Something went wrong, please excuse us this is a beta command.`).then(msg.delete()))
+    const results = body.results[0]
 
     const question = results.question
 
-    var answers = [results.correct_answer, results.incorrect_answers[0], results.incorrect_answers[1], results.incorrect_answers[2]]
+    var answers = [he.decode(results.correct_answer), he.decode(results.incorrect_answers[0]), he.decode(results.incorrect_answers[1]), he.decode(results.incorrect_answers[2])]
 
     shuffle(answers)
 
@@ -69,9 +67,9 @@ class TriviaCommand extends Command {
       .setColor(process.env.EMBED)
       .setTimestamp()
       .setFooter(`Requested by ${msg.author.tag} | OpenTDB API`, `${msg.author.displayAvatarURL()}`)
-      .addField('Question:', question)
+      .addField('Question:', he.decode(question))
       .addField('Answers:', [
-        `1: ${answers[0]}`,
+        `1: ${(answers[0])}`,
         `2: ${answers[1]}`,
         `3: ${answers[2]}`,
         `4: ${answers[3]}`,
@@ -83,18 +81,18 @@ class TriviaCommand extends Command {
 
     if (!attempts || !attempts.size) {
       await sent.edit({ embed: null })
-      return msg.channel.send(`${ohNo} You ran out of time it was **${results.correct_answer}**.`)
+      return msg.channel.send(`${ohNo} You ran out of time it was **${he.decode(results.correct_answer)}**.`)
     }
 
     const answer = attempts.first().content.toLowerCase()
     const index = Number(answer) - 1
 
-    if (answers[index].toLowerCase() === results.correct_answer.toLowerCase()) {
+    if (answers[index].toLowerCase() === he.decode(results.correct_answer.toLowerCase())) {
       await sent.edit({ embed: null })
-      return msg.channel.send(`${check} You answered correctly with **${results.correct_answer}**`)
+      return msg.channel.send(`${check} You answered correctly with **${he.decode(results.correct_answer)}**`)
     } else {
       await sent.edit({ embed: null })
-      return msg.channel.send(`${ohNo} You answered incorrectly, It was **${results.correct_answer}**`)
+      return msg.channel.send(`${ohNo} You answered incorrectly, It was **${he.decode(results.correct_answer)}**`)
     }
   }
 }

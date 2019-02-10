@@ -22,6 +22,7 @@
     "discord-akairo": "github:1computer1/discord-akairo",
     "discord.js": "github:hydrabolt/discord.js",
     "dotenv": "^6.2.0",
+    "he": "^1.2.0",
     "kitsu.js": "^2.0.0",
     "moment": "^2.22.2",
     "ms": "^2.1.1",
