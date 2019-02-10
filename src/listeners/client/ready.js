@@ -2,7 +2,6 @@ const { Listener } = require('discord-akairo')
 const { post } = require('snekfetch')
 const Logger = require('../../util/Logger')
 const Starboard = require('../../struct/Starboard')
-const { BFD_TOKEN, BFD_APP } = process.env
 
 class ReadyListener extends Listener {
   constructor () {
@@ -22,8 +21,8 @@ class ReadyListener extends Listener {
       this.client.starboards.set(guild.id, starboard)
     }
 
-    post(`https://discordbots.org/api/bots/${BFD_APP}/stats`)
-      .set('Authorization', `${BFD_TOKEN}`)
+    post(`https://discordbots.org/api/bots/${process.env.BFD_APP}/stats`)
+      .set('Authorization', `${process.env.BFD_TOKEN}`)
       .send({ server_count: this.client.guilds.size })
       .then(Logger.info('Updated botsfordiscord.com Guild Size', { tag: 'BotsForDiscord' })).catch(e => Logger.error('Something went wrong, check BFD details.', { tag: 'BotsForDiscord' }))
   }
