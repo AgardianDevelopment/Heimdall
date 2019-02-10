@@ -21,10 +21,14 @@ class ReadyListener extends Listener {
       this.client.starboards.set(guild.id, starboard)
     }
 
-    snekfetch.post(`https://botsfordiscord.com/api/bot/${process.env.BFD_APP}`)
-      .set('Authorization', `${process.env.BFD_TOKEN}`)
-      .send({ server_count: this.client.guilds.size })
-      .then(Logger.info('Updated botsfordiscord.com Guild Size', { tag: 'BotsForDiscord' })).catch(e => Logger.error('Something went wrong, check BFD details.', { tag: 'BotsForDiscord' }))
+    setInterval(() => {
+      this.client.user.setActivity(`Over ${this.client.users.size} Mortals`, { type: 'WATCHING' })
+
+      snekfetch.post(`https://botsfordiscord.com/api/bot/${process.env.BFD_APP}`)
+        .set('Authorization', `${process.env.BFD_TOKEN}`)
+        .send({ server_count: this.client.guilds.size })
+        .then(Logger.info('Updated botsfordiscord.com Guild Size', { tag: 'BotsForDiscord' })).catch(e => Logger.error('Unable to post stats.', { tag: 'BotsForDiscord' }))
+    }, 60000)
   }
 }
 

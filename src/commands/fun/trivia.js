@@ -51,7 +51,7 @@ class TriviaCommand extends Command {
     } else {
       return sent.edit(`${ohNo} I couldn't find any trivia.`).then(msg.delete())
     }
-    
+
     if (!body.results[0].question) return sent.edit(`${ohNo} I couldn't find any trivia.`).then(msg.delete())
     const results = body.results[0]
 
@@ -72,7 +72,7 @@ class TriviaCommand extends Command {
         `1: ${(answers[0])}`,
         `2: ${answers[1]}`,
         `3: ${answers[2]}`,
-        `4: ${answers[3]}`,
+        `4: ${answers[3]}`
       ])
 
     await sent.edit({ embed }).then(msg.delete())
