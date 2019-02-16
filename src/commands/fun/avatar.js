@@ -18,7 +18,8 @@ class AvatarCommand extends Command {
     const loading = await this.client.emojis.get('541151509946171402')
     let m = await msg.channel.send(`${loading} **Searching the worlds.**`)
 
-    if (msg.channel.nsfw) {
+    const nsfwMode = this.client.settings.get(msg.guild.id, 'nsfw', [])
+    if (nsfwMode === true || !msg.channel.nsfw) {
       var url = 'https://nekos.life/api/v2/img/nsfw_avatar'
     } else {
       url = 'https://nekos.life/api/v2/img/avatar'
