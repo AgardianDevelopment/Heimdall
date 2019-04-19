@@ -1,4 +1,5 @@
 const { Command } = require('discord-akairo')
+const Starboard = require('../../struct/Starboard')
 
 class SettingsCommand extends Command {
   constructor () {
@@ -14,6 +15,7 @@ class SettingsCommand extends Command {
   exec (msg) {
     const prefix = this.handler.prefix(msg)
     const defaultRole = this.client.settings.get(msg.guild.id, 'defaultRole', [])
+    const emojiID = this.client.settings.get(msg.guild, 'emoji', '⭐')
     const starboard = this.client.starboards.get(msg.guild.id)
     const logChan = this.client.settings.get(msg.guild.id, 'logChannel', [])
     const newsChan = this.client.settings.get(msg.guild.id, 'newsChannel', [])
@@ -34,6 +36,7 @@ class SettingsCommand extends Command {
         `**Default Role:** ${(roleName) || 'None'}`,
         `**Log Channel**: ${(logName) || 'None'}`,
         `**Annoucement Channel**: ${(newsName) || 'None'}`,
+        `**Emoji**: ${Starboard.emojiFromID(this.client, emojiID)}`,
         `**Starboard**: ${(starboard && starboard.channel) || 'None'}`,
         `**Threshold**: ${(starboard && starboard.threshold) || 'None'}`,
         `**Blacklist**: ${blacklist.join(', ') || 'None'}`,

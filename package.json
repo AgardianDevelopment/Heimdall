@@ -12,23 +12,22 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^5.4.0",
-    "eslint-config-aqua": "^4.3.4"
+    "eslint": "^5.16.0",
+    "eslint-config-aqua": "^4.4.1"
   },
   "dependencies": {
-    "chalk": "^2.4.1",
-    "decode-entities": "^1.0.7",
-    "delay": "^4.1.0",
-    "discord-akairo": "github:1computer1/discord-akairo",
-    "discord.js": "github:hydrabolt/discord.js",
-    "dotenv": "^6.2.0",
+    "chalk": "^2.4.2",
+    "delay": "^4.2.0",
+    "discord-akairo": "^8.0.0-beta.8",
+    "discord.js": "github:discordjs/discord.js",
+    "dotenv": "^7.0.0",
     "he": "^1.2.0",
     "kitsu.js": "^2.0.0",
-    "moment": "^2.22.2",
-    "ms": "^2.1.1",
-    "pg": "^6.4.2",
-    "sequelize": "^4.38.0",
-    "shuffle-array": "^1.0.1",
-    "snekfetch": "^4.0.4"
+    "moment": "^2.24.0",
+    "node-emoji": "^1.10.0",
+    "pg": "^7.9.0",
+    "raven": "^2.6.4",
+    "sequelize": "^5.2.12",
+    "shuffle-array": "^1.0.1"
   }
 }

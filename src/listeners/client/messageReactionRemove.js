@@ -1,4 +1,5 @@
 const { Listener } = require('discord-akairo')
+const Starboard = require('../../struct/Starboard')
 
 class MessageReactionRemoveListener extends Listener {
   constructor () {
@@ -11,9 +12,11 @@ class MessageReactionRemoveListener extends Listener {
 
   async exec (reaction, user) {
     if (user.id === this.client.user.id) return
+    if (reaction.message.partial) await reaction.message.fetch()
     if (!reaction.message.guild) return
 
-    if (reaction.emoji.name === '⭐') {
+    const emoji = Starboard.emojiFromID(this.client, this.client.settings.get(reaction.message.guild, 'emoji', '⭐'))
+    if (Starboard.emojiEquals(reaction.emoji, emoji)) {
       const starboard = this.client.starboards.get(reaction.message.guild.id)
       if (starboard.reactionsRemoved.has(reaction.message.id)) {
         starboard.reactionsRemoved.delete(reaction.message.id)

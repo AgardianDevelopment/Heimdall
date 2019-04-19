@@ -9,14 +9,13 @@ class ShowStarsCommand extends Command {
       category: 'starboard',
       channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
-      quoted: false,
       args: [
         {
-          'id': 'member',
-          'match': 'content',
-          'type': 'member',
-          'default': message => message.member,
-          'prompt': {
+          id: 'member',
+          match: 'content',
+          type: 'member',
+          default: message => message.member,
+          prompt: {
             start: 'That user could not be found. Whose stars would you like to view?',
             retry: 'Please provide a valid user.',
             optional: true
@@ -48,7 +47,7 @@ class ShowStarsCommand extends Command {
     const plural = (num, str) => Math.abs(num) === 1 ? `${num} ${str}` : `${num} ${str}s`
 
     const embed = this.client.util.embed()
-      .setColor(process.env.EMBED)
+      .setColor(0xFFAC33)
       .setThumbnail(member.user.displayAvatarURL())
       .setTitle(`User Information for ${member.user.tag}`)
       .addField('Star Count', [
