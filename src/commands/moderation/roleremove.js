@@ -41,7 +41,7 @@ class RoleRemoveCommand extends Command {
     guildMember.roles.remove(guildRole.id).catch(console.error)
 
     const logChan = this.client.settings.get(msg.guild.id, 'logChannel', [])
-    if (!logChan) return msg.util.reply(`${member.tag} has had role removed.`)
+    if (Object.entries(logChan).length === 0) return msg.util.reply(`${member.tag} has had role removed.`)
     const logSend = msg.guild.channels.get(logChan)
 
     const guildID = await guildSettings.findOne({ where: { guildID: msg.guild.id } })

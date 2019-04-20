@@ -34,7 +34,7 @@ class AnnouncementCommand extends Command {
 
   async exec (msg, { title, content }) {
     const anncChan = this.client.settings.get(msg.guild.id, 'newsChannel', [])
-    if (!anncChan) return msg.util.reply('No announcements channel congifured please run `annchan`')
+    if (Object.entries(anncChan).length === 0) return msg.util.reply(`No announcements channel congifured please run **${this.handler.prefix(msg)}annchan**`)
     const anncSend = msg.guild.channels.get(anncChan)
 
     const embed = this.client.util.embed()

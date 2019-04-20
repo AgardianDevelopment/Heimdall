@@ -60,7 +60,7 @@ class LockDownCommand extends Command {
     }
 
     const logChan = this.client.settings.get(msg.guild.id, 'logChannel', [])
-    if (!logChan) return msg.author.send(`Lockdown has been set for ${ms(ms(time), { long: true })}`)
+    if (Object.entries(logChan).length === 0) return msg.author.send(`Lockdown has been set for ${ms(ms(time), { long: true })}`)
     const logSend = msg.guild.channels.get(logChan)
 
     const guildID = await guildSettings.findOne({ where: { guildID: msg.guild.id } })
