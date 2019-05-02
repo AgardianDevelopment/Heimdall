@@ -1,4 +1,4 @@
-require('./src/util/Extensions')
+//require('./src/util/Extensions')
 require('dotenv').config()
 
 const config = process.env.config
