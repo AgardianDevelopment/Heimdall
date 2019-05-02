@@ -24,7 +24,7 @@ class E61Command extends Command {
 
   async exec (msg, { searchTerm }) {
     const nsfwMode = this.client.settings.get(msg.guild.id, 'nsfw', [])
-    if (!nsfwMode || nsfwMode === false || !msg.channel.nsfw || Object.entries(nsfwMode).length === 0) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
+    if (nsfwMode != true || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
 
     const loading = await this.client.emojis.get('541151509946171402')
     const ohNo = await this.client.emojis.get('541151482599440385')

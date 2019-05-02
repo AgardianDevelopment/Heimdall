@@ -16,7 +16,7 @@ class HentaiCommand extends Command {
 
   async exec (msg) {
     const nsfwMode = this.client.settings.get(msg.guild.id, 'nsfw', [])
-    if (!nsfwMode || nsfwMode === false || !msg.channel.nsfw || Object.entries(nsfwMode).length === 0) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
+    if (nsfwMode != true || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
 
     const loading = await this.client.emojis.get('541151509946171402')
     let m = await msg.channel.send(`${loading} **Get you some anime sex.**`)
