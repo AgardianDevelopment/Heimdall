@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const snekfetch = require('snekfetch')
+const igdb = require('igdb-api-node').default;
 
 class GameCommand extends Command {
   constructor () {
@@ -24,42 +24,31 @@ class GameCommand extends Command {
   }
 
   async exec (msg, { game }) {
+    const API = igdb(`${process.env.IGDB}`)
     const loading = await this.client.emojis.get('541151509946171402')
     const ohNo = await this.client.emojis.get('541151482599440385')
 
     let m = await msg.channel.send(`${loading} **Checking IGDB for ${game}**`)
     game.split(' ').join('+')
 
-    try {
-      var igdb = await snekfetch.get('https://api-2445582011268.apicast.io/games/?search=' + game + '&fields=*&limit=1')
-        .set('user-key', process.env.IGDB).then(r => r.body[0])
-    } catch (e) {
-      return m.edit(`${ohNo} I couldn't find that game.`).then(msg.delete())
-    }
+    const res = await igdb(process.env.IGDB)
+      .fields('name,rating,summary,url,cover')
+      .limit(1)
+      .search(game)
+      .request('/games')
 
-    if (!igdb) return m.edit(`${ohNo} I couldn't find that game.`).then(msg.delete())
-    if (!igdb.summary) return m.edit(`${ohNo} I couldn't find that game.`).then(msg.delete())
+    if (!res.data[0].summary) return m.edit(`${ohNo} I couldn't find that game.`).then(msg.delete())
 
-    if (!igdb.cover) {
-      var igdbCover = 'https://i.imgur.com/HPt4eTx.png'
-    } else if ((igdb.cover.url).includes('https://')) {
-      var igdbCover = igdb.cover.url
-    } else {
-      var igdbCover = `https:${igdb.cover.url}`
-    }
-
-    let gameName = igdb.name.split(' ').join('-').replace(/:/g, '')
-    let gameSummary = igdb.summary
+    let gameSummary = res.data[0].summary
 
     const embed = this.client.util.embed()
-      .setTitle(igdb.name)
+      .setTitle(res.data[0].name)
       .setColor(process.env.EMBED)
       .setTimestamp()
       .setFooter(`Requested by ${msg.author.tag} | IGDB API`, `${msg.author.displayAvatarURL()}`)
-      .setThumbnail(igdbCover)
       .addField('Summary', `${gameSummary.substring(0, 350)}...`)
-      .addField('Ratings', `${Math.round(igdb.rating)}%`, true)
-      .addField('More Info', `[IGDB Results](https://www.igdb.com/games/${gameName})`, true)
+      .addField('Ratings', `${Math.round(res.data[0].rating)}%`, true)
+      .addField('More Info', `[IGDB Results](${res.data[0].url})`, true)
 
     m.edit({ embed }).then(msg.delete())
   }

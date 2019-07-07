@@ -22,6 +22,7 @@
     "discord.js": "github:discordjs/discord.js",
     "dotenv": "^7.0.0",
     "he": "^1.2.0",
+    "igdb-api-node": "^4.0.2",
     "kitsu.js": "^2.0.0",
     "moment": "^2.24.0",
     "node-emoji": "^1.10.0",
