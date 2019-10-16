@@ -1,5 +1,7 @@
-![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=for-the-badge)
-![node](https://img.shields.io/badge/Node-%3E10.0.0-yellow.svg?style=for-the-badge)
+[![Codacy Badge](https://img.shields.io/codacy/grade/f6f32a91a6994bb69f8f282365c60857?style=flat-square)](https://www.codacy.com/manual/VulgarBear/heimdall?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AgardianDevelopment/heimdall&amp;utm_campaign=Badge_Grade)
+![license](https://img.shields.io/github/license/AgardianDevelopment/heimdall?style=flat-square)
+![Commit](https://img.shields.io/github/last-commit/AgardianDevelopment/heimdall?style=flat-square)
+[![Discord](https://img.shields.io/discord/540671346728763392?label=discord&style=flat-square)](https://discord.gg/E9cJjvw)
 
 [![Bots for Discord](https://botsfordiscord.com/api/bot/391050398850613250/widget)](https://botsfordiscord.com/bots/391050398850613250)
 
