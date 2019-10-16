@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const { get } = require('snekfetch')
+const Booru = require('booru')
 
 class E61Command extends Command {
   constructor () {
@@ -32,20 +32,17 @@ class E61Command extends Command {
 
     const blacklist = ['loli', 'shota', 'cub', 'young', 'child', 'baby']
 
-    const { body } = await get(`https://e621.net/post/index.json?limit=100&rating=explicit&tags=${encodeURI(searchTerm)}`)
-    const i = Math.floor(Math.random() * body.length)
-    const result = body[i]
-    if (!result) return m.edit(`${ohNo} Looks like your dreams were too big.`)
+    const result = await Booru.search('e621.net', searchTerm, {limit: 1, random: true})
 
-    if (result.tags.split(' ').some(t => blacklist.includes(t.toLowerCase()))) return m.edit(`${ohNo} Blacklisted word found, how about we dont...`)
+    if (!result) return m.edit(`${ohNo} Looks like your dreams were too big.`)
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
-      .setURL(`https://e621.net/post/show/${result.id}`)
-      .setDescription(`**Artist:** ${result.artist[0]}\n**Description:** ${result.description.substring(0, 450)}...`)
+      .setURL(`https://e621.net/post/show/${result[0].data.id}`)
+      .setDescription(`**Artist:** ${result[0].data.author}\n**Description:** ${result[0].data.description.substring(0, 450)}...`)
       .setColor(process.env.EMBED)
       .setTimestamp()
-      .setImage(result.file_url)
+      .setImage(result[0].data.file_url)
       .setFooter(`Requested by ${msg.author.tag} | e621 API`, `${msg.author.displayAvatarURL()}`)
 
     m.edit({ embed }).then(msg.delete())

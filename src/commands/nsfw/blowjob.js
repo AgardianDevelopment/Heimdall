@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const { get } = require('snekfetch')
+const Porn = require('pornsearch').search('blowjob')
 
 class BlowJobCommand extends Command {
   constructor () {
@@ -22,30 +22,10 @@ class BlowJobCommand extends Command {
     const ohNo = await this.client.emojis.get('541151482599440385')
     let m = await msg.channel.send(`${loading} **Cradle the balls, stroke the shaft, work the pipe, swallow the gravy.**`)
 
-    let subreddits = [
-      'Blowjobs',
-      'blowjobsandwich'
-    ]
-
-    let img_sub = subreddits[Math.round(Math.random() * (subreddits.length - 1))]
-
-    try {
-      var image = await get(`https://api.imgur.com/3/gallery/r/${img_sub}`).set('authorization', 'Client-ID ' + process.env.IMGUR).then(r => r.body)
-    } catch (e) {
-      return m.edit(`${ohNo} Looks like something went wrong.`).then(console.log(e))
-    }
-
-    if (image.status == 403) {
-      return m.edit(`${ohNo} Looks like something went wrong.`).then(msg.delete())
-    }
-
-    var i = Math.floor(Math.random() * image.data.length)
-
-    if (image.data[i].is_album === true) {
-      var imagePhoto = image.data[i].images[0].link
-    } else {
-      var imagePhoto = image.data[i].link
-    }
+    const res = await Porn.gifs()
+    var i = Math.floor(Math.random() * res.length)
+    const imagePhoto = res[i].url
+    console.log(imagePhoto)
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')

@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const { get } = require('snekfetch')
+const { get } = require('superagent')
 const shuffle = require('shuffle-array')
 const he = require('he')
 

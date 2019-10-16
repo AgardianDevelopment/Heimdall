@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const snekfetch = require('snekfetch')
+const superagent = require('superagent')
 
 class DatbuttCommand extends Command {
   constructor () {
@@ -22,7 +22,7 @@ class DatbuttCommand extends Command {
     let m = await msg.channel.send(`${loading} **Hold onto your butts!**`)
 
     try {
-      var image = await snekfetch.get('https://api.imgur.com/3/album/JZUQ7/images').set('authorization', 'Client-ID ' + process.env.IMGUR).then(r => r.body)
+      var image = await superagent.get('https://api.imgur.com/3/album/JZUQ7/images').set('authorization', 'Client-ID ' + process.env.IMGUR).then(r => r.body)
     } catch (e) {
       return m.edit(`${ohNo} Looks like something went wrong.`).then(msg.delete())
     }

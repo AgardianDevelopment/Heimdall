@@ -10,7 +10,7 @@ class PingCommand extends Command {
   }
 
   async exec (msg) {
-    let start = Date.now(); msg.channel.send(msg.channel.id, 'Pong!').then(m => {
+    let start = Date.now(); msg.channel.send(msg.channel.id, 'Thinking...').then(m => {
       let diff = (Date.now() - start)
 
       const embed = this.client.util.embed()

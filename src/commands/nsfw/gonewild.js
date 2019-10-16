@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const { get } = require('snekfetch')
+const { get } = require('superagent')
 
 class GoneWildCommand extends Command {
   constructor () {

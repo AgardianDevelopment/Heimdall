@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const snekfetch = require('snekfetch')
+const superagent = require('superagent')
 
 class KimchiCommand extends Command {
   constructor () {
@@ -38,7 +38,7 @@ class KimchiCommand extends Command {
     var img_sub = subreddits[Math.round(Math.random() * (subreddits.length - 1))]
 
     try {
-      var image = await snekfetch.get(`https://api.imgur.com/3/gallery/r/${img_sub}`).set('authorization', 'Client-ID ' + process.env.IMGUR).then(r => r.body)
+      var image = await superagent.get(`https://api.imgur.com/3/gallery/r/${img_sub}`).set('authorization', 'Client-ID ' + process.env.IMGUR).then(r => r.body)
     } catch (e) {
       return m.edit(`${ohNo} Looks like something went wrong.`).then(msg.delete())
     }
