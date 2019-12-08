@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const igdb = require('igdb-api-node').default;
+const igdb = require('igdb-api-node').default
 
 class GameCommand extends Command {
   constructor () {

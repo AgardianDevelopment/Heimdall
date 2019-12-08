@@ -14,7 +14,7 @@ class ReadyListener extends Listener {
 
   exec () {
     Logger.info(`${this.client.user.tag} is ready to serve!`)
-    this.client.user.setActivity(`Over ${this.client.users.size} Mortals`, { type: 'WATCHING' })
+    this.client.user.setActivity(`Over ${this.client.guilds.size} Realms`, { type: 'WATCHING' })
 
     for (const guild of this.client.guilds.values()) {
       const starboard = new Starboard(guild)
@@ -22,7 +22,7 @@ class ReadyListener extends Listener {
     }
 
     setInterval(() => {
-      this.client.user.setActivity(`Over ${this.client.users.size} Mortals`, { type: 'WATCHING' })
+      this.client.user.setActivity(`Over ${this.client.guilds.size} Realms`, { type: 'WATCHING' })
 
       snekfetch.post(`https://botsfordiscord.com/api/bot/${process.env.BFD_APP}`)
         .set('Authorization', `${process.env.BFD_TOKEN}`)

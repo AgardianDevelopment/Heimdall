@@ -18,7 +18,7 @@ class PingCommand extends Command {
         .setColor(process.env.EMBED)
         .addField('📶 Latency', `${diff}ms`, true)
 
-      m.edit({ embed })
+      m.delete().then(msg.channel.send({ embed }))
     })
   }
 }

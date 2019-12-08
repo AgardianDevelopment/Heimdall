@@ -32,7 +32,7 @@ class E61Command extends Command {
 
     const blacklist = ['loli', 'shota', 'cub', 'young', 'child', 'baby']
 
-    const result = await Booru.search('e621.net', searchTerm, {limit: 1, random: true})
+    const result = await Booru.search('e621.net', searchTerm, { limit: 1, random: true })
 
     if (!result) return m.edit(`${ohNo} Looks like your dreams were too big.`)
 
