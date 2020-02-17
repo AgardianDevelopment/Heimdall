@@ -1,9 +1,11 @@
 const Akairo = require('discord-akairo')
-const { Command } = Akairo
+const {
+  Command
+} = Akairo
 const Discord = require('discord.js')
 
 class GuildInfoCommand extends Command {
-  constructor () {
+  constructor() {
     super('guildinfo', {
       aliases: ['ginfo', 'guild', 'serverinfo', 'sinfo', 'server'],
       category: 'general',
@@ -17,12 +19,13 @@ class GuildInfoCommand extends Command {
     })
   }
 
-  async exec (msg) {
+  async exec(msg) {
 
     const embed = this.client.util.embed()
       .setColor(process.env.EMBED)
       .setTimestamp()
       .setFooter(`Requested by ${msg.author.tag}`, `${msg.author.displayAvatarURL()}`)
+      .setThumbnail(msg.guild.iconURL())
       .addField('Guild Info', [
         `**Name**: ${msg.guild.name}`,
         `**Owner**: ${msg.guild.owner.toString()}`,
@@ -33,7 +36,9 @@ class GuildInfoCommand extends Command {
         `**IconURL**: ${msg.guild.iconURL()}`
       ])
 
-    msg.channel.send({ embed })
+    msg.channel.send({
+      embed
+    })
   }
 }
 module.exports = GuildInfoCommand
