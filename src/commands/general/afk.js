@@ -5,10 +5,11 @@ const {
 // const Discord = require('discord.js')
 
 class AFKCommand extends Command {
-  constructor() {
+  constructor () {
     super('afk', {
       aliases: ['afk'],
       category: 'general',
+      channel: 'guild',
       cooldown: 2000,
       ratelimit: 1,
       description: {
@@ -18,8 +19,12 @@ class AFKCommand extends Command {
     })
   }
 
-  async exec(msg) {
-    if (!msg.guild.usersAFK) msg.guild.usersAFK = []
+  async exec (msg) {
+    if (!msg.guild.usersAFK) {
+      msg.guild.usersAFK = []
+    } else {
+      return
+    }
     if (msg.guild.usersAFK.includes(msg.author.id)) return
 
     msg.guild.usersAFK.push(msg.author.id)
