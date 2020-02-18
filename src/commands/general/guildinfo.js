@@ -2,10 +2,10 @@ const Akairo = require('discord-akairo')
 const {
   Command
 } = Akairo
-const Discord = require('discord.js')
+// const Discord = require('discord.js')
 
 class GuildInfoCommand extends Command {
-  constructor() {
+  constructor () {
     super('guildinfo', {
       aliases: ['ginfo', 'guild', 'serverinfo', 'sinfo', 'server'],
       category: 'general',
@@ -19,8 +19,7 @@ class GuildInfoCommand extends Command {
     })
   }
 
-  async exec(msg) {
-
+  async exec (msg) {
     const embed = this.client.util.embed()
       .setColor(process.env.EMBED)
       .setTimestamp()
