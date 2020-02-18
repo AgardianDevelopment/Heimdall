@@ -26,9 +26,11 @@ class MessageInhibitor extends Inhibitor {
           user = user[1]
           message.channel.send(`**${user.tag}** ${response}`).catch(() => { })
         }
+      } else {
+        return
       }
     } catch (err) {
-      return Logger.error('Heimdall has had an error with the message.js inhibitor')
+      Logger.error('messages.js ' + err)
     }
   }
 }
