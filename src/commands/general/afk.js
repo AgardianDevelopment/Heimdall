@@ -9,7 +9,7 @@ class AFKCommand extends Command {
     super('afk', {
       aliases: ['afk'],
       category: 'general',
-      channel: 'guild',
+      channelRestriction: 'guild',
       cooldown: 2000,
       ratelimit: 1,
       description: {
@@ -20,6 +20,7 @@ class AFKCommand extends Command {
   }
 
   async exec(msg) {
+    if (!msg.guild) return msg.channel.send('This command must be used in a guild.')
     if (!msg.guild.usersAFK) msg.guild.usersAFK = []
     if (msg.guild.usersAFK.includes(msg.author.id)) return
 
