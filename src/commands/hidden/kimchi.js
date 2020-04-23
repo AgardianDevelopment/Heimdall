@@ -16,11 +16,11 @@ class KimchiCommand extends Command {
     const nsfwMode = this.client.settings.get(msg.guild.id, 'nsfw', [])
     if (!nsfwMode || nsfwMode === false || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
 
-    const loading = await this.client.emojis.get('541151509946171402')
-    const ohNo = await this.client.emojis.get('541151482599440385')
-    let m = await msg.channel.send(`${loading} **Now subscribed to kimchi facts!**`)
+    const loading = await this.client.emojis.resolve('541151509946171402')
+    const ohNo = await this.client.emojis.resolve('541151482599440385')
+    const m = await msg.channel.send(`${loading} **Now subscribed to kimchi facts!**`)
 
-    let response = ['Jugeullae?!', '죽을래']
+    const response = ['Jugeullae?!', '죽을래']
 
     if (((msg.author.id == 138549812307034112) || (msg.author.id == 101808227385098240)) == false) return m.edit(response[Math.floor(Math.random() * response.length)])
 
@@ -60,7 +60,7 @@ class KimchiCommand extends Command {
       .setURL(imagePhoto)
       .setColor(process.env.EMBED)
       .setImage(imagePhoto)
-      .setFooter(`Requested by REDACTED | via REDACTED • REDATED at XX:XX GMT`, `https://just.vulgarity.xyz/CWtyugHIu6oVFuYN.png`)
+      .setFooter('Requested by REDACTED | via REDACTED • REDATED at XX:XX GMT', 'https://just.vulgarity.xyz/CWtyugHIu6oVFuYN.png')
 
     m.edit({ embed }).then(msg.delete())
   }

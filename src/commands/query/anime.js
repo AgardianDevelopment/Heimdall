@@ -28,10 +28,10 @@ class AnimeCommand extends Command {
   }
 
   async exec (msg, { anime }) {
-    const loading = await this.client.emojis.get('541151509946171402')
-    const ohNo = await this.client.emojis.get('541151482599440385')
+    const loading = await this.client.emojis.resolve('541151509946171402')
+    const ohNo = await this.client.emojis.resolve('541151482599440385')
 
-    let m = await msg.channel.send(`${loading} **Let's see ${anime} huh?**`)
+    const m = await msg.channel.send(`${loading} **Let's see ${anime} huh?**`)
 
     try {
       var results = await kitsu.searchAnime(anime)
@@ -39,7 +39,7 @@ class AnimeCommand extends Command {
       return m.edit(`${ohNo} I couldn't find that anime.`).then(msg.delete())
     }
 
-    let url = `https://kitsu.io/anime/${results[0].slug}`
+    const url = `https://kitsu.io/anime/${results[0].slug}`
 
     const embed = this.client.util.embed()
       .setTitle(results[0].titles.english + ' | ' + results[0].titles.japanese)

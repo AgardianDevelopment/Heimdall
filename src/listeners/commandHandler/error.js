@@ -18,7 +18,7 @@ class ErrorListener extends Listener {
     Logger.stacktrace(err)
 
     if (message.guild ? message.channel.permissionsFor(this.client.user).has('SEND_MESSAGES') : true) {
-      const owners = this.client.ownerID.map(id => this.client.users.get(id).tag)
+      const owners = this.client.ownerID.map(id => this.client.user.fetch(id).tag)
       message.channel.send([
         `An error occured, please contact ${owners.join(' or ')}.`,
         '```js',

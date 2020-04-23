@@ -18,9 +18,9 @@ class BlowJobCommand extends Command {
     const nsfwMode = this.client.settings.get(msg.guild.id, 'nsfw', [])
     if (nsfwMode != true || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
 
-    const loading = await this.client.emojis.get('541151509946171402')
-    const ohNo = await this.client.emojis.get('541151482599440385')
-    let m = await msg.channel.send(`${loading} **Cradle the balls, stroke the shaft, work the pipe, swallow the gravy.**`)
+    const loading = await this.client.emojis.resolve('541151509946171402')
+    const ohNo = await this.client.emojis.resolve('541151482599440385')
+    const m = await msg.channel.send(`${loading} **Cradle the balls, stroke the shaft, work the pipe, swallow the gravy.**`)
 
     const res = await Porn.gifs()
     var i = Math.floor(Math.random() * res.length)

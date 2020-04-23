@@ -13,13 +13,13 @@ class DatbuttCommand extends Command {
   }
 
   async exec (msg) {
-    let response = ['Just who the fuck do you think you are?', 'That\'s disgusting', 'haha and then what :wink:', 'I bet you say that to all the girls.', 'We are never ever getting back together!!!', 'Seriously, we barely know each other.', ':middle_finger: Sit on it and spin bitch!', 'Umm... I have a boyfriend.']
+    const response = ['Just who the fuck do you think you are?', 'That\'s disgusting', 'haha and then what :wink:', 'I bet you say that to all the girls.', 'We are never ever getting back together!!!', 'Seriously, we barely know each other.', ':middle_finger: Sit on it and spin bitch!', 'Umm... I have a boyfriend.']
 
     if ((msg.author.id == 137727774910709760) == false) return msg.channel.send(response[Math.floor(Math.random() * response.length)]).then(msg.delete())
 
-    const loading = await this.client.emojis.get('541151509946171402')
-    const ohNo = await this.client.emojis.get('541151482599440385')
-    let m = await msg.channel.send(`${loading} **Hold onto your butts!**`)
+    const loading = await this.client.emojis.resolve('541151509946171402')
+    const ohNo = await this.client.emojis.resolve('541151482599440385')
+    const m = await msg.channel.send(`${loading} **Hold onto your butts!**`)
 
     try {
       var image = await superagent.get('https://api.imgur.com/3/album/JZUQ7/images').set('authorization', 'Client-ID ' + process.env.IMGUR).then(r => r.body)
@@ -44,7 +44,7 @@ class DatbuttCommand extends Command {
       .setURL(imagePhoto)
       .setColor(process.env.EMBED)
       .setImage(imagePhoto)
-      .setFooter(`Requested by REDACTED | via REDACTED • REDATED at XX:XX GMT`, `https://just.vulgarity.xyz/CWtyugHIu6oVFuYN.png`)
+      .setFooter('Requested by REDACTED | via REDACTED • REDATED at XX:XX GMT', 'https://just.vulgarity.xyz/CWtyugHIu6oVFuYN.png')
 
     m.edit({ embed }).then(msg.delete())
   }

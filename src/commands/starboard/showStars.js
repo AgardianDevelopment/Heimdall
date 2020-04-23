@@ -57,7 +57,7 @@ class ShowStarsCommand extends Command {
 
     if (guildStars.length) {
       const topStar = guildStars.sort((a, b) => b.starCount - a.starCount)[0]
-      const msg = await message.guild.channels.get(topStar.channelID).messages.fetch(topStar.messageID)
+      const msg = await message.guild.channels.resolve(topStar.channelID).messages.fetch(topStar.messageID)
         .catch(() => null)
 
       let content

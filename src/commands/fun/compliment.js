@@ -28,12 +28,12 @@ class ComplimentCommand extends Command {
   }
 
   async exec (msg, { member }) {
-    const loading = await this.client.emojis.get('541151509946171402')
-    const ohNo = await this.client.emojis.get('541151482599440385')
+    const loading = await this.client.emojis.resolve('541151509946171402')
+    const ohNo = await this.client.emojis.resolve('541151482599440385')
 
-    let m = await msg.channel.send(`${loading} looking for a heart warming compliment!`)
+    const m = await msg.channel.send(`${loading} looking for a heart warming compliment!`)
 
-    const { body } = await get(`https://complimentr.com/api`)
+    const { body } = await get('https://complimentr.com/api')
     if (!body.compliment) return msg.util.reply(`${ohNo} There seems to be a problem sorry.`).then(msg.delete())
 
     m.edit(`${member}, ${body.compliment}!`).then(msg.delete())

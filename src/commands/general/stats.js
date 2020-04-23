@@ -38,9 +38,9 @@ class StatsCommand extends Command {
       .setColor(process.env.EMBED)
       .setTitle('Heimdallr Statistics')
       .addField('Discord', [
-        `**Guilds**: ${this.client.guilds.size}`,
-        `**Channels**: ${this.client.channels.size}`,
-        `**Users**: ${this.client.users.size}`,
+        `**Guilds**: ${this.client.guilds.cache.size}`,
+        `**Channels**: ${this.client.channels.cache.size}`,
+        `**Users**: ${this.client.users.cache.size}`,
         `**Stars**: ${await Star.count()}`
       ], true)
       .addField('Technical', [

@@ -28,10 +28,10 @@ class CheapSharkCommand extends Command {
 
   async exec (msg, { searchTerm }) {
     const search = searchTerm.split(' ').join('+')
-    const loading = await this.client.emojis.get('541151509946171402')
-    const ohNo = await this.client.emojis.get('541151482599440385')
+    const loading = await this.client.emojis.resolve('541151509946171402')
+    const ohNo = await this.client.emojis.resolve('541151482599440385')
 
-    let m = await msg.channel.send(`${loading} **Searching on Cheapshark...**`)
+    const m = await msg.channel.send(`${loading} **Searching on Cheapshark...**`)
 
     const stores = await get('http://www.cheapshark.com/api/1.0/stores')
     const res = await get('http://www.cheapshark.com/api/1.0/deals?lowerPrice&title=' + search + '&pageSize=2')

@@ -19,12 +19,12 @@ class AcceptCommand extends Command {
     msg.delete()
     const defRole = this.client.settings.get(msg.guild.id, 'defaultRole', [])
     if (!defRole) return msg.util.reply('Your server does not make use of this feature.')
-    let guildMember = msg.guild.member(msg.author)
+    const guildMember = msg.guild.member(msg.author)
     guildMember.roles.add(defRole).catch(console.error)
 
     const logChan = this.client.settings.get(msg.guild.id, 'logChannel', [])
-    if (!logChan) return msg.util.reply(`Thank you, you now have access to the server.`)
-    const logSend = msg.guild.channels.get(logChan)
+    if (!logChan) return msg.util.reply('Thank you, you now have access to the server.')
+    const logSend = msg.guild.channels.resolve(logChan)
 
     const guildID = await guildSettings.findOne({ where: { guildID: msg.guild.id } })
     guildID.increment('caseNumber')
@@ -35,7 +35,7 @@ class AcceptCommand extends Command {
       .setFooter(`Case: ${guildID.caseNumber} | Recorded by ${msg.author.tag}`, `${msg.author.displayAvatarURL()}`)
       .addField('Rule Acceptance', `${msg.author.tag} has accepted the server rules.`)
 
-    msg.util.reply(`Thank you, you now have access to the server.`).then(async botMsg => {
+    msg.util.reply('Thank you, you now have access to the server.').then(async botMsg => {
       await delay(5000)
       botMsg.delete({ limit: 5000 })
     })

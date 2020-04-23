@@ -21,17 +21,17 @@ class PollCommand extends Command {
   }
 
   async exec (msg, { question }) {
-    const goodEmoji = await this.client.emojis.get('541151462642941962')
-    const badEmoji = await this.client.emojis.get('541151482599440385')
+    const goodEmoji = await this.client.emojis.resolve('541151462642941962')
+    const badEmoji = await this.client.emojis.resolve('541151482599440385')
 
     const embed = this.client.util.embed()
-      .setTitle(`Server Poll | React to Vote`)
+      .setTitle('Server Poll | React to Vote')
       .setColor(process.env.EMBED)
       .setDescription(question)
       .setTimestamp()
       .setFooter(`Requested by ${msg.author.tag}`, `${msg.author.displayAvatarURL()}`)
 
-    let m = await msg.channel.send({ embed }).then(function (m) {
+    const m = await msg.channel.send({ embed }).then(function (m) {
       m.react(goodEmoji.id)
       m.react(badEmoji.id)
       msg.delete()

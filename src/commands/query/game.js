@@ -25,10 +25,10 @@ class GameCommand extends Command {
 
   async exec (msg, { game }) {
     const API = igdb(`${process.env.IGDB}`)
-    const loading = await this.client.emojis.get('541151509946171402')
-    const ohNo = await this.client.emojis.get('541151482599440385')
+    const loading = await this.client.emojis.resolve('541151509946171402')
+    const ohNo = await this.client.emojis.resolve('541151482599440385')
 
-    let m = await msg.channel.send(`${loading} **Checking IGDB for ${game}**`)
+    const m = await msg.channel.send(`${loading} **Checking IGDB for ${game}**`)
     game.split(' ').join('+')
 
     const res = await igdb(process.env.IGDB)
@@ -39,7 +39,7 @@ class GameCommand extends Command {
 
     if (!res.data[0].summary) return m.edit(`${ohNo} I couldn't find that game.`).then(msg.delete())
 
-    let gameSummary = res.data[0].summary
+    const gameSummary = res.data[0].summary
 
     const embed = this.client.util.embed()
       .setTitle(res.data[0].name)

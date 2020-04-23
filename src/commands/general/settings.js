@@ -22,9 +22,9 @@ class SettingsCommand extends Command {
     const blacklist = this.client.settings.get(msg.guild, 'blacklist', [])
     const nsfw = this.client.settings.get(msg.guild, 'nsfw', [])
 
-    const logName = msg.guild.channels.get(logChan)
-    const newsName = msg.guild.channels.get(newsChan)
-    const roleName = msg.guild.roles.get(defaultRole)
+    const logName = msg.guild.channels.resolve(logChan)
+    const newsName = msg.guild.channels.resolve(newsChan)
+    const roleName = msg.guild.roles.resolve(defaultRole)
 
     console.log(newsChan)
 

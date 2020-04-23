@@ -16,10 +16,10 @@ class ChronoCommand extends Command {
   }
 
   async exec (msg) {
-    const loading = await this.client.emojis.get('541151509946171402')
-    const ohNo = await this.client.emojis.get('541151482599440385')
+    const loading = await this.client.emojis.resolve('541151509946171402')
+    const ohNo = await this.client.emojis.resolve('541151482599440385')
 
-    let m = await msg.channel.send(`${loading} **Checking out chrono.gg...**`)
+    const m = await msg.channel.send(`${loading} **Checking out chrono.gg...**`)
 
     const { body } = await get('https://api.chrono.gg/sale')
     if (body.length === 0) return m.edit(`${ohNo} Couldn't find any deals...`).then(msg.delete())

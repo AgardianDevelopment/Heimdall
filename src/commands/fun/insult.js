@@ -28,14 +28,15 @@ class InsultCommand extends Command {
   }
 
   async exec (msg, { member }) {
-    const loading = await this.client.emojis.get('541151509946171402')
-    const ohNo = await this.client.emojis.get('541151482599440385')
+    const loading = await this.client.emojis.resolve('541151509946171402')
+    const ohNo = await this.client.emojis.resolve('541151482599440385')
 
-    let m = await msg.channel.send(`${loading} looking for a savage insult!`)
+    const m = await msg.channel.send(`${loading} looking for a savage insult!`)
 
-    const { body } = await get(`https://insult.mattbas.org/api/en/insult.json`)
-    if (!body) return msg.util.reply(`${ohNo} There seems to be a problem sorry.`).then(msg.delete())
-    const { insult } = await JSON.parse(body)
+    const { text } = await get('https://evilinsult.com/generate_insult.php?lang=en&type=json')
+    if (!text) return msg.util.reply(`${ohNo} There seems to be a problem sorry.`).then(msg.delete())
+    const resInsult = JSON.parse(text)
+    const insult = resInsult.insult
     const insultRes = insult.toLowerCase()
 
     m.edit(`${member}, ${insultRes}.`).then(msg.delete())

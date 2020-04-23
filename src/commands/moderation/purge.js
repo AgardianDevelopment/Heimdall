@@ -39,7 +39,7 @@ class PurgeCommand extends Command {
     const logChan = this.client.settings.get(msg.guild.id, 'logChannel', [])
     console.log(logChan)
     if (Object.entries(logChan).length === 0) return msg.util.reply(`${fetched.size} of ${limit + 1} messages deleted.`)
-    const logSend = msg.guild.channels.get(logChan)
+    const logSend = msg.guild.channels.resolve(logChan)
 
     const guildID = await guildSettings.findOne({ where: { guildID: msg.guild.id } })
     guildID.increment('caseNumber')

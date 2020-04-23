@@ -30,7 +30,7 @@ class BestStarCommand extends Command {
     const embed = this.client.util.embed().setColor(process.env.EMBED)
 
     if (bestStar) {
-      const msg = await message.guild.channels.get(bestStar.channelID)
+      const msg = await message.guild.channels.resolve(bestStar.channelID)
         .messages.fetch(bestStar.messageID).catch(() => null)
 
       let content

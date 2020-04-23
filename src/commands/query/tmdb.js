@@ -36,8 +36,8 @@ class tmdbCommand extends Command {
     var string = string.substring().split(' ')
     const search = string.join('%20')
 
-    const loading = await this.client.emojis.get('541151509946171402')
-    const ohNo = await this.client.emojis.get('541151482599440385')
+    const loading = await this.client.emojis.resolve('541151509946171402')
+    const ohNo = await this.client.emojis.resolve('541151482599440385')
     const m = await msg.channel.send(`${loading} **Searching on TMDB...**`)
 
     const movieURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + process.env.TMDB + '&query=' + search + '&page=1&include_adult=false'

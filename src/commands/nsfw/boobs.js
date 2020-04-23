@@ -18,8 +18,8 @@ class BoobsCommand extends Command {
     const nsfwMode = this.client.settings.get(msg.guild.id, 'nsfw', [])
     if (nsfwMode != true || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
 
-    const loading = await this.client.emojis.get('541151509946171402')
-    let m = await msg.channel.send(`${loading} **Look at them motherfuckers jiggle.**`)
+    const loading = await this.client.emojis.resolve('541151509946171402')
+    const m = await msg.channel.send(`${loading} **Look at them motherfuckers jiggle.**`)
 
     const { body } = await get('http://api.oboobs.ru/boobs/0/1/random')
 

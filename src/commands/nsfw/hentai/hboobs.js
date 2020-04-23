@@ -18,8 +18,8 @@ class HBoobsCommand extends Command {
     const nsfwMode = this.client.settings.get(msg.guild.id, 'nsfw', [])
     if (nsfwMode != true || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
 
-    const loading = await this.client.emojis.get('541151509946171402')
-    let m = await msg.channel.send(`${loading} **Them motherfuckers still jiggly.**`)
+    const loading = await this.client.emojis.resolve('541151509946171402')
+    const m = await msg.channel.send(`${loading} **Them motherfuckers still jiggly.**`)
 
     const { body } = await get('https://nekos.life/api/v2/img/boobs')
 

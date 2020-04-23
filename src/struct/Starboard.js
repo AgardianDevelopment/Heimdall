@@ -15,7 +15,7 @@ class Starboard {
 
   get channel () {
     const channelID = this.client.settings.get(this.guild, 'starboardChannelID')
-    return this.guild.channels.get(channelID)
+    return this.guild.channels.resolve(channelID)
   }
 
   get threshold () {
