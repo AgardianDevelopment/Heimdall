@@ -16,13 +16,13 @@ class ReadyListener extends Listener {
     Logger.info(`${this.client.user.tag} is ready to serve!`)
     this.client.user.setActivity(`Over ${this.client.guilds.cache.size} Realms`, { type: 'WATCHING' })
 
-    for (const guild of this.client.guilds.cache.values()) {
+    for (const guild of this.client.guilds.cache.size()) {
       const starboard = new Starboard(guild)
       this.client.starboards.set(guild.id, starboard)
     }
 
     setInterval(() => {
-      this.client.user.setActivity(`Over ${this.client.guilds.size} Realms`, { type: 'WATCHING' })
+      this.client.user.setActivity(`Over ${this.client.cache.size} Realms`, { type: 'WATCHING' })
     }, 60000)
   }
 }
