@@ -1,10 +1,3 @@
-[![Codacy Badge](https://img.shields.io/codacy/grade/f6f32a91a6994bb69f8f282365c60857?style=flat-square)](https://www.codacy.com/manual/VulgarBear/heimdall?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AgardianDevelopment/heimdall&amp;utm_campaign=Badge_Grade)
-![license](https://img.shields.io/github/license/AgardianDevelopment/heimdall?style=flat-square)
-![Commit](https://img.shields.io/github/last-commit/AgardianDevelopment/heimdall?style=flat-square)
-[![Discord](https://img.shields.io/discord/540671346728763392?label=discord&style=flat-square)](https://discord.gg/E9cJjvw)
-
-[![Bots for Discord](https://botsfordiscord.com/api/bot/391050398850613250/widget)](https://botsfordiscord.com/bots/391050398850613250)
-
 <div align="center">
   <br />
   <p>
@@ -17,7 +10,7 @@
     <img alt="Discord" src="https://img.shields.io/discord/540671346728763392?color=%237289da%20&label=Discord&logo=discord&logoColor=white&style=flat-square">
   </p>
   <p>
-    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/vulgarbear/heimdallr/node?style=flat-square">
+    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/vulgarbear/heimdall/Node.js CI?style=flat-square">
     <img alt="GitHub" src="https://img.shields.io/github/license/vulgarbear/heimdall?style=flat-square">
     <img alt="CodeFactor Grade" src="https://img.shields.io/codefactor/grade/github/vulgarbear/heimdall?style=flat-square">
     <img alt="David" src="https://img.shields.io/david/vulgarbear/heimdall?style=flat-square">
