@@ -388,7 +388,7 @@ class Starboard {
 
   static emojiFromID (client, id) {
     if (/^\d+$/.test(id)) {
-      return client.emojis.get(id)
+      return client.emojis.resolve(id)
     }
 
     return id
