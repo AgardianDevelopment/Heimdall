@@ -17,8 +17,8 @@ class DatbuttCommand extends Command {
 
     if ((msg.author.id == 137727774910709760) == false) return msg.channel.send(response[Math.floor(Math.random() * response.length)]).then(msg.delete())
 
-    const loading = await this.client.emojis.resolve('541151509946171402')
-    const ohNo = await this.client.emojis.resolve('541151482599440385')
+    const loading = await this.client.emojis.resolve('620109183399755796')
+    const ohNo = await this.client.emojis.resolve('620106037390999558')
     const m = await msg.channel.send(`${loading} **Hold onto your butts!**`)
 
     try {
