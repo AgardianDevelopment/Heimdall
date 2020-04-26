@@ -10,10 +10,9 @@
     <img alt="Discord" src="https://img.shields.io/discord/540671346728763392?color=%237289da%20&label=Discord&logo=discord&logoColor=white&style=flat-square">
   </p>
   <p>
-    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/vulgarbear/heimdall/Node.js CI?style=flat-square">
     <img alt="GitHub" src="https://img.shields.io/github/license/vulgarbear/heimdall?style=flat-square">
-    <img alt="CodeFactor Grade" src="https://img.shields.io/codefactor/grade/github/vulgarbear/heimdall?style=flat-square">
-    <img alt="David" src="https://img.shields.io/david/vulgarbear/heimdall?style=flat-square">
+    <a href="https://www.codefactor.io/repository/github/vulgarbear/heimdall"><img src="https://www.codefactor.io/repository/github/vulgarbear/heimdall/badge?style=flat-square" alt="CodeFactor" /></a>
+    <a href="https://david-dm.org/VulgarBear/heimdall"><img alt="David" src="https://david-dm.org/VulgarBear/heimdall.svg?style=flat-square"></a>
   </p>
 </div>
 
