@@ -48,12 +48,6 @@ class HeimdallClient extends AkairoClient {
     this.starboards = new Collection()
 
     this.setup()
-
-    setInterval(() => {
-      for (const guild of this.guilds.values()) {
-        guild.presences.clear()
-      }
-    }, 9e5)
   }
 
   setup () {

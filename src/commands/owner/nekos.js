@@ -11,7 +11,7 @@ class NekosCommand extends Command {
   }
 
   async exec (msg) {
-    console.log(this.client.guilds.cache.size)
+    console.log(this.client.guilds.values())
   }
 }
 module.exports = NekosCommand

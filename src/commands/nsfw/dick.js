@@ -1,10 +1,12 @@
 const { Command } = require('discord-akairo')
-const Porn = require('pornsearch').search('gay')
+const isImageUrl = require('is-image-url')
+const redditApiImageGetter = require('reddit-api-image-getter')
+const getter = new redditApiImageGetter()
 
-class GayCommand extends Command {
+class DickCommand extends Command {
   constructor () {
-    super('gay', {
-      aliases: ['gay'],
+    super('dick', {
+      aliases: ['dick'],
       category: 'nsfw',
       description: {
         content: 'Returns a random result of sword fighting.'
@@ -23,20 +25,19 @@ class GayCommand extends Command {
     const ohNo = await this.client.emojis.resolve('541151482599440385')
     const m = await msg.channel.send(`${loading} **Is that a dick in your pocket or....**`)
 
-    const res = await Porn.gifs()
-    var i = Math.floor(Math.random() * res.length)
-    const imagePhoto = res[i].url
-    console.log(imagePhoto)
+    const response = await getter.getHotImagesOfSubReddit('penis')
+    const randomResponse = response[Math.floor(Math.random() * response.length)].url
+    if (isImageUrl(randomResponse) !== true) return m.edit(`${ohNo} Something went wrong, try again.`)
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
-      .setURL(imagePhoto)
+      .setURL(randomResponse)
       .setColor(process.env.EMBED)
       .setTimestamp()
-      .setImage(imagePhoto)
+      .setImage(randomResponse)
       .setFooter(`Requested by ${msg.author.tag} | imgur API`, `${msg.author.displayAvatarURL()}`)
 
-    m.edit({ embed }).then(msg.delete()).then(msg.delete())
-  }
+    m.edit({ embed }).then(msg.delete())
+  }r
 }
-module.exports = GayCommand
+module.exports = DickCommand
