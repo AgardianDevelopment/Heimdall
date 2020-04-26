@@ -16,7 +16,7 @@
     "eslint-config-aqua": "^4.4.1"
   },
   "dependencies": {
-    "booru": "^2.0.3",
+    "booru": "^2.2.3",
     "chalk": "^2.4.2",
     "delay": "^4.2.0",
     "discord-akairo": "^8.0.0",

@@ -32,17 +32,20 @@ class E61Command extends Command {
 
     const blacklist = ['loli', 'shota', 'cub', 'young', 'child', 'baby']
 
-    const result = await Booru.search('e621.net', searchTerm, { limit: 1, random: true })
+    const searchArry = searchTerm.split(',')
+    const result = await Booru.search('e621.net', searchArry, { limit: 1, random: true })
+
+    console.log(result.posts[0].data.tags.artist)
 
     if (!result) return m.edit(`${ohNo} Looks like your dreams were too big.`)
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
-      .setURL(`https://e621.net/post/show/${result[0].data.id}`)
-      .setDescription(`**Artist:** ${result[0].data.author}\n**Description:** ${result[0].data.description.substring(0, 450)}...`)
+      .setURL(`https://e621.net/post/show/${result.posts[0].data.id}`)
+      .setDescription(`**Artist:** ${result.posts[0].data.tags.artist}`)
       .setColor(process.env.EMBED)
       .setTimestamp()
-      .setImage(result[0].data.file_url)
+      .setImage(result.posts[0].fileUrl)
       .setFooter(`Requested by ${msg.author.tag} | e621 API`, `${msg.author.displayAvatarURL()}`)
 
     m.edit({ embed }).then(msg.delete())
