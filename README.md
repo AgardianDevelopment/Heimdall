@@ -33,7 +33,7 @@ Heimdallr is an all in one Discord bot built with server functionality in mind. 
 * Set a custom prefix
 * Starboard functionality
 * Reputation System
-* Moderation tools to kick some ass when needed
+* Moderation tools to kick some ass when needed (Kick, Ban, Mute, etc)
 * Search movies, anime, managa, games, and more
 * Fun and interactive commands for user enguagment
 * NSFW features for deviants with the ability to disable

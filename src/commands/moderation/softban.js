@@ -37,7 +37,7 @@ class SoftBanCommand extends Command {
       description: {
         content: 'Soft Bans a user from the server.',
         useage: '<prefix>',
-        exmaples: ['@User [reason]']
+        exmaples: ['@User [time] [reason]']
       }
     })
   }
