@@ -15,6 +15,7 @@ class SettingsCommand extends Command {
   exec (msg) {
     const prefix = this.handler.prefix(msg)
     const defaultRole = this.client.settings.get(msg.guild.id, 'defaultRole', [])
+    const muteRole = this.client.settings.get(msg.guild.id, 'muteRole', [])
     const emojiID = this.client.settings.get(msg.guild, 'emoji', '⭐')
     const starboard = this.client.starboards.get(msg.guild.id)
     const logChan = this.client.settings.get(msg.guild.id, 'logChannel', [])
@@ -24,16 +25,16 @@ class SettingsCommand extends Command {
 
     const logName = msg.guild.channels.resolve(logChan)
     const newsName = msg.guild.channels.resolve(newsChan)
-    const roleName = msg.guild.roles.resolve(defaultRole)
-
-    console.log(newsChan)
+    const defRoleName = msg.guild.roles.resolve(defaultRole)
+    const muteRoleName = msg.guild.roles.resolve(muteRole)
 
     const embed = this.client.util.embed()
       .setColor(process.env.EMBED)
       .setTitle('Settings')
       .setDescription([
         `**Prefix**: \`${prefix}\``,
-        `**Default Role:** ${(roleName) || 'None'}`,
+        `**Default Role:** ${(defRoleName) || 'None'}`,
+        `**Mute Role:** ${(muteRoleName) || 'None'}`,
         `**Log Channel**: ${(logName) || 'None'}`,
         `**Annoucement Channel**: ${(newsName) || 'None'}`,
         `**Emoji**: ${Starboard.emojiFromID(this.client, emojiID)}`,

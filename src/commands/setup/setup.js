@@ -17,6 +17,14 @@ class SetupCommand extends Command {
           }
         },
         {
+          id: 'muteRoleName',
+          type: 'role',
+          prompt: {
+            start: 'What role would you like to be the mute role?',
+            retry: 'Please input a correct role name'
+          }
+        },
+        {
           id: 'logChannel',
           type: 'textChannel',
           prompt: {
@@ -53,8 +61,9 @@ class SetupCommand extends Command {
     })
   }
 
-  async exec (msg, { roleName, logChannel, anncChannel, starChannel, yesOrNo }) {
+  async exec (msg, { roleName, muteRoleName, logChannel, anncChannel, starChannel, yesOrNo }) {
     await this.client.settings.set(msg.guild, 'defaultRole', roleName.id)
+    await this.client.settings.set(msg.guild, 'muteRole', muteRoleName.id)
     await this.client.settings.set(msg.guild, 'logChannel', logChannel.id)
     await this.client.settings.set(msg.guild.id, 'newsChannel', anncChannel.id)
     await this.client.settings.set(msg.guild, 'starboardChannelID', starChannel.id)
@@ -68,6 +77,7 @@ class SetupCommand extends Command {
       .setColor(process.env.EMBED)
       .setDescription(['Server Settings',
         `**Default Role**: ${roleName}`,
+        `**Mute Role**: ${muteRoleName}`,
         `**Log Channel**: ${logChannel}`,
         `**Annoucement Channel**: ${anncChannel}`,
         `**Starboard**: ${starChannel}`,
