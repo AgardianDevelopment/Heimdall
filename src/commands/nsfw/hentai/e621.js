@@ -35,8 +35,6 @@ class E61Command extends Command {
     const searchArry = searchTerm.split(',')
     const result = await Booru.search('e621.net', searchArry, { limit: 1, random: true })
 
-    console.log(result.posts[0].data.tags.artist)
-
     if (!result) return m.edit(`${ohNo} Looks like your dreams were too big.`)
 
     const embed = this.client.util.embed()

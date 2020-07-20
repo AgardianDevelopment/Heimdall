@@ -34,6 +34,7 @@ class InsultCommand extends Command {
     const m = await msg.channel.send(`${loading} looking for a savage insult!`)
 
     const { text } = await get('https://evilinsult.com/generate_insult.php?lang=en&type=json')
+
     if (!text) return msg.util.reply(`${ohNo} There seems to be a problem sorry.`).then(msg.delete())
     const resInsult = JSON.parse(text)
     const insult = resInsult.insult

@@ -79,7 +79,7 @@ class HelpCommand extends Command {
       if (title) embed.addField(title, `\`${category.map(cmd => cmd.aliases[0]).join('` `')}\``)
     }
 
-    const shouldReply = msg.guild && msg.channel.permissionsFor(this.client.user).has('SEND_msgS')
+    const shouldReply = msg.guild && msg.channel.permissionsFor(this.client.user).has('SEND_MESSAGES')
 
     try {
       await msg.author.send({ embed })
