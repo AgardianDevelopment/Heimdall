@@ -29,11 +29,13 @@ class TriviaCommand extends Command {
   }
 
   async exec (msg, { category }) {
+    // Load Emojis from server
     const loading = await this.client.emojis.resolve('541151509946171402')
     const ohNo = await this.client.emojis.resolve('541151482599440385')
     const check = await this.client.emojis.resolve('541151462642941962')
     const sent = await msg.channel.send(`${loading} **Grabbing your trivia...**`)
 
+    // Grab trivia from API based on user input
     if (category === 'games') {
       var { body } = await get('https://opentdb.com/api.php?amount=1&category=15&type=multiple')
     } else if (category === 'animals') {
@@ -52,15 +54,16 @@ class TriviaCommand extends Command {
       return sent.edit(`${ohNo} I couldn't find any trivia.`).then(msg.delete())
     }
 
+    // Response if error is not caught in above block
     if (!body.results[0].question) return sent.edit(`${ohNo} I couldn't find any trivia.`).then(msg.delete())
+
+    // Take results from API and assign them to vars, shuffle answers
     const results = body.results[0]
-
     const question = results.question
-
     var answers = [he.decode(results.correct_answer), he.decode(results.incorrect_answers[0]), he.decode(results.incorrect_answers[1]), he.decode(results.incorrect_answers[2])]
-
     shuffle(answers)
 
+    // Build Embed
     const embed = this.client.util.embed()
       .setTitle(results.category)
       .setDescription('Please select the correct answer via 1-4')
@@ -75,18 +78,22 @@ class TriviaCommand extends Command {
         `4: ${answers[3]}`
       ])
 
+    // Send embed, set timeout for user to select answer, set max amount of guesses
     await sent.edit({ embed }).then(msg.delete())
     const filter = m => m.author.id === msg.author.id
     const attempts = await msg.channel.awaitMessages(filter, { time: 15000, max: 1 })
 
+    // Response if user times out
     if (!attempts || !attempts.size) {
       await sent.edit({ embed: null })
       return msg.channel.send(`${ohNo} You ran out of time it was **${he.decode(results.correct_answer)}**.`)
     }
 
+    // Format user's response
     const answer = attempts.first().content.toLowerCase()
     const index = Number(answer) - 1
 
+    // Check if answer is correct or not then send response
     if (answers[index].toLowerCase() === he.decode(results.correct_answer.toLowerCase())) {
       await sent.edit({ embed: null })
       return msg.channel.send(`${check} You answered correctly with **${he.decode(results.correct_answer)}**`)

@@ -1,3 +1,4 @@
+// Original Hoshi Code
 const { Command } = require('discord-akairo')
 const Starboard = require('../../struct/Starboard')
 
@@ -13,6 +14,7 @@ class SettingsCommand extends Command {
   }
 
   exec (msg) {
+    // Query database for guild settings, should result to null if nothing is found
     const prefix = this.handler.prefix(msg)
     const defaultRole = this.client.settings.get(msg.guild.id, 'defaultRole', [])
     const muteRole = this.client.settings.get(msg.guild.id, 'muteRole', [])
@@ -22,12 +24,12 @@ class SettingsCommand extends Command {
     const newsChan = this.client.settings.get(msg.guild.id, 'newsChannel', [])
     const blacklist = this.client.settings.get(msg.guild, 'blacklist', [])
     const nsfw = this.client.settings.get(msg.guild, 'nsfw', [])
-
     const logName = msg.guild.channels.resolve(logChan)
     const newsName = msg.guild.channels.resolve(newsChan)
     const defRoleName = msg.guild.roles.resolve(defaultRole)
     const muteRoleName = msg.guild.roles.resolve(muteRole)
 
+    // Build Embed
     const embed = this.client.util.embed()
       .setColor(process.env.EMBED)
       .setTitle('Settings')

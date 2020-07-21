@@ -1,3 +1,4 @@
+// Original Hoshi Code
 const Akairo = require('discord-akairo')
 const { Command } = Akairo
 const Discord = require('discord.js')

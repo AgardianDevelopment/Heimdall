@@ -21,9 +21,11 @@ class PollCommand extends Command {
   }
 
   async exec (msg, { question }) {
+    // Load Emojis from server
     const goodEmoji = await this.client.emojis.resolve('541151462642941962')
     const badEmoji = await this.client.emojis.resolve('541151482599440385')
 
+    // Build Embed
     const embed = this.client.util.embed()
       .setTitle('Server Poll | React to Vote')
       .setColor(process.env.EMBED)
@@ -31,6 +33,7 @@ class PollCommand extends Command {
       .setTimestamp()
       .setFooter(`Requested by ${msg.author.tag}`, `${msg.author.displayAvatarURL()}`)
 
+    // Send Embed and add reactions for voting
     const m = await msg.channel.send({ embed }).then(function (m) {
       m.react(goodEmoji.id)
       m.react(badEmoji.id)

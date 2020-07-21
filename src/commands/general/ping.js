@@ -10,9 +10,11 @@ class PingCommand extends Command {
   }
 
   async exec (msg) {
-    const start = Date.now(); msg.channel.send(msg.channel.id, 'Thinking...').then(m => {
+    // Start timing for ping response
+    const start = Date.now(); msg.channel.send('**Thinking...**').then(m => {
       const diff = (Date.now() - start)
 
+      // Build Embed
       const embed = this.client.util.embed()
         .setTitle('🔔 Pong!')
         .setColor(process.env.EMBED)

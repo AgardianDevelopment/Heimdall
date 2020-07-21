@@ -11,9 +11,11 @@ class AboutCommand extends Command {
   }
 
   exec (message) {
+    // Resolve current prefix for user's guild, resolve help guild
     const prefix = this.handler.prefix(message)
     const asgard = this.client.guilds.resolve('540671346728763392')
 
+    // Build embed
     const embed = this.client.util.embed()
       .setColor(process.env.EMBED)
       .setTitle('About Heimdallr')

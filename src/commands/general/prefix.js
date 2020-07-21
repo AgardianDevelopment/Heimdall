@@ -1,3 +1,4 @@
+// Original Hoshi Code
 const { Argument, Command } = require('discord-akairo')
 
 class PrefixCommand extends Command {

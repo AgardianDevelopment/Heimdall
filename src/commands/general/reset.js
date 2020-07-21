@@ -1,3 +1,4 @@
+// Original Hoshi Code
 const { Command } = require('discord-akairo')
 const Reputation = require('../../models/reputations')
 

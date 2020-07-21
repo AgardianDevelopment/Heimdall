@@ -1,3 +1,4 @@
+// Original Hoshi code
 const { Command } = require('discord-akairo')
 
 class HelpCommand extends Command {

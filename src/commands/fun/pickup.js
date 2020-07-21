@@ -28,11 +28,13 @@ class PickupCommand extends Command {
   }
 
   async exec (msg, { member }) {
+    // Load Emojis from server
     const loading = await this.client.emojis.resolve('541151509946171402')
     const ohNo = await this.client.emojis.resolve('541151482599440385')
 
     const m = await msg.channel.send(`${loading} looking for an awesome pickup line!`)
 
+    // Query API for pickup response and format
     const { body } = await get('https://pebble-pickup.herokuapp.com/tweets/random')
     if (!body) return msg.util.reply(`${ohNo} There seems to be a problem sorry.`).then(msg.delete())
     const pickup = body.tweet.toLowerCase()
