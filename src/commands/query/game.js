@@ -1,4 +1,5 @@
 const { Command } = require('discord-akairo')
+const fetch = require('node-fetch')
 const igdb = require('igdb-api-node').default
 
 class GameCommand extends Command {
@@ -24,32 +25,45 @@ class GameCommand extends Command {
   }
 
   async exec (msg, { game }) {
-    const API = igdb(`${process.env.IGDB}`)
     const loading = await this.client.emojis.resolve('541151509946171402')
     const ohNo = await this.client.emojis.resolve('541151482599440385')
 
+    // Sending initial message
     const m = await msg.channel.send(`${loading} **Checking IGDB for ${game}**`)
     game.split(' ').join('+')
 
-    const res = await igdb(process.env.IGDB)
-      .fields('name,rating,summary,url,cover')
-      .limit(1)
-      .search(game)
-      .request('/games')
+    // Fetch Configuration for Game
+    var gameRequestOptions = {
+      method: 'GET',
+      headers: {
+        'user-key': process.env.IGDB
+      },
+      redirect: 'follow'
+    }
 
-    if (!res.data[0].summary) return m.edit(`${ohNo} I couldn't find that game.`).then(msg.delete())
+    var gameRes = await fetch('https://api-v3.igdb.com/games/?search=' + game + '&fields=id,age_ratings,franchise,first_release_date,name,platforms,rating,screenshots,slug,summary,url,cover&limit=1', gameRequestOptions).then(res => res.json())
+    var gameSearch = gameRes[0]
 
-    const gameSummary = res.data[0].summary
+    // Error message is no game is found
+    if (!gameSearch.summary) return m.edit(`${ohNo} I couldn't find that game.`).then(msg.delete())
 
+    const gameSummary = gameSearch.summary
+
+    // Convert Epoch date to Human readable
+    const releaseDate = new Date(gameSearch.first_release_date * 1000).toLocaleDateString('en-US')
+
+    // Build embeded message
     const embed = this.client.util.embed()
-      .setTitle(res.data[0].name)
+      .setTitle(gameSearch.name)
       .setColor(process.env.EMBED)
       .setTimestamp()
       .setFooter(`Requested by ${msg.author.tag} | IGDB API`, `${msg.author.displayAvatarURL()}`)
       .addField('Summary', `${gameSummary.substring(0, 350)}...`)
-      .addField('Ratings', `${Math.round(res.data[0].rating)}%`, true)
-      .addField('More Info', `[IGDB Results](${res.data[0].url})`, true)
+      .addField('Ratings', `${Math.round(gameSearch.rating)}%`, true)
+      .addField('Release Date', releaseDate, true)
+      .addField('More Info', `[IGDB Results](${gameSearch.url})`, true)
 
+    // Send edited embed message
     m.edit({ embed }).then(msg.delete())
   }
 }
