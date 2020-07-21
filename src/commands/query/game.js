@@ -1,6 +1,5 @@
 const { Command } = require('discord-akairo')
 const fetch = require('node-fetch')
-const igdb = require('igdb-api-node').default
 
 class GameCommand extends Command {
   constructor () {

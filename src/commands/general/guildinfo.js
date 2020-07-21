@@ -20,6 +20,7 @@ class GuildInfoCommand extends Command {
   }
 
   async exec (msg) {
+    // Build Embed
     const embed = this.client.util.embed()
       .setColor(process.env.EMBED)
       .setTimestamp()
@@ -30,7 +31,7 @@ class GuildInfoCommand extends Command {
         `**Owner**: ${msg.guild.owner.toString()}`,
         `**Region**: ${msg.guild.region}`,
         `**Members**: ${msg.guild.memberCount}`,
-        `**Roles**: ${msg.guild.roles.size}`,
+        `**Roles**: ${msg.guild.roles.cache.size}`,
         `**Created:** ${msg.guild.createdAt}`,
         `**IconURL**: ${msg.guild.iconURL()}`
       ])
