@@ -1,3 +1,4 @@
+// Originally Hoshi code
 const { Command } = require('discord-akairo')
 const Sequelize = require('sequelize')
 const Star = require('../../models/stars')

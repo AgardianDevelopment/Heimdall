@@ -29,6 +29,7 @@ class LogChannelCommand extends Command {
   }
 
   async exec (msg, { channelName }) {
+    // Fetch log channel from Discord and save to PostgreSQL
     await this.client.settings.set(msg.guild, 'logChannel', channelName.id)
     return msg.util.reply(`The log channel has been set to **${channelName}**.`)
   }

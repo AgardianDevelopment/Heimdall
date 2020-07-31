@@ -29,6 +29,7 @@ class AnnounceChannelCommand extends Command {
   }
 
   async exec (msg, { channelName }) {
+    // Fetch accounement channel from Discord and save to PostgreSQL
     await this.client.settings.set(msg.guild.id, 'newsChannel', channelName.id)
     return msg.util.reply(`The announcements channel has been set to ${channelName}`)
   }

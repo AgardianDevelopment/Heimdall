@@ -36,21 +36,25 @@ class UnmuteCommand extends Command {
   }
 
   async exec (msg, { member, time, reason }) {
+    // Fetch muterole and member, send response if not found
     const muteRole = this.client.settings.get(msg.guild.id, 'muteRole', [])
     if (!muteRole) return msg.util.reply('💢 Muting is not configured on this server.')
     const guildMember = msg.guild.member(member)
 
+    // Perform check if member is currently muted else remove mute role
     if (!guildMember.roles.cache.has(muteRole)) return msg.util.reply('💢 User is not currently muted.')
-
     guildMember.roles.remove(muteRole).catch(console.error)
 
+    // Fetch log channel and save to variable, send response if not found.
     const logChan = this.client.settings.get(msg.guild.id, 'logChannel', [])
     if (Object.entries(logChan).length === 0) return msg.util.reply(`${member.tag} has been soft banned.`)
     const logSend = msg.guild.channels.resolve(logChan)
 
+    // Increment case count
     const guildID = await guildSettings.findOne({ where: { guildID: msg.guild.id } })
     guildID.increment('caseNumber')
 
+    // Build embed and send
     const embed = this.client.util.embed()
       .setColor(process.env.EMBED)
       .setTimestamp()

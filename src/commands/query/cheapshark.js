@@ -27,16 +27,20 @@ class CheapSharkCommand extends Command {
   }
 
   async exec (msg, { searchTerm }) {
+    // Format search text, load emojis from emoji server
     const search = searchTerm.split(' ').join('+')
     const loading = await this.client.emojis.resolve('541151509946171402')
     const ohNo = await this.client.emojis.resolve('541151482599440385')
 
+    // Send default pending message
     const m = await msg.channel.send(`${loading} **Searching on Cheapshark...**`)
 
+    // Fetch stores and result from Cheapshark API
     const stores = await fetch('http://www.cheapshark.com/api/1.0/stores').then(res => res.json())
     const res = await fetch('http://www.cheapshark.com/api/1.0/deals?lowerPrice&title=' + search + '&pageSize=2').then(res => res.json())
     if (!res[0]) return m.edit(`${ohNo} I couldn't find that game.`).then(msg.delete())
 
+    // Build embed and send
     const embed = this.client.util.embed()
       .setTitle(res[0].title)
       .setColor(process.env.EMBED)

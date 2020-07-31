@@ -29,6 +29,7 @@ class DefaultRoleCommand extends Command {
   }
 
   async exec (msg, { roleName }) {
+    // Fetch default role from Discord and save to PostgreSQL
     await this.client.settings.set(msg.guild, 'defaultRole', roleName.id)
     return msg.util.reply(`The default role has been set to ${roleName}`)
   }

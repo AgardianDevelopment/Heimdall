@@ -29,27 +29,32 @@ class PurgeCommand extends Command {
   }
 
   async exec (msg, { limit }) {
+    // Set hard limit on amount of messages to purge
     if (limit > 99) {
       return msg.util.reply('Please try again with a number between 1 and 99')
     }
 
+    // Fetch amount of messages and delete, add +1 for the command message
     const fetched = await msg.channel.messages.fetch({ limit: limit + 1 })
     msg.channel.bulkDelete(fetched.array().reverse()).catch(err => msg.util.reply(`Messages not deleted due to error: ${err}`))
 
+    // Fetch log channel and save to variable, send response if not found.
     const logChan = this.client.settings.get(msg.guild.id, 'logChannel', [])
     console.log(logChan)
     if (Object.entries(logChan).length === 0) return msg.util.reply(`${fetched.size} of ${limit + 1} messages deleted.`)
     const logSend = msg.guild.channels.resolve(logChan)
 
+    // Increment case count
     const guildID = await guildSettings.findOne({ where: { guildID: msg.guild.id } })
     guildID.increment('caseNumber')
 
+    // Create embed and send
     const embed = this.client.util.embed()
       .setColor(process.env.EMBED)
       .setTimestamp()
       .setFooter(`Case: ${guildID.caseNumber} | Recorded by ${msg.author.tag}`, `${msg.author.displayAvatarURL()}`)
       .addField('Messages Purged', [
-        `**Requested Purge**: ${limit + 1}`,
+        `**Requested Purge**: ${limit}`,
         `**Actual Purge**: ${fetched.size}`
       ])
 

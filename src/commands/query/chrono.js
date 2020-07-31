@@ -16,14 +16,18 @@ class ChronoCommand extends Command {
   }
 
   async exec (msg) {
+    // Load emojis from emoji server
     const loading = await this.client.emojis.resolve('541151509946171402')
     const ohNo = await this.client.emojis.resolve('541151482599440385')
 
+    // Send default pending message
     const m = await msg.channel.send(`${loading} **Checking out chrono.gg...**`)
 
+    // Fetch results from Chrono.gg API and check for results
     const res = await fetch('https://api.chrono.gg/sale').then(res => res.json())
     if (res.length === 0) return m.edit(`${ohNo} Couldn't find any deals...`).then(msg.delete())
 
+    // Build embed and send
     const embed = this.client.util.embed()
       .setTitle(res.name)
       .setColor(process.env.EMBED)

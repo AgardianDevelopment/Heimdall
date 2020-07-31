@@ -32,18 +32,24 @@ class tmdbCommand extends Command {
   }
 
   async exec (msg, { mediaType, searchTerm }) {
+    // Format search string
     var string = searchTerm
     var string = string.substring().split(' ')
     const search = string.join('%20')
 
+    // Load emojis from emoji server
     const loading = await this.client.emojis.resolve('541151509946171402')
     const ohNo = await this.client.emojis.resolve('541151482599440385')
+
+    // Send default pending message
     const m = await msg.channel.send(`${loading} **Searching on TMDB...**`)
 
+    // Build url based on type
     const movieURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + process.env.TMDB + '&query=' + search + '&page=1&include_adult=false'
     const seriesURL = 'https://api.themoviedb.org/3/search/tv?api_key=' + process.env.TMDB + '&query=' + search + '&page=1'
     const actorURL = 'https://api.themoviedb.org/3/search/person?api_key=' + process.env.TMDB + '&query=' + search + '&page=1&include_adult=false'
 
+    // Try fetching results from TMDB API for movies, error is none found
     if (mediaType === 'movie') {
       try {
         var movie = await fetch(movieURL).then(res => res.json())
@@ -55,6 +61,7 @@ class tmdbCommand extends Command {
         return m.edit(`${ohNo} I couldn't find that movie.`).then(msg.delete())
       }
 
+      // Build embed and send
       const embed = this.client.util.embed()
         .setTitle(movie.results[0].title)
         .setColor(process.env.EMBED)
@@ -67,6 +74,7 @@ class tmdbCommand extends Command {
         .addField('More Info', `[TMDB](https://www.themoviedb.org/movie/${movie.results[0].id})`)
 
       m.edit({ embed }).then(msg.delete())
+      // Try fetching results from TMDB API if for series, error if none found
     } else if (mediaType === 'series') {
       try {
         var series = await fetch(seriesURL).then(res => res.json())
@@ -78,6 +86,7 @@ class tmdbCommand extends Command {
         return m.edit(`${ohNo} I couldn't find that series.`).then(msg.delete())
       }
 
+      // Build embed and send
       const embed = this.client.util.embed()
         .setTitle(series.results[0].name)
         .setColor(process.env.EMBED)
@@ -90,6 +99,7 @@ class tmdbCommand extends Command {
         .addField('More Info', `[TMDB](https://www.themoviedb.org/tv/${series.results[0].id})`)
 
       m.edit({ embed }).then(msg.delete())
+      // Fetch results from TMDB API for actors, error if none found
     } else if (mediaType === 'actor') {
       try {
         var actor = await fetch(actorURL).then(res => res.json())
@@ -101,6 +111,7 @@ class tmdbCommand extends Command {
         return m.edit(`${ohNo} I couldn't find that actor.`).then(msg.delete())
       }
 
+      // Build embed and send
       const embed = this.client.util.embed()
         .setTitle(actor.results[0].name)
         .setColor(process.env.EMBED)
@@ -111,6 +122,7 @@ class tmdbCommand extends Command {
         .addField('More Info', `[TMDB](https://www.themoviedb.org/person/${actor.results[0].id})`)
 
       m.edit({ embed }).then(msg.delete())
+      // Catch all error message
     } else return m.edit(`${ohNo} Something went wrong I'm sorry.`).then(msg.delete())
   }
 }

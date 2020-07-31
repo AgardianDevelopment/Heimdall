@@ -62,6 +62,7 @@ class SetupCommand extends Command {
   }
 
   async exec (msg, { roleName, muteRoleName, logChannel, anncChannel, starChannel, yesOrNo }) {
+    // Fetch guild settings from Discord and save to PostgreSQL
     await this.client.settings.set(msg.guild, 'defaultRole', roleName.id)
     await this.client.settings.set(msg.guild, 'muteRole', muteRoleName.id)
     await this.client.settings.set(msg.guild, 'logChannel', logChannel.id)
@@ -72,6 +73,7 @@ class SetupCommand extends Command {
     } else {
       await this.client.settings.set(msg.guild, 'nsfw', false)
     }
+    // Build embed with results and send
     const embed = this.client.util.embed()
       .setAuthor('Server Setting Wizard')
       .setColor(process.env.EMBED)

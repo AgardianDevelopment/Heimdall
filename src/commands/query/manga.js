@@ -28,11 +28,14 @@ class MangaCommand extends Command {
   }
 
   async exec (msg, { manga }) {
+    // Load emojis from emoji server
     const loading = await this.client.emojis.resolve('541151509946171402')
     const ohNo = await this.client.emojis.resolve('541151482599440385')
 
+    // Send default pending message
     const m = await msg.channel.send(`${loading} **Let's see ${manga} huh?**`)
 
+    // Try fetching results from Kitsu API, send error if not found
     try {
       var results = await kitsu.searchManga(manga)
     } catch (e) {
@@ -43,6 +46,7 @@ class MangaCommand extends Command {
 
     const url = `https://kitsu.io/manga/${results[0].slug}`
 
+    // Build embed and send
     const embed = this.client.util.embed()
       .setTitle(results[0].titles.canonical)
       .setURL(url)

@@ -1,3 +1,4 @@
+// Originally Hoshi code
 const { Argument, Command } = require('discord-akairo')
 
 class StarThresholdCommand extends Command {

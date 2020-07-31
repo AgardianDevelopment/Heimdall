@@ -29,6 +29,7 @@ class MuteRoleCommand extends Command {
   }
 
   async exec (msg, { roleName }) {
+    // Fetch mute role from Discord and save to PostgreSQL
     await this.client.settings.set(msg.guild, 'muteRole', roleName.id)
     return msg.util.reply(`The mute role has been set to ${roleName}`)
   }

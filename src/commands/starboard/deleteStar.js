@@ -1,3 +1,4 @@
+// Originally Hoshi code
 const { Command } = require('discord-akairo')
 const Star = require('../../models/stars')
 

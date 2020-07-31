@@ -43,17 +43,22 @@ class SoftBanCommand extends Command {
   }
 
   async exec (msg, { member, time, reason }) {
+    // Fetch guild member
     msg.guild.members.ban(member.id).catch(console.error)
 
+    // Create muteTime variable
     const muteTime = ms(time)
 
+    // Fetch log channel and save to variable, send response if not found.
     const logChan = this.client.settings.get(msg.guild.id, 'logChannel', [])
     if (Object.entries(logChan).length === 0) return msg.util.reply(`${member.tag} has been soft banned.`)
     const logSend = msg.guild.channels.resolve(logChan)
 
+    // Increment case count
     const guildID = await guildSettings.findOne({ where: { guildID: msg.guild.id } })
     guildID.increment('caseNumber')
 
+    // Build embed and send
     const embed = this.client.util.embed()
       .setColor(process.env.EMBED)
       .setTimestamp()
@@ -67,6 +72,7 @@ class SoftBanCommand extends Command {
 
     logSend.send({ embed })
 
+    // Function to apply ban to user for specified amount of time and send embed when completed
     setTimeout(async () => {
       msg.guild.members.unban(member.id).catch(console.error)
 

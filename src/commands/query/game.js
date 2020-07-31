@@ -24,10 +24,11 @@ class GameCommand extends Command {
   }
 
   async exec (msg, { game }) {
+    // Loading emojis from emoji server
     const loading = await this.client.emojis.resolve('541151509946171402')
     const ohNo = await this.client.emojis.resolve('541151482599440385')
 
-    // Sending initial message
+    // Send default pending message
     const m = await msg.channel.send(`${loading} **Checking IGDB for ${game}**`)
     game.split(' ').join('+')
 

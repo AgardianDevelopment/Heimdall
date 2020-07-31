@@ -29,6 +29,7 @@ class NSFWCommand extends Command {
   }
 
   async exec (msg, { yesOrNo }) {
+    // Check above answer and set NSFW setting for guild accordingly in PostgreSQL
     if (yesOrNo.match[0] === 'true') {
       await this.client.settings.set(msg.guild, 'nsfw', true)
       return msg.util.reply('NSFW has been to **TRUE** for you server.')
