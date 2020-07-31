@@ -57,7 +57,8 @@ class CuteCommand extends Command {
 
     // Build embed and send
     const embed = this.client.util.embed()
-      .setTitle('A little dose of cuteness')
+      .setTitle('Image didn\'t load click here.')
+      .setURL(cuteImage)
       .setColor(process.env.EMBED)
       .setTimestamp()
       .setFooter(`Requested by ${msg.author.tag} | Cute Animal APIs`, `${msg.author.displayAvatarURL()}`)
