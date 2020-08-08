@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const superagent = require('superagent')
+const fetch = require('node-fetch')
 
 class DatbuttCommand extends Command {
   constructor () {
@@ -21,29 +21,37 @@ class DatbuttCommand extends Command {
     const ohNo = await this.client.emojis.resolve('620106037390999558')
     const m = await msg.channel.send(`${loading} **Hold onto your butts!**`)
 
+    var fetchRequestOptions = {
+      method: 'GET',
+      headers: {
+        authorization: `Client-ID ${process.env.IMGUR}`
+      },
+      redirect: 'follow'
+    }
+
     try {
-      var image = await superagent.get('https://api.imgur.com/3/album/JZUQ7/images').set('authorization', 'Client-ID ' + process.env.IMGUR).then(r => r.body)
+      var res = await fetch('https://api.imgur.com/3/album/JZUQ7/images', fetchRequestOptions).then(res => res.json())
     } catch (e) {
+      console.log(e)
+      return m.edit(`${ohNo} Looks like something went wrong.`).then(msg.delete())
+    }
+    if (res.status == 403) {
       return m.edit(`${ohNo} Looks like something went wrong.`).then(msg.delete())
     }
 
-    if (image.status == 403) {
-      return m.edit(`${ohNo} Looks like something went wrong.`).then(msg.delete())
-    }
+    var i = Math.floor(Math.random() * res.data.length)
 
-    var i = Math.floor(Math.random() * image.data.length)
-
-    if (image.data[i].is_album === true) {
-      var imagePhoto = image.data[i].images[0].link
+    if (res.data[i].is_album === true) {
+      var resPhoto = res.data[i].images[0].link
     } else {
-      var imagePhoto = image.data[i].link
+      var resPhoto = res.data[i].link
     }
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
-      .setURL(imagePhoto)
+      .setURL(resPhoto)
       .setColor(process.env.EMBED)
-      .setImage(imagePhoto)
+      .setImage(resPhoto)
       .setFooter('Requested by REDACTED | via REDACTED • REDATED at XX:XX GMT', 'https://just.vulgarity.xyz/CWtyugHIu6oVFuYN.png')
 
     m.edit({ embed }).then(msg.delete())

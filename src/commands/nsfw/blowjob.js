@@ -4,7 +4,7 @@ const Porn = require('pornsearch').search('blowjob')
 class BlowJobCommand extends Command {
   constructor () {
     super('blowjob', {
-      aliases: ['blowjob'],
+      aliases: ['blowjob', 'bj'],
       category: 'nsfw',
       description: {
         content: 'Random result here to give you head.'

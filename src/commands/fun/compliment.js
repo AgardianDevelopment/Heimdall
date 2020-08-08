@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const { get } = require('superagent')
+const fetch = require('node-fetch')
 
 class ComplimentCommand extends Command {
   constructor () {
@@ -35,10 +35,11 @@ class ComplimentCommand extends Command {
     const m = await msg.channel.send(`${loading} looking for a heart warming compliment!`)
 
     // Query API for compliment response
-    const { body } = await get('https://complimentr.com/api')
-    if (!body.compliment) return msg.util.reply(`${ohNo} There seems to be a problem sorry.`).then(msg.delete())
+    const res = await fetch('https://complimentr.com/api').then(res => res.json())
+    console.log(res)
+    if (!res.compliment) return msg.util.reply(`${ohNo} There seems to be a problem sorry.`).then(msg.delete())
 
-    m.edit(`${member}, ${body.compliment}!`).then(msg.delete())
+    m.edit(`${member}, ${res.compliment}!`).then(msg.delete())
   }
 }
 module.exports = ComplimentCommand

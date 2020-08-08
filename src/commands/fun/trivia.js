@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const { get } = require('superagent')
+const fetch = require('node-fetch')
 const shuffle = require('shuffle-array')
 const he = require('he')
 
@@ -37,28 +37,28 @@ class TriviaCommand extends Command {
 
     // Grab trivia from API based on user input
     if (category === 'games') {
-      var { body } = await get('https://opentdb.com/api.php?amount=1&category=15&type=multiple')
+      var res = await fetch('https://opentdb.com/api.php?amount=1&category=15&type=multiple').then(res => res.json())
     } else if (category === 'animals') {
-      var { body } = await get('https://opentdb.com/api.php?amount=1&category=27&type=multiple')
+      var res = await fetch('https://opentdb.com/api.php?amount=1&category=27&type=multiple').then(res => res.json())
     } else if (category === 'movies') {
-      var { body } = await get('https://opentdb.com/api.php?amount=1&category=11&type=multiple')
+      var res = await fetch('https://opentdb.com/api.php?amount=1&category=11&type=multiple').then(res => res.json())
     } else if (category === 'jp_animation') {
-      var { body } = await get('https://opentdb.com/api.php?amount=1&category=31&type=multiple')
+      var res = await fetch('https://opentdb.com/api.php?amount=1&category=31&type=multiple').then(res => res.json())
     } else if (category === 'animation') {
-      var { body } = await get('https://opentdb.com/api.php?amount=1&category=32&type=multiple')
+      var res = await fetch('https://opentdb.com/api.php?amount=1&category=32&type=multiple').then(res => res.json())
     } else if (category === 'music') {
-      var { body } = await get('https://opentdb.com/api.php?amount=1&category=12&type=multiple')
+      var res = await fetch('https://opentdb.com/api.php?amount=1&category=12&type=multiple').then(res => res.json())
     } else if (category === 'general') {
-      var { body } = await get('https://opentdb.com/api.php?amount=1&category=9&type=multiple')
+      var res = await fetch('https://opentdb.com/api.php?amount=1&category=9&type=multiple').then(res => res.json())
     } else {
       return sent.edit(`${ohNo} I couldn't find any trivia.`).then(msg.delete())
     }
 
     // Response if error is not caught in above block
-    if (!body.results[0].question) return sent.edit(`${ohNo} I couldn't find any trivia.`).then(msg.delete())
+    if (!res.results[0].question) return sent.edit(`${ohNo} I couldn't find any trivia.`).then(msg.delete())
 
     // Take results from API and assign them to vars, shuffle answers
-    const results = body.results[0]
+    const results = res.results[0]
     const question = results.question
     var answers = [he.decode(results.correct_answer), he.decode(results.incorrect_answers[0]), he.decode(results.incorrect_answers[1]), he.decode(results.incorrect_answers[2])]
     shuffle(answers)

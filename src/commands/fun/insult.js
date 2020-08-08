@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const { get } = require('superagent')
+const fetch = require('node-fetch')
 
 class InsultCommand extends Command {
   constructor () {
@@ -35,10 +35,9 @@ class InsultCommand extends Command {
     const m = await msg.channel.send(`${loading} looking for a savage insult!`)
 
     // Query API for insult response and format
-    const { text } = await get('https://evilinsult.com/generate_insult.php?lang=en&type=json')
-    if (!text) return msg.util.reply(`${ohNo} There seems to be a problem sorry.`).then(msg.delete())
-    const resInsult = JSON.parse(text)
-    const insult = resInsult.insult
+    const res = await fetch('https://evilinsult.com/generate_insult.php?lang=en&type=json').then(res => res.json())
+    if (!res) return msg.util.reply(`${ohNo} There seems to be a problem sorry.`).then(msg.delete())
+    const insult = res.insult
     const insultRes = insult.toLowerCase()
 
     m.edit(`${member}, ${insultRes}.`).then(msg.delete())

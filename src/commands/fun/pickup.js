@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const { get } = require('superagent')
+const fetch = require('node-fetch')
 
 class PickupCommand extends Command {
   constructor () {
@@ -35,9 +35,9 @@ class PickupCommand extends Command {
     const m = await msg.channel.send(`${loading} looking for an awesome pickup line!`)
 
     // Query API for pickup response and format
-    const { body } = await get('https://pebble-pickup.herokuapp.com/tweets/random')
-    if (!body) return msg.util.reply(`${ohNo} There seems to be a problem sorry.`).then(msg.delete())
-    const pickup = body.tweet.toLowerCase()
+    const res = await fetch('https://pebble-pickup.herokuapp.com/tweets/random').then(res => res.json())
+    if (!res) return msg.util.reply(`${ohNo} There seems to be a problem sorry.`).then(msg.delete())
+    const pickup = res.tweet.toLowerCase()
 
     m.edit(`${member}, ${pickup}.`).then(msg.delete())
   }

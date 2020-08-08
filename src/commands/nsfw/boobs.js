@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const { get } = require('superagent')
+const fetch = require('node-fetch')
 
 class BoobsCommand extends Command {
   constructor () {
@@ -21,14 +21,14 @@ class BoobsCommand extends Command {
     const loading = await this.client.emojis.resolve('541151509946171402')
     const m = await msg.channel.send(`${loading} **Look at them motherfuckers jiggle.**`)
 
-    const { body } = await get('http://api.oboobs.ru/boobs/0/1/random')
+    const res = await fetch('http://api.oboobs.ru/boobs/0/1/random').then(res => res.json())
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
-      .setURL(`http://media.oboobs.ru/${body[0].preview}`)
+      .setURL(`http://media.oboobs.ru/${res[0].preview}`)
       .setColor(process.env.EMBED)
       .setTimestamp()
-      .setImage(`http://media.oboobs.ru/${body[0].preview}`)
+      .setImage(`http://media.oboobs.ru/${res[0].preview}`)
       .setFooter(`Requested by ${msg.author.tag} | oboobs.ru API`, `${msg.author.displayAvatarURL()}`)
 
     m.edit({ embed }).then(msg.delete())
