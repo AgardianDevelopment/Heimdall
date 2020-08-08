@@ -1,18 +1,18 @@
 <div align="center">
   <br />
   <p>
-    <a href="https://github.com/VulgarBear/heimdall"> <img src="./images/Heimdallr.png" width="400" alt="Heimdallr" /> </a>
+    <a href="https://github.com/VulgarBear/heimdallr"> <img src="./images/Heimdallr.png" width="400" alt="Heimdallr" /> </a>
   </p>
   <p>
-    <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/VulgarBear/heimdall?style=flat-square">
+    <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/VulgarBear/heimdallr?style=flat-square">
     <a href="https://github.com/VulgarBear/heimdall/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/VulgarBear/heimdall?style=flat-square"></a>
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/vulgarbear/heimdall?style=flat-square">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/vulgarbear/heimdallr?style=flat-square">
     <img alt="Discord" src="https://img.shields.io/discord/540671346728763392?color=%237289da%20&label=Discord&logo=discord&logoColor=white&style=flat-square">
   </p>
   <p>
     <img alt="GitHub" src="https://img.shields.io/github/license/vulgarbear/heimdall?style=flat-square">
-    <a href="https://www.codefactor.io/repository/github/vulgarbear/heimdall"><img src="https://www.codefactor.io/repository/github/vulgarbear/heimdall/badge?style=flat-square" alt="CodeFactor" /></a>
-    <a href="https://david-dm.org/VulgarBear/heimdall"><img alt="David" src="https://david-dm.org/VulgarBear/heimdall.svg?style=flat-square"></a>
+    <a href="https://www.codefactor.io/repository/github/vulgarbear/heimdallr"><img src="https://www.codefactor.io/repository/github/vulgarbear/heimdallr/badge?style=flat-square" alt="CodeFactor" /></a>
+    <a href="https://david-dm.org/VulgarBear/heimdallr"><img alt="David" src="https://david-dm.org/VulgarBear/heimdallr.svg?style=flat-square"></a>
   </p>
 </div>
 
