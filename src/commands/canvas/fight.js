@@ -25,9 +25,9 @@ class FightCommand extends Command {
         }
       ],
       description: {
-        content: 'Ship some users.',
+        content: 'Set some users against each other.',
         useage: '<prefix>',
-        exmaples: ['[user1] [user2]']
+        examples: ['[user1] [user2]']
       },
       cooldown: 3000,
       ratelimit: 2
