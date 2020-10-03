@@ -38,7 +38,7 @@ class GameCommand extends Command {
       headers: {
         Accept: 'application/json',
         'Client-ID': process.env.TWITCH_ID,
-        Authorization: 'Bearer aghbuf5ojmxzc0sbmzfuw57q9j0mom'
+        Authorization: process.env.TWITCH_AUTH
       },
       redirect: 'follow'
     }
