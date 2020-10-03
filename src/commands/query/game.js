@@ -34,14 +34,16 @@ class GameCommand extends Command {
 
     // Fetch Configuration for Game
     var gameRequestOptions = {
-      method: 'GET',
+      method: 'POST',
       headers: {
-        'user-key': process.env.IGDB
+        Accept: 'application/json',
+        'Client-ID': process.env.TWITCH_ID,
+        Authorization: 'Bearer aghbuf5ojmxzc0sbmzfuw57q9j0mom'
       },
       redirect: 'follow'
     }
 
-    var gameRes = await fetch('https://api-v3.igdb.com/games/?search=' + game + '&fields=id,age_ratings,franchise,first_release_date,name,platforms,rating,screenshots,slug,summary,url,cover&limit=1', gameRequestOptions).then(res => res.json())
+    var gameRes = await fetch('https://api.igdb.com/v4/games/?search=' + game + '&fields=id,age_ratings,franchise,first_release_date,name,platforms,rating,screenshots,slug,summary,url,cover&limit=1', gameRequestOptions).then(res => res.json())
     var gameSearch = gameRes[0]
 
     // Error message is no game is found
