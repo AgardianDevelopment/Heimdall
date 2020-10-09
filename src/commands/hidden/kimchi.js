@@ -24,7 +24,7 @@ class KimchiCommand extends Command {
 
     const insult = ['Jugeullae?!', '죽을래']
 
-    if (((msg.author.id == 138549812307034112) || (msg.author.id == 101808227385098240)) == false) return m.edit(response[Math.floor(Math.random() * insult.length)])
+    if (((msg.author.id == 138549812307034112) || (msg.author.id == 101808227385098240 || msg.author.id == 137727774910709760)) == false) return m.edit(response[Math.floor(Math.random() * insult.length)])
 
     var subreddits = [
       'Nekomimi',
