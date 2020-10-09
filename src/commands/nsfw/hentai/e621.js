@@ -36,8 +36,6 @@ class E61Command extends Command {
     const search = searchTerm.split(' ').join('_')
     const result = await Booru.search('e621.net', search, { limit: 1, random: true })
 
-    console.log(result.posts[0])
-
     if (!result.posts[0]) return m.edit(`${ohNo} Looks like your dreams were too big.`).then(m.delete({ timeout: 5000 })).then(msg.delete())
 
     const embed = this.client.util.embed()

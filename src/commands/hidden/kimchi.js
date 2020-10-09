@@ -21,14 +21,15 @@ class KimchiCommand extends Command {
 
     const permission = await Perms.findAll({ where: { userID: msg.author.id } })
 
-    const loading = await this.client.emojis.resolve('541151509946171402')
-    const ohNo = await this.client.emojis.resolve('541151482599440385')
-    const m = await msg.channel.send(`${loading} **Now subscribed to kimchi facts!**`)
-
     const insult = ['Jugeullae?!', '죽을래']
 
-    if (permission.length === 0) return msg.channel.send(insult[Math.floor(Math.random() * insult.length)]).then(m.delete())
-    if (permission[0].dataValues.kimchi === 'false') return msg.channel.send(insult[Math.floor(Math.random() * insult.length)]).then(m.delete())
+    if (permission.length === 0) return msg.channel.send(insult[Math.floor(Math.random() * insult.length)]).then(msg.delete())
+    if (permission[0].dataValues.kimchi === 'false') return msg.channel.send(insult[Math.floor(Math.random() * insult.length)]).then(msg.delete())
+
+    const loading = await this.client.emojis.resolve('541151509946171402')
+    const ohNo = await this.client.emojis.resolve('541151482599440385')
+
+    const m = await msg.channel.send(`${loading} **Now subscribed to kimchi facts!**`)
 
     var subreddits = [
       'Nekomimi',
