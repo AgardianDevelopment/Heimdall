@@ -19,6 +19,11 @@ const Perms = db.define('hidden_perms', {
     type: Sequelize.STRING,
     allowNull: false,
     defaultValue: 'false'
+  },
+  tentai: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue: 'false'
   }
 })
 
