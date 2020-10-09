@@ -9,6 +9,7 @@ class E61Command extends Command {
       args: [
         {
           id: 'searchTerm',
+          match: 'content',
           prompt: {
             start: 'What do you lookup on e621?'
           }
@@ -32,10 +33,12 @@ class E61Command extends Command {
 
     const blacklist = ['loli', 'shota', 'cub', 'young', 'child', 'baby']
 
-    const searchArry = searchTerm.split(',')
-    const result = await Booru.search('e621.net', searchArry, { limit: 1, random: true })
+    const search = searchTerm.split(' ').join('_')
+    const result = await Booru.search('e621.net', search, { limit: 1, random: true })
 
-    if (!result) return m.edit(`${ohNo} Looks like your dreams were too big.`)
+    console.log(result.posts[0])
+
+    if (!result.posts[0]) return m.edit(`${ohNo} Looks like your dreams were too big.`).then(m.delete({ timeout: 5000 })).then(msg.delete())
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')

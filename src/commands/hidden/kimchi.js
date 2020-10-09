@@ -2,6 +2,7 @@ const { Command } = require('discord-akairo')
 const isImageUrl = require('is-image-url')
 const redditApiImageGetter = require('reddit-api-image-getter')
 const getter = new redditApiImageGetter()
+const Perms = require('../../models/perms.js')
 
 class KimchiCommand extends Command {
   constructor () {
@@ -18,13 +19,16 @@ class KimchiCommand extends Command {
     const nsfwMode = this.client.settings.get(msg.guild.id, 'nsfw', [])
     if (!nsfwMode || nsfwMode === false || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
 
+    const permission = await Perms.findAll({ where: { userID: msg.author.id } })
+
     const loading = await this.client.emojis.resolve('541151509946171402')
     const ohNo = await this.client.emojis.resolve('541151482599440385')
     const m = await msg.channel.send(`${loading} **Now subscribed to kimchi facts!**`)
 
     const insult = ['Jugeullae?!', '죽을래']
 
-    if (((msg.author.id == 138549812307034112) || (msg.author.id == 101808227385098240) || (msg.author.id == 137727774910709760)) == false) return m.edit(response[Math.floor(Math.random() * insult.length)])
+    if (permission.length === 0) return msg.channel.send(insult[Math.floor(Math.random() * insult.length)]).then(m.delete())
+    if (permission[0].dataValues.kimchi === 'false') return msg.channel.send(insult[Math.floor(Math.random() * insult.length)]).then(m.delete())
 
     var subreddits = [
       'Nekomimi',

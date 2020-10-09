@@ -13,7 +13,7 @@ class CuteCommand extends Command {
           id: 'cuteType',
           type: ['dog', 'fox', 'cat', 'bird'],
           prompt: {
-            start: 'What kind of cuteness are your looking for? (dog, cat, fox, etc.)',
+            start: 'What kind of cuteness are your looking for? (dog, cat, fox, bird, etc.)',
             retry: 'Please select dog, cat, fox, etc.'
           }
         }

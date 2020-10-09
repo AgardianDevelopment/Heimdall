@@ -1,5 +1,6 @@
 const { Command } = require('discord-akairo')
 const fetch = require('node-fetch')
+const Perms = require('../../models/perms.js')
 
 class DatbuttCommand extends Command {
   constructor () {
@@ -13,9 +14,12 @@ class DatbuttCommand extends Command {
   }
 
   async exec (msg) {
+    const permission = await Perms.findAll({ where: { userID: msg.author.id } })
+
     const response = ['Just who the fuck do you think you are?', 'That\'s disgusting', 'haha and then what :wink:', 'I bet you say that to all the girls.', 'We are never ever getting back together!!!', 'Seriously, we barely know each other.', ':middle_finger: Sit on it and spin bitch!', 'Umm... I have a boyfriend.']
 
-    if ((msg.author.id == 137727774910709760) == false) return msg.channel.send(response[Math.floor(Math.random() * response.length)]).then(msg.delete())
+    if (permission.length === 0) return msg.channel.send(response[Math.floor(Math.random() * response.length)]).then(msg.delete())
+    if (permission[0].dataValues.datbutt === 'false') return msg.channel.send(response[Math.floor(Math.random() * response.length)]).then(msg.delete())
 
     const loading = await this.client.emojis.resolve('620109183399755796')
     const ohNo = await this.client.emojis.resolve('620106037390999558')
