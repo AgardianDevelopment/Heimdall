@@ -6,7 +6,7 @@ WORKDIR /usr/src/heimdallr
 
 # Copy and Install Heimdallr
 COPY package.json /usr/src/heimdallr
-RUN npm Install
+RUN npm install
 COPY . /usr/src/heimdallr
 
 # Start Bot
