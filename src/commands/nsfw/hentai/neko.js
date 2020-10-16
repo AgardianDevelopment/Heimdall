@@ -1,5 +1,6 @@
 const { Command } = require('discord-akairo')
-const fetch = require('node-fetch')
+const nekoClient = require('nekos.life')
+const { nsfw } = new nekoClient()
 
 class NekoCommand extends Command {
   constructor () {
@@ -21,15 +22,15 @@ class NekoCommand extends Command {
     const loading = await this.client.emojis.resolve('541151509946171402')
     const m = await msg.channel.send(`${loading} **Sexy anime kitties.**`)
 
-    const res = await fetch('https://nekobot.xyz/api/image?type=lewdneko').then(res => res.json())
+    const { url } = await nsfw.neko()
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
-      .setURL(res.message)
+      .setURL(url)
       .setColor(process.env.EMBED)
       .setTimestamp()
-      .setImage(res.message)
-      .setFooter(`Requested by ${msg.author.tag} | NekoBot API`, `${msg.author.displayAvatarURL()}`)
+      .setImage(url)
+      .setFooter(`Requested by ${msg.author.tag} | Nekos.life API`, `${msg.author.displayAvatarURL()}`)
 
     m.edit({ embed }).then(msg.delete())
   }

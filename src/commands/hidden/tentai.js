@@ -21,7 +21,7 @@ class TentaiCommand extends Command {
 
     const permission = await Perms.findAll({ where: { userID: msg.author.id } })
 
-    const insult = ['Jugeullae?!', '죽을래']
+    const insult = ['くそくらえ', 'でぶ', 'This is what you get for getting a A- in math', 'いやらしい']
 
     if (permission.length === 0) return msg.channel.send(insult[Math.floor(Math.random() * insult.length)]).then(msg.delete())
     if (permission[0].dataValues.tentai === 'false') return msg.channel.send(insult[Math.floor(Math.random() * insult.length)]).then(msg.delete())
@@ -29,7 +29,7 @@ class TentaiCommand extends Command {
     const loading = await this.client.emojis.resolve('541151509946171402')
     const ohNo = await this.client.emojis.resolve('541151482599440385')
 
-    const m = await msg.channel.send(`${loading} **Now subsribed to vine facts!**`)
+    const m = await msg.channel.send(`${loading} **Now subscribed to vine facts!**`)
 
     var subreddits = [
       'Tentai',

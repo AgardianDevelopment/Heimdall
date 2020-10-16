@@ -2,13 +2,13 @@ const { Command } = require('discord-akairo')
 const nekoClient = require('nekos.life')
 const { nsfw } = new nekoClient()
 
-class HCumCommand extends Command {
+class EroCommand extends Command {
   constructor () {
-    super('hcum', {
-      aliases: ['hcum'],
+    super('ero', {
+      aliases: ['ero'],
       category: 'nsfw',
       description: {
-        content: 'Returns a random hentai cumshot.'
+        content: 'Returns a random naughty ero.'
       },
       cooldown: 3000,
       ratelimit: 2
@@ -20,9 +20,9 @@ class HCumCommand extends Command {
     if (nsfwMode != true || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
 
     const loading = await this.client.emojis.resolve('541151509946171402')
-    const m = await msg.channel.send(`${loading} **It's time for that anime load.**`)
+    const m = await msg.channel.send(`${loading} **Erotic anime? Don't you mean hentai...**`)
 
-    const { url } = await nsfw.cumArts()
+    const { url } = await nsfw.ero()
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
@@ -35,4 +35,4 @@ class HCumCommand extends Command {
     m.edit({ embed }).then(msg.delete())
   }
 }
-module.exports = HCumCommand
+module.exports = EroCommand

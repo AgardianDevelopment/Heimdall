@@ -1,6 +1,8 @@
 const { Listener } = require('discord-akairo')
 const Logger = require('../../util/Logger')
 const Starboard = require('../../struct/Starboard')
+const BOATS = require('boats.js')
+const Boats = new BOATS(process.env.BOAT_API)
 
 class ReadyListener extends Listener {
   constructor () {
@@ -22,7 +24,8 @@ class ReadyListener extends Listener {
 
     setInterval(() => {
       this.client.user.setActivity(`Over ${this.client.guilds.cache.size} Realms`, { type: 'WATCHING' })
-    }, 60000)
+      Boats.postStats(this.client.guilds.cache.size, process.env.BOT_ID).then(() => { console.log('Discord Boats: Guilds Posted') })
+    }, 300000)
   }
 }
 

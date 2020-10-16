@@ -1,5 +1,6 @@
 const { Command } = require('discord-akairo')
-const fetch = require('node-fetch')
+const nekoClient = require('nekos.life')
+const { nsfw } = new nekoClient()
 
 class HBoobsCommand extends Command {
   constructor () {
@@ -21,14 +22,14 @@ class HBoobsCommand extends Command {
     const loading = await this.client.emojis.resolve('541151509946171402')
     const m = await msg.channel.send(`${loading} **Them motherfuckers still jiggly.**`)
 
-    const res = await fetch('https://nekos.life/api/v2/img/boobs').then(res => res.json())
+    const { url } = await nsfw.boobs()
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
-      .setURL(res.url)
+      .setURL(url)
       .setColor(process.env.EMBED)
       .setTimestamp()
-      .setImage(res.url)
+      .setImage(url)
       .setFooter(`Requested by ${msg.author.tag} | Nekos.life API`, `${msg.author.displayAvatarURL()}`)
 
     m.edit({ embed }).then(msg.delete())
