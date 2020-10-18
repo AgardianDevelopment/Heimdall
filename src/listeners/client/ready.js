@@ -3,6 +3,8 @@ const Logger = require('../../util/Logger')
 const Starboard = require('../../struct/Starboard')
 const BOATS = require('boats.js')
 const Boats = new BOATS(process.env.BOAT_API)
+const DBL = require('dblapi.js')
+const dbl = new DBL(process.env.TOP_API, this.client)
 
 class ReadyListener extends Listener {
   constructor () {
@@ -25,6 +27,7 @@ class ReadyListener extends Listener {
     setInterval(() => {
       this.client.user.setActivity(`Over ${this.client.guilds.cache.size} Realms`, { type: 'WATCHING' })
       Boats.postStats(this.client.guilds.cache.size, process.env.BOT_ID).then(() => { console.log('Discord Boats: Guilds Posted') })
+      dbl.postStats(this.client.guilds.cache.size).then(() => { console.log('Top.gg: Guilds Posted') })
     }, 300000)
   }
 }

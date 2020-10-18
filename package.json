@@ -19,6 +19,7 @@
     "boats.js": "^2.5.0",
     "booru": "^2.3.2",
     "chalk": "^2.4.2",
+    "dblapi.js": "^2.4.1",
     "delay": "^4.4.0",
     "discord-akairo": "^8.0.0",
     "discord.js": "^12.2.0",
