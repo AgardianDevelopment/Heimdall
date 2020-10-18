@@ -25,6 +25,7 @@
     "discord.js": "^12.2.0",
     "dotenv": "^7.0.0",
     "enmap": "^5.6.1",
+    "forever-monitor": "^3.0.1",
     "he": "^1.2.0",
     "is-image-url": "^1.1.8",
     "kitsu.js": "^2.0.0",

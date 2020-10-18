@@ -26,8 +26,8 @@ class ReadyListener extends Listener {
 
     setInterval(() => {
       this.client.user.setActivity(`Over ${this.client.guilds.cache.size} Realms`, { type: 'WATCHING' })
-      Boats.postStats(this.client.guilds.cache.size, process.env.BOT_ID).then(() => { console.log('Discord Boats: Guilds Posted') })
-      dbl.postStats(this.client.guilds.cache.size).then(() => { console.log('Top.gg: Guilds Posted') })
+      Boats.postStats(this.client.guilds.cache.size, process.env.BOT_ID).then(() => { Logger.info('Discord Boats: Guilds Posted') })
+      dbl.postStats(this.client.guilds.cache.size).then(() => { Logger.info('Top.gg: Guilds Posted') })
     }, 300000)
   }
 }
