@@ -1,10 +1,10 @@
 const { Argument, Command } = require('discord-akairo')
 const fetch = require('node-fetch')
 
-class DisRepCommand extends Command {
+class DisInfracCommand extends Command {
   constructor () {
-    super('disrep', {
-      aliases: ['disrep', 'drep'],
+    super('dis-infractions', {
+      aliases: ['dis-infractions', 'dinf'],
       category: 'reputation',
       channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
@@ -14,14 +14,14 @@ class DisRepCommand extends Command {
           type: 'user',
           default: message => message.author,
           prompt: {
-            start: 'That user could not be found. Whose reputation would you like to view?',
+            start: 'That user could not be found. Whose infractions would you like to view?',
             retry: 'Please provide a valid user.',
             optional: true
           }
         }
       ],
       description: {
-        content: 'Shows a user\'s reputation from DiscordRep.',
+        content: 'Shows a user\'s infractions from DiscordRep.',
         usage: '<user> [page]',
         examples: ['@JimBob', 'PopularDude#4232 10']
       }
@@ -51,25 +51,36 @@ class DisRepCommand extends Command {
       redirect: 'follow'
     }
 
-    var userRep = await fetch(`https://discordrep.com/api/v3/rep/${guildMember.id}`, requestOptions).then(res => res.json())
+    var userRep = await fetch(`https://discordrep.com/api/v3/infractions/${guildMember.id}`, requestOptions).then(res => res.json())
 
-    // Build embeded message
-    const embed = this.client.util.embed()
+    if (!userRep.type === 'CLEAN') {
+      var embed = this.client.util.embed()
       .setTitle('DiscordRep Results')
       .setColor(process.env.EMBED)
       .setTimestamp()
       .setThumbnail('https://discordrep.com/favicon.png')
       .setFooter(`Requested by ${msg.author.tag} | DiscordRep API`, `${msg.author.displayAvatarURL()}`)
       .addField(`${member.tag}`, [
-        `**❯ Upvotes**: ${userRep.upvotes}`,
-        `**❯ Downvotes**: ${userRep.downvotes}`,
-        `**❯ XP**: ${userRep.xp}`,
-        `**❯ Rank**: ${userRep.rank}`
+        `**❯ Infraction**: ${userRep.type}`,
+        `**❯ Reason**: ${userRep.reason}`,
       ])
       .addField('DiscordRep Link', `https://discordrep.com/u/${member.id}`)
+    } else {
+      var embed = this.client.util.embed()
+      .setTitle('DiscordRep Results')
+      .setColor(process.env.EMBED)
+      .setTimestamp()
+      .setThumbnail('https://discordrep.com/favicon.png')
+      .setFooter(`Requested by ${msg.author.tag} | DiscordRep API`, `${msg.author.displayAvatarURL()}`)
+      .addField(`${member.tag}`, [
+        `User reports back with no infractions`
+      ])
+      .addField('DiscordRep Link', `https://discordrep.com/u/${member.id}`)
+    }
+
     // Send edited embed message
     m.edit({ embed }).then(msg.delete())
   }
 }
 
-module.exports = DisRepCommand
+module.exports = DisInfracCommand
