@@ -26,6 +26,7 @@
     "prettier": "^2.1.2"
   },
   "dependencies": {
+    "@drep/api": "^2.0.3",
     "boats.js": "^2.5.0",
     "booru": "^2.3.2",
     "chalk": "^2.4.2",
