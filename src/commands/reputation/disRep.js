@@ -31,7 +31,7 @@ class DisRepCommand extends Command {
   }
 
   async exec (msg, { member }) {
-    //Fetch guild member
+    // Fetch guild member
     const guildMember = msg.guild.member(member)
 
     // Loading emojis from emoji server

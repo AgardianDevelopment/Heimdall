@@ -31,7 +31,7 @@ class DisInfracCommand extends Command {
   }
 
   async exec (msg, { member }) {
-    //Fetch guild member
+    // Fetch guild member
     const guildMember = msg.guild.member(member)
 
     // Loading emojis from emoji server
@@ -55,27 +55,27 @@ class DisInfracCommand extends Command {
 
     if (!userRep.type === 'CLEAN') {
       var embed = this.client.util.embed()
-      .setTitle('DiscordRep Results')
-      .setColor(process.env.EMBED)
-      .setTimestamp()
-      .setThumbnail('https://discordrep.com/favicon.png')
-      .setFooter(`Requested by ${msg.author.tag} | DiscordRep API`, `${msg.author.displayAvatarURL()}`)
-      .addField(`${member.tag}`, [
+        .setTitle('DiscordRep Results')
+        .setColor(process.env.EMBED)
+        .setTimestamp()
+        .setThumbnail('https://discordrep.com/favicon.png')
+        .setFooter(`Requested by ${msg.author.tag} | DiscordRep API`, `${msg.author.displayAvatarURL()}`)
+        .addField(`${member.tag}`, [
         `**❯ Infraction**: ${userRep.type}`,
-        `**❯ Reason**: ${userRep.reason}`,
-      ])
-      .addField('DiscordRep Link', `https://discordrep.com/u/${member.id}`)
+        `**❯ Reason**: ${userRep.reason}`
+        ])
+        .addField('DiscordRep Link', `https://discordrep.com/u/${member.id}`)
     } else {
       var embed = this.client.util.embed()
-      .setTitle('DiscordRep Results')
-      .setColor(process.env.EMBED)
-      .setTimestamp()
-      .setThumbnail('https://discordrep.com/favicon.png')
-      .setFooter(`Requested by ${msg.author.tag} | DiscordRep API`, `${msg.author.displayAvatarURL()}`)
-      .addField(`${member.tag}`, [
-        `User reports back with no infractions`
-      ])
-      .addField('DiscordRep Link', `https://discordrep.com/u/${member.id}`)
+        .setTitle('DiscordRep Results')
+        .setColor(process.env.EMBED)
+        .setTimestamp()
+        .setThumbnail('https://discordrep.com/favicon.png')
+        .setFooter(`Requested by ${msg.author.tag} | DiscordRep API`, `${msg.author.displayAvatarURL()}`)
+        .addField(`${member.tag}`, [
+          'User reports back with no infractions'
+        ])
+        .addField('DiscordRep Link', `https://discordrep.com/u/${member.id}`)
     }
 
     // Send edited embed message
