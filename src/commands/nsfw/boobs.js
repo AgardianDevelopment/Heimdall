@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const fetch = require('node-fetch')
+const nekoAPI = require('../../helpers/nekoBot')
 
 class BoobsCommand extends Command {
   constructor () {
@@ -16,22 +16,24 @@ class BoobsCommand extends Command {
 
   async exec (msg) {
     const nsfwMode = this.client.settings.get(msg.guild.id, 'nsfw', [])
-    if (nsfwMode != true || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
+    if (nsfwMode !== true || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
 
     const loading = await this.client.emojis.resolve('541151509946171402')
     const m = await msg.channel.send(`${loading} **Look at them motherfuckers jiggle.**`)
 
-    const res = await fetch('http://api.oboobs.ru/boobs/0/1/random').then(res => res.json())
+    const searchData = await nekoAPI.search('boobs')
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
-      .setURL(`http://media.oboobs.ru/${res[0].preview}`)
+      .setURL(searchData.message)
       .setColor(process.env.EMBED)
       .setTimestamp()
-      .setImage(`http://media.oboobs.ru/${res[0].preview}`)
-      .setFooter(`Requested by ${msg.author.tag} | oboobs.ru API`, `${msg.author.displayAvatarURL()}`)
+      .setImage(searchData.message)
+      .setFooter(`Requested by ${msg.author.tag} | NekoBot API`, `${msg.author.displayAvatarURL()}`)
 
-    m.edit({ embed }).then(msg.delete())
+    msg.channel.send({ embed })
+      .then(msg.delete())
+      .then(m.delete())
   }
 }
 module.exports = BoobsCommand

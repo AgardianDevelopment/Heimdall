@@ -19,7 +19,7 @@ class EightBallCommand extends Command {
       description: {
         content: 'Ask the magic 8ball a question.',
         usage: '[question]',
-        examples: ['*question*']
+        examples: ['am I cool']
       }
     })
   }

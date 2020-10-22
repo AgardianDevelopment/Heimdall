@@ -52,6 +52,7 @@ class SetupCommand extends Command {
         {
           id: 'yesOrNo',
           type: /^(true|false)$/i,
+          deafult: false,
           prompt: {
             start: 'Would you like to enable nsfw mode true/false?',
             retry: 'Please either input either true or false.'

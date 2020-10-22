@@ -98,8 +98,8 @@ class Starboard {
       const embed = this.buildStarboardEmbed(message, newStarredBy.length)
       starboardMessage = star.starboardMessageID
         ? await this.channel.messages.fetch(star.starboardMessageID)
-          .then(msg => msg.edit({ embed }))
-          .catch(() => this.channel.send({ embed }))
+            .then(msg => msg.edit({ embed }))
+            .catch(() => this.channel.send({ embed }))
         : await this.channel.send({ embed })
     }
 
@@ -147,8 +147,8 @@ class Starboard {
         const embed = this.buildStarboardEmbed(message, newStarredBy.length)
         starboardMessage = star.starboardMessageID
           ? await this.channel.messages.fetch(star.starboardMessageID)
-            .then(msg => msg.edit({ embed }))
-            .catch(() => this.channel.send({ embed }))
+              .then(msg => msg.edit({ embed }))
+              .catch(() => this.channel.send({ embed }))
           : await this.channel.send({ embed })
       } else {
         const msg = await this.channel.messages.fetch(star.starboardMessageID).catch(() => null)
@@ -272,8 +272,8 @@ class Starboard {
       const embed = this.buildStarboardEmbed(message, newStarredBy.length)
       starboardMessage = star.starboardMessageID
         ? await this.channel.messages.fetch(star.starboardMessageID)
-          .then(msg => msg.edit({ embed }))
-          .catch(() => this.channel.send({ embed }))
+            .then(msg => msg.edit({ embed }))
+            .catch(() => this.channel.send({ embed }))
         : await this.channel.send({ embed })
     } else {
       const msg = await this.channel.messages.fetch(star.starboardMessageID).catch(() => null)

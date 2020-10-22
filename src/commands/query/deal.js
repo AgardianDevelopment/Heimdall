@@ -8,7 +8,7 @@ const apiUtil = require('../../helpers/itadAPI')
 class DealCommand extends Command {
   constructor () {
     super('deal', {
-      aliases: ['deal'],
+      aliases: ['deal', 'deals'],
       category: 'query',
       cooldown: 2000,
       ratelimit: 1,
@@ -25,14 +25,15 @@ class DealCommand extends Command {
       description: {
         content:
           'Checks for any current game deals on isthereanydeal.com',
-        useage: '<prefix>'
+        useage: '<prefix>',
+        examples: ['killing floor 2', 'monster train']
       }
     })
   }
 
   async exec (msg, { searchTerm }) {
     const game = searchTerm.replace(/[^A-Z0-9]/ig, '')
-    const ignoredSellers = []
+    const ignoredSellers = ['2game', 'allyouplay', 'bistore', 'dlgamer', 'direct2drive', 'dreamgame', 'fireflower', 'impuse', 'gamesplanet', 'gamesplanetfr', 'gamesplanetus', 'gamesrepublic', 'gemly', 'lbostore', 'nuuvem', 'playism', 'silagames', 'voidu', 'wingamestore', 'gamesplanetde', 'gamesload', 'gamersgate']
 
     // Load emojis from emoji server
     const loading = await this.client.emojis.resolve('541151509946171402')

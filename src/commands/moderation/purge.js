@@ -14,7 +14,7 @@ class PurgeCommand extends Command {
           type: 'number',
           prompt: {
             start: 'How many messages would you like to delete (1-99)?',
-            retry: 'Please enter a number between 1 and 100.'
+            retry: 'Please enter a number between 1 and 99.'
           }
         }
       ],

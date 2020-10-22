@@ -37,19 +37,19 @@ class TriviaCommand extends Command {
 
     // Grab trivia from API based on user input
     if (category === 'games') {
-      var res = await fetch('https://opentdb.com/api.php?amount=1&category=15&type=multiple').then(res => res.json())
+      const res = await fetch('https://opentdb.com/api.php?amount=1&category=15&type=multiple').then(res => res.json())
     } else if (category === 'animals') {
-      var res = await fetch('https://opentdb.com/api.php?amount=1&category=27&type=multiple').then(res => res.json())
+      const res = await fetch('https://opentdb.com/api.php?amount=1&category=27&type=multiple').then(res => res.json())
     } else if (category === 'movies') {
-      var res = await fetch('https://opentdb.com/api.php?amount=1&category=11&type=multiple').then(res => res.json())
+      const res = await fetch('https://opentdb.com/api.php?amount=1&category=11&type=multiple').then(res => res.json())
     } else if (category === 'jp_animation') {
-      var res = await fetch('https://opentdb.com/api.php?amount=1&category=31&type=multiple').then(res => res.json())
+      const res = await fetch('https://opentdb.com/api.php?amount=1&category=31&type=multiple').then(res => res.json())
     } else if (category === 'animation') {
-      var res = await fetch('https://opentdb.com/api.php?amount=1&category=32&type=multiple').then(res => res.json())
+      const res = await fetch('https://opentdb.com/api.php?amount=1&category=32&type=multiple').then(res => res.json())
     } else if (category === 'music') {
-      var res = await fetch('https://opentdb.com/api.php?amount=1&category=12&type=multiple').then(res => res.json())
+      const res = await fetch('https://opentdb.com/api.php?amount=1&category=12&type=multiple').then(res => res.json())
     } else if (category === 'general') {
-      var res = await fetch('https://opentdb.com/api.php?amount=1&category=9&type=multiple').then(res => res.json())
+      const res = await fetch('https://opentdb.com/api.php?amount=1&category=9&type=multiple').then(res => res.json())
     } else {
       return sent.edit(`${ohNo} I couldn't find any trivia.`).then(msg.delete())
     }

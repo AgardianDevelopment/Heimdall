@@ -11,6 +11,8 @@
   </p>
   <p>
     <img alt="GitHub" src="https://img.shields.io/github/license/vulgarbear/heimdall?style=for-the-badge">
+    <img alt="Codacy grade" src="https://img.shields.io/codacy/grade/f6f32a91a6994bb69f8f282365c60857?style=for-the-badge">
+    <img alt="Travis (.org)" src="https://img.shields.io/travis/VulgarBear/heimdallr?style=for-the-badge">
     <a href="https://discord.js.org/#/"><img src="https://img.shields.io/badge/discord-js-blue.svg?style=for-the-badge" alt="discord.js"></a>
   </p>
   <p>

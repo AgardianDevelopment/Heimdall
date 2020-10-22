@@ -1,6 +1,5 @@
 const { Command } = require('discord-akairo')
 const guildSettings = require('../../models/settings')
-const ms = require('ms')
 
 class UnmuteCommand extends Command {
   constructor () {

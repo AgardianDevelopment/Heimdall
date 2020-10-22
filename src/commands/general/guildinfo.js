@@ -13,8 +13,7 @@ class GuildInfoCommand extends Command {
       cooldown: 2000,
       ratelimit: 1,
       description: {
-        content: 'Get information on the current server.',
-        examples: ['guildinfo', 'serverinfo']
+        content: 'Get information on the current server.'
       }
     })
   }

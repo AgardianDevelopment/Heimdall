@@ -1,6 +1,5 @@
 const { Command } = require('discord-akairo')
-const nekoClient = require('nekos.life')
-const { nsfw } = new nekoClient()
+const nekoAPI = require('../../../helpers/nekoBot')
 
 class KitsuneCommand extends Command {
   constructor () {
@@ -17,22 +16,24 @@ class KitsuneCommand extends Command {
 
   async exec (msg) {
     const nsfwMode = this.client.settings.get(msg.guild.id, 'nsfw', [])
-    if (nsfwMode != true || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
+    if (nsfwMode !== true || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
 
     const loading = await this.client.emojis.resolve('541151509946171402')
     const m = await msg.channel.send(`${loading} **Sexy anime foxes.**`)
 
-    const { url } = await nsfw.kitsune()
+    const searchData = await nekoAPI.search('hkitsune')
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
-      .setURL(url)
+      .setURL(searchData.message)
       .setColor(process.env.EMBED)
       .setTimestamp()
-      .setImage(url)
-      .setFooter(`Requested by ${msg.author.tag} | Nekos.life API`, `${msg.author.displayAvatarURL()}`)
+      .setImage(searchData.message)
+      .setFooter(`Requested by ${msg.author.tag} | NekoBot API`, `${msg.author.displayAvatarURL()}`)
 
-    m.edit({ embed }).then(msg.delete())
+    msg.channel.send({ embed })
+      .then(msg.delete())
+      .then(m.delete())
   }
 }
 module.exports = KitsuneCommand
