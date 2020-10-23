@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const nekoAPI = require('../../helpers/nekoBot')
+const nekoAPI = require('../../helpers/nekoAPIs')
 
 class PussyCommand extends Command {
   constructor () {
@@ -18,10 +18,10 @@ class PussyCommand extends Command {
     const nsfwMode = this.client.settings.get(msg.guild.id, 'nsfw', [])
     if (nsfwMode !== true || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
 
-    const loading = await this.client.emojis.resolve('541151509946171402')
+    const loading = await this.client.emojis.resolve(process.env.LOADING)
     const m = await msg.channel.send(`${loading} **Putting out the cat food!**`)
 
-    const searchData = await nekoAPI.search('pussy')
+    const searchData = await nekoAPI.nekoBot('pussy')
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')

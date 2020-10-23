@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const Booru = require('booru')
+const booru = require('../../../helpers/booru')
 
 class E621Command extends Command {
   constructor () {
@@ -29,27 +29,27 @@ class E621Command extends Command {
     const nsfwMode = this.client.settings.get(msg.guild.id, 'nsfw', [])
     if (nsfwMode !== true || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
 
-    const loading = await this.client.emojis.resolve('541151509946171402')
-    const ohNo = await this.client.emojis.resolve('541151482599440385')
-    const m = await msg.channel.send(`${loading} **Time to look for some ${searchTerm}.**`)
+    const loading = await this.client.emojis.resolve(`${process.env.LOADING}`)
+    const ohNo = await this.client.emojis.resolve(`${process.env.CROSS}`)
+    const m = await msg.channel.send(`${loading} **Looking for ${searchTerm} on e621.net.**`)
 
-    m.edit(`${ohNo} Your request contains a blacklisted word or words.`)
+    const search = await searchTerm.split(' ').join('_')
+    const searchData = await booru.e621(search)
 
-    const search = searchTerm.split(' ').join('_')
-    const result = await Booru.search('e621.net', search, { limit: 1, random: true })
-
-    if (!result.posts[0]) return m.edit(`${ohNo} Looks like your dreams were too big.`).then(m.delete({ timeout: 5000 })).then(msg.delete())
+    if (!searchData.fileUrl) return m.edit(`${ohNo} Your dreams were too big and I couldn't find ${searchTerm}.`).then(m.delete({ timeout: 5000 })).then(msg.delete())
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
-      .setURL(`https://e621.net/post/show/${result.posts[0].data.id}`)
-      .setDescription(`**Artist:** ${result.posts[0].data.tags.artist}`)
+      .setURL(searchData.fileUrl)
+      .setDescription(`**Artist:** ${searchData.data.tags.artist}`)
       .setColor(process.env.EMBED)
       .setTimestamp()
-      .setImage(result.posts[0].fileUrl)
-      .setFooter(`Requested by ${msg.author.tag} | e621 API`, `${msg.author.displayAvatarURL()}`)
+      .setImage(searchData.fileUrl)
+      .setFooter(`Requested by ${msg.author.tag} | e621.net API`, `${msg.author.displayAvatarURL()}`)
 
-    m.edit({ embed }).then(msg.delete())
+    msg.channel.send({ embed })
+      .then(msg.delete())
+      .then(m.delete())
   }
 }
 module.exports = E621Command
