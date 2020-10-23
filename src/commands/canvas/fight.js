@@ -36,7 +36,8 @@ class FightCommand extends Command {
 
   async exec (msg, { user1, user2 }) {
     // Load Emojis from server
-    const loading = await this.client.emojis.resolve('541151509946171402')
+    const loading = await this.client.emojis.resolve(process.env.LOADING)
+
     const m = await msg.channel.send(`${loading} **Setting up the match**`)
 
     var ship1 = msg.guild.member(user1)

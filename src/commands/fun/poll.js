@@ -22,8 +22,8 @@ class PollCommand extends Command {
 
   async exec (msg, { question }) {
     // Load Emojis from server
-    const goodEmoji = await this.client.emojis.resolve('541151462642941962')
-    const badEmoji = await this.client.emojis.resolve('541151482599440385')
+    const goodEmoji = await this.client.emojis.resolve(process.env.CHECK)
+    const badEmoji = await this.client.emojis.resolve(process.env.CROSS)
 
     // Build Embed
     const embed = this.client.util.embed()

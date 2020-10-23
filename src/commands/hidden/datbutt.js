@@ -21,8 +21,8 @@ class DatbuttCommand extends Command {
     if (permission.length === 0) return msg.channel.send(response[Math.floor(Math.random() * response.length)]).then(msg.delete())
     if (permission[0].dataValues.datbutt === 'false') return msg.channel.send(response[Math.floor(Math.random() * response.length)]).then(msg.delete())
 
-    const loading = await this.client.emojis.resolve('620109183399755796')
-    const ohNo = await this.client.emojis.resolve('620106037390999558')
+    const loading = await this.client.emojis.resolve(process.env.LOADING)
+    const ohNo = await this.client.emojis.resolve(process.env.CROSS)
     const m = await msg.channel.send(`${loading} **Hold onto your butts!**`)
 
     var fetchRequestOptions = {
@@ -39,7 +39,7 @@ class DatbuttCommand extends Command {
       console.log(e)
       return m.edit(`${ohNo} Looks like something went wrong.`).then(msg.delete())
     }
-    if (res.status == 403) {
+    if (res.status === 403) {
       return m.edit(`${ohNo} Looks like something went wrong.`).then(msg.delete())
     }
 

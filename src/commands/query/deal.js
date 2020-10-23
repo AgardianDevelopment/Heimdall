@@ -36,8 +36,8 @@ class DealCommand extends Command {
     const ignoredSellers = ['2game', 'allyouplay', 'bistore', 'dlgamer', 'direct2drive', 'dreamgame', 'fireflower', 'impuse', 'gamesplanet', 'gamesplanetfr', 'gamesplanetus', 'gamesrepublic', 'gemly', 'lbostore', 'nuuvem', 'playism', 'silagames', 'voidu', 'wingamestore', 'gamesplanetde', 'gamesload', 'gamersgate']
 
     // Load emojis from emoji server
-    const loading = await this.client.emojis.resolve('541151509946171402')
-    const ohNo = await this.client.emojis.resolve('541151482599440385')
+    const loading = await this.client.emojis.resolve(process.env.LOADING)
+    const ohNo = await this.client.emojis.resolve(process.env.CROSS)
 
     // Send default pending message
     const m = await msg.channel.send(`${loading} **Checking out isthereanydeal.com...**`)

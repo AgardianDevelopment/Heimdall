@@ -40,8 +40,7 @@ class Rule34Command extends Command {
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
-      .setURL(`https://e621.net/post/show/${searchData.fileUrl}`)
-      .setDescription(`**Artist:** ${searchData.data.owner}`)
+      .setURL(searchData.fileUrl)
       .setColor(process.env.EMBED)
       .setTimestamp()
       .setImage(searchData.fileUrl)

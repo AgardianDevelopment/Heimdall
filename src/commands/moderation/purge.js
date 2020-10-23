@@ -40,8 +40,7 @@ class PurgeCommand extends Command {
 
     // Fetch log channel and save to variable, send response if not found.
     const logChan = this.client.settings.get(msg.guild.id, 'logChannel', [])
-    console.log(logChan)
-    if (Object.entries(logChan).length === 0) return msg.util.reply(`${fetched.size} of ${limit + 1} messages deleted.`)
+    if (Object.entries(logChan).length === 0) return msg.util.reply(`${fetched.size} of ${limit} messages deleted.`).then(msg.delete({ timeout: 5000 }))
     const logSend = msg.guild.channels.resolve(logChan)
 
     // Increment case count

@@ -51,7 +51,7 @@ class SoftBanCommand extends Command {
 
     // Fetch log channel and save to variable, send response if not found.
     const logChan = this.client.settings.get(msg.guild.id, 'logChannel', [])
-    if (Object.entries(logChan).length === 0) return msg.util.reply(`${member.tag} has been soft banned.`)
+    if (Object.entries(logChan).length === 0) return msg.util.reply(`${member.tag} has been soft banned.`).then(msg.delete({ timeout: 5000 }))
     const logSend = msg.guild.channels.resolve(logChan)
 
     // Increment case count

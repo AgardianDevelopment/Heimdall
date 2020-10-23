@@ -35,8 +35,7 @@ class DisRepCommand extends Command {
     const guildMember = msg.guild.member(member)
 
     // Loading emojis from emoji server
-    const loading = await this.client.emojis.resolve('541151509946171402')
-    const ohNo = await this.client.emojis.resolve('541151482599440385')
+    const loading = await this.client.emojis.resolve(process.env.LOADING)
 
     // Send default pending message
     const m = await msg.channel.send(`${loading} **Checking DiscordRep for this user**`)

@@ -30,8 +30,8 @@ class TriviaCommand extends Command {
 
   async exec (msg, { category }) {
     // Load Emojis from server
-    const loading = await this.client.emojis.resolve('541151509946171402')
-    const ohNo = await this.client.emojis.resolve('541151482599440385')
+    const loading = await this.client.emojis.resolve(process.env.LOADING)
+    const ohNo = await this.client.emojis.resolve(process.env.CROSS)
     const check = await this.client.emojis.resolve('541151462642941962')
     const sent = await msg.channel.send(`${loading} **Grabbing your trivia...**`)
 

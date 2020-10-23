@@ -26,8 +26,8 @@ class KimchiCommand extends Command {
     if (permission.length === 0) return msg.channel.send(insult[Math.floor(Math.random() * insult.length)]).then(msg.delete())
     if (permission[0].dataValues.kimchi === 'false') return msg.channel.send(insult[Math.floor(Math.random() * insult.length)]).then(msg.delete())
 
-    const loading = await this.client.emojis.resolve('541151509946171402')
-    const ohNo = await this.client.emojis.resolve('541151482599440385')
+    const loading = await this.client.emojis.resolve(process.env.LOADING)
+    const ohNo = await this.client.emojis.resolve(process.env.CROSS)
 
     const m = await msg.channel.send(`${loading} **Now subscribed to kimchi facts!**`)
 
@@ -42,9 +42,9 @@ class KimchiCommand extends Command {
       'Tentai'
     ]
 
-    var img_sub = subreddits[Math.round(Math.random() * (subreddits.length - 1))]
+    const imgSub = subreddits[Math.round(Math.random() * (subreddits.length - 1))]
 
-    const response = await getter.getHotImagesOfSubReddit(img_sub)
+    const response = await getter.getHotImagesOfSubReddit(imgSub)
     const randomResponse = response[Math.floor(Math.random() * response.length)].url
     if (isImageUrl(randomResponse) !== true) return m.edit(`${ohNo} Something went wrong, try again.`)
 
