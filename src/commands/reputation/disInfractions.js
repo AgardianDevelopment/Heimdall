@@ -1,4 +1,4 @@
-const { Argument, Command } = require('discord-akairo')
+const { Command } = require('discord-akairo')
 const fetch = require('node-fetch')
 
 class DisInfracCommand extends Command {
