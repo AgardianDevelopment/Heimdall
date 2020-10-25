@@ -5,3 +5,4 @@ node_modules
 package-lock.json
 /botPostList.json
 src/commands/owner/test.js
+/logs

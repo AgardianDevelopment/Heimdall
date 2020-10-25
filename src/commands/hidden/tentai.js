@@ -50,7 +50,9 @@ class TentaiCommand extends Command {
       .setImage(randomResponse)
       .setFooter('Requested by REDACTED | via REDACTED • REDATED at XX:XX GMT', 'https://just.vulgarity.xyz/CWtyugHIu6oVFuYN.png')
 
-    m.edit({ embed }).then(msg.delete())
+    msg.channel.send({ embed })
+      .then(msg.delete())
+      .then(m.delete())
   }
 }
 

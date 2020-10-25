@@ -19,3 +19,5 @@ process.on('unhandledRejection', (err) => {
   Logger.error('An unhandled promise rejection occured')
   Logger.stacktrace(err)
 })
+
+require('./src/dashboard/server')
