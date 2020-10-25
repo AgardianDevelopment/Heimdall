@@ -1,15 +1,19 @@
 {
   "name": "heimdall",
   "version": "1.1.0",
-  "description": "A multipurose bot",
-  "main": "heimdall.js",
+  "description": "Your Multipurpose Viking Friend!",
+  "main": "index.js",
   "scripts": {
-    "test": "node ./heimdall.js"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "contributors": [
+    "VulgarBear",
     "1Computer",
     "vzwGrey"
   ],
+  "keywords": ["discord", "bot", "discord.js", "discord-akairo"],
+  "author": "Jotunn Development",
   "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
@@ -37,6 +41,7 @@
     "node-emoji": "^1.10.0",
     "node-fetch": "^2.6.1",
     "pg": "^7.9.0",
+    "pug": "^3.0.0",
     "reddit-api-image-getter": "^1.0.9",
     "sequelize": "^5.22.3",
     "shuffle-array": "^1.0.1"
