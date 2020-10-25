@@ -20,4 +20,8 @@ process.on('unhandledRejection', (err) => {
   Logger.stacktrace(err)
 })
 
-require('./src/dashboard/server')
+if (process.env.ENABLED === 'true') {
+  require('./src/dashboard/server')
+} else {
+  Logger.log('Dashboard was not started, to run set process.env.ENABLED to "true"', { tag: 'Dashboard' })
+}

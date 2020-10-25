@@ -5,8 +5,11 @@ const Logger = require('../util/Logger')
 const app = express()
 const port = process.env.PORT || 3000
 
-app.set('views', path.join(__dirname, './views'))
-app.set('view engine', 'pug')
+app
+  .use(express.static(path.join(__dirname, '/')))
+  .engine('html', require('ejs').renderFile)
+  .set('view engine', 'ejs')
+  .set('views', path.join(__dirname, 'views'))
 
 app.get('/', (req, res) => res.render('index'))
 

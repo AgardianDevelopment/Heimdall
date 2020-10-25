@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+// Brand Colors
+$blackish: #202020;
+$dark-grey: #3F3F3F;
+$medium-grey: #707070;
+$egg-yellow: #FFDF6C;
+$cloud: #F3F3F3;
+
+// Non-bulma
+
+// Update global variables
+$primary: $egg-yellow;
+$dark: $blackish;
+$light: $cloud;
+$link: $egg-yellow;
+$link-focus: $egg-yellow;
+
+// Update component variables
+$navbar-tab-hover-background-color: $medium-grey;
+$body-background-color: $cloud;
+$footer-background-color: $blackish;
+$footer-color: $medium-grey;
+$text-strong: $medium-grey;
+$footer-padding: 1.0rem 1.5rem .5rem;
+
+// Import Bulma
+@import "../../../../node_modules/bulma/bulma.sass";
