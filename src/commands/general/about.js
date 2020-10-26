@@ -28,7 +28,7 @@ class AboutCommand extends Command {
         '',
         `Use \`${prefix}stats\` for statistics and \`${prefix}invite\` for an invite link.`,
         '',
-        'Join the community server [server](https://discord.gg/E9cJjvw) to learn more!'
+        'Join the community server [server](https://discord.gg/E9cJjvw) to learn more! Lastly if you enjoy Heimdallr and would like to help support it check out our [Patreon](https://www.patreon.com/jotunndev).'
       ])
 
     return message.util.send({ embed })
