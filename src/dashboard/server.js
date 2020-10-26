@@ -12,5 +12,6 @@ app
   .set('views', path.join(__dirname, 'views'))
 
 app.get('/', (req, res) => res.render('index'))
+app.get('/commands', (req, res) => res.render('commands'))
 
 app.listen(port, () => { Logger.info(`Dashboard has started on ${port}`, { tag: 'Dashboard' }) })

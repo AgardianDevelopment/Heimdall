@@ -1,3 +1,22 @@
+html, body {
+  /* IE 10-11 didn't like using min-height */
+  height: 100%; }
+
+body {
+  display: flex;
+  flex-direction: column; }
+
+.content {
+  flex: 1 0 auto; }
+
+.footer {
+  flex-shrink: 0;
+  padding: 20px; }
+
+.content code {
+  background-color: #3F3F3F;
+  color: #FFDF6C; }
+
 /*! bulma.io v0.9.1 | MIT License | github.com/jgthms/bulma */
 /* Bulma Utilities */
 @keyframes spinAround {
@@ -4035,7 +4054,7 @@ a.navbar-item,
     min-height: 3.25rem;
     padding-bottom: calc(0.5rem - 1px); }
     .navbar-item.is-tab:focus, .navbar-item.is-tab:hover {
-      background-color: #707070;
+      background-color: transparent;
       border-bottom-color: #FFDF6C; }
     .navbar-item.is-tab.is-active {
       background-color: transparent;
@@ -4494,7 +4513,7 @@ a.navbar-item,
     flex-wrap: wrap; }
   .panel-block.is-active {
     border-left-color: #FFDF6C;
-    color: #363636; }
+    color: #3F3F3F; }
     .panel-block.is-active .panel-icon {
       color: #FFDF6C; }
   .panel-block:last-child {
