@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "css-build": "node-sass --omit-source-map-url ./src/dashboard/styles/scss/main.scss ./src/dashboard/styles/main.css",
+    "css-build": "node-sass --omit-source-map-url ./src/dashboard/assets/css/scss/main.scss ./src/dashboard/assets/css/main.css",
     "css-watch": "npm run css-build -- --watch",
     "dashboard": "node ./src/dashboard/server",
     "test": "echo \"Error: no test specified\" && exit 1"

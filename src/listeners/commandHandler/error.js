@@ -18,12 +18,12 @@ class ErrorListener extends Listener {
     Logger.stacktrace(err)
 
     if (message.guild ? message.channel.permissionsFor(this.client.user).has('SEND_MESSAGES') : true) {
-      const owners = this.client.ownerID.map(id => this.client.user.fetch(id).tag)
       message.channel.send([
-        `An error occured, please contact ${owners.join(' or ')}.`,
+        'An error occured, please submit an issue on https://github.com/Jotunn-Development/heimdallr/issues.',
         '```js',
         err.toString(),
-        '```'
+        '```',
+        'Include the information about with your github issue.'
       ])
     }
   }

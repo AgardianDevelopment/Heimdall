@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+  <%- include('../includes/header.ejs') %>
+
+</head>
+<body>
+
+
+  <section class="section hero">
+    <div class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title is-1">
+            Commands
+          </h1>
+          <h2 class="subtitle">
+            What good is having a bot if you can't even do anything with it?
+          </h2>
+          <div class="content">
+            <h5 class="subtitle is-5">
+             <strong>Command Usage Syntax</strong>
+          </h5>
+            <ul>
+              <li><code>[]</code> optional parameter</li>
+              <li><code>&lt;&gt;</code> required parameter</li>
+          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section columns">
+    <div class="column is-offset-one-fifth is-3">
+      <aside class="menu">
+        <p class="menu-label">
+          General Commands
+        </p>
+        <ul class="menu-list">
+          <li><a class="is-active">General</a></li>
+          <li><a>Fun</a></li>
+          <li><a>Moderation</a></li>
+          <li><a>Query</a></li>
+          <li><a>Reputation</a></li>
+          <li><a>Setup</a></li>
+          <li><a>Starboard</a></li>
+        </ul>
+        <p class="menu-label">
+          NSFW Commands
+        </p>
+          <ul class="menu-list">
+            <li><a>Real</a></li>
+            <li><a>Hentai</a></li>
+            <li><a>Boorus</a></li>
+          </ul>
+      </aside>
+    </div>
+    <div class="column is-9">
+      Commands Text
+    </div>
+  </section>
+
+
+</body>
+
+  <%- include('../includes/footer') %>
+
+</html>
