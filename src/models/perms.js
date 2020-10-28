@@ -4,6 +4,7 @@ const Sequelize = require('sequelize')
 const Perms = db.define('hidden_perms', {
   userID: {
     type: Sequelize.STRING,
+    primaryKey: true,
     allowNull: false
   },
   userName: {
