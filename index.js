@@ -1,27 +1,27 @@
 require('./src/util/Extensions')
 require('dotenv').config()
 
+const signale = require('signale')
 const config = process.env.config
 const HeimdallClient = require('./src/struct/HeimdallClient')
-const Logger = require('./src/util/Logger')
 
 const client = new HeimdallClient(config)
 
 client
-  .on('disconnect', () => Logger.warn('Connection lost...'))
-  .on('reconnect', () => Logger.info('Attempting to reconnect...'))
-  .on('error', (err) => Logger.error(err))
-  .on('warn', (info) => Logger.warn(info))
+  .on('disconnect', () => signale.warn({ prefix: '[Client]', message: 'Connection lost...' }))
+  .on('reconnect', () => signale.info({ prefix: '[Client]', message: 'Attempting to reconnect...' }))
+  .on('error', (err) => signale.error({ prefix: '[Client]', message: err.message }))
+  .on('warn', (info) => signale.warn({ prefix: '[Client]', message: info }))
 
 client.start()
 
 process.on('unhandledRejection', (err) => {
-  Logger.error('An unhandled promise rejection occured')
-  Logger.stacktrace(err)
+  signale.warn({ prefix: '[Client]', message: 'An unhandled promise rejection occured' })
+  signale.log({ prefix: '[Client]', message: err.message })
 })
 
 if (process.env.ENABLED === 'true') {
   require('./src/dashboard/server')
 } else {
-  Logger.log('Dashboard was not started, to run set process.env.ENABLED to "true"', { tag: 'Dashboard' })
+  signale.log({ prefix: '[Web-Server]', message: 'Dashboard was not started, to run set process.env.ENABLED to "true"' })
 }

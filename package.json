@@ -1,5 +1,5 @@
 {
-  "name": "heimdall",
+  "name": "Heimdallr",
   "version": "1.5.0",
   "description": "Your Multipurpose Viking Friend!",
   "main": "index.js",
@@ -46,7 +46,6 @@
     "forever-monitor": "^3.0.1",
     "he": "^1.2.0",
     "is-image-url": "^1.1.8",
-    "kitsu.js": "^2.0.0",
     "moment": "^2.29.1",
     "node-emoji": "^1.10.0",
     "node-fetch": "^2.6.1",
@@ -54,6 +53,9 @@
     "reddit-api-image-getter": "^1.0.9",
     "sequelize": "^5.22.3",
     "serve-favicon": "^2.5.0",
-    "shuffle-array": "^1.0.1"
-  }
+    "shuffle-array": "^1.0.1",
+    "signale": "^1.4.0"
+  },
+  "repository": "https://github.com/Jotunn-Development/heimdallr.git",
+  "private": false
 }

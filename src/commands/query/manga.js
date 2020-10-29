@@ -1,6 +1,6 @@
 const { Command } = require('discord-akairo')
-const Kitsu = require('kitsu.js')
-const kitsu = new Kitsu()
+const kitsuAPI = require('../../helpers/kitsu')
+const signale = require('signale')
 
 class MangaCommand extends Command {
   constructor () {
@@ -37,29 +37,30 @@ class MangaCommand extends Command {
 
     // Try fetching results from Kitsu API, send error if not found
     try {
-      var results = await kitsu.searchManga(manga)
+      const searchData = await kitsuAPI.manga(manga)
+
+      const url = `https://kitsu.io/manga/${searchData.attributes.slug}`
+
+      // Build embed and send
+      const embed = this.client.util.embed()
+        .setTitle(searchData.attributes.titles.canonical)
+        .setURL(url)
+        .setDescription(`**Synopsis:**\n${searchData.attributes.synopsis.substring(0, 450)}...`)
+        .setColor(process.env.EMBED)
+        .setTimestamp()
+        .setFooter(`Requested by ${msg.author.tag} | Kitsu API`, `${msg.author.displayAvatarURL()}`)
+        .setThumbnail(searchData.attributes.posterImage.small)
+        .addField('❯ Volumes', searchData.attributes.volumeCount, true)
+        .addField('❯ Total Chapers', searchData.attributes.chapterCount, true)
+        .addField('❯ Rating', `${searchData.attributes.averageRating}%`, true)
+
+      msg.channel.send({ embed })
+        .then(msg.delete())
+        .then(m.delete())
     } catch (e) {
-      console.log(e)
-      return m.edit(`${ohNo} I couldn't find that manga.`).then(msg.delete())
+      signale.error({ prefix: '[Manga Query]', message: e.message })
+      return m.edit(`${ohNo} Couldn't find that manga...`).then(msg.delete(), m.delete({ timeout: 5000 }))
     }
-    if (typeof results === 'undefined') return m.edit(`${ohNo} I couldn't find that manga.`).then(msg.delete())
-
-    const url = `https://kitsu.io/manga/${results[0].slug}`
-
-    // Build embed and send
-    const embed = this.client.util.embed()
-      .setTitle(results[0].titles.canonical)
-      .setURL(url)
-      .setDescription(`**Synopsis:**\n${results[0].synopsis.substring(0, 450)}...`)
-      .setColor(process.env.EMBED)
-      .setTimestamp()
-      .setFooter(`Requested by ${msg.author.tag} | Kitsu API`, `${msg.author.displayAvatarURL()}`)
-      .setThumbnail(results[0].posterImage.small)
-      .addField('❯ Volumes', results[0].volumeCount, true)
-      .addField('❯ Total Chapers', results[0].chapterCount, true)
-      .addField('❯ Rating', `${results[0].averageRating}%`, true)
-
-    m.edit({ embed }).then(msg.delete())
   }
 }
 module.exports = MangaCommand

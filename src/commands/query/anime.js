@@ -1,6 +1,6 @@
 const { Command } = require('discord-akairo')
-const Kitsu = require('kitsu.js')
-const kitsu = new Kitsu()
+const kitsuAPI = require('../../helpers/kitsu')
+const signale = require('signale')
 
 class AnimeCommand extends Command {
   constructor () {
@@ -37,29 +37,32 @@ class AnimeCommand extends Command {
 
     // Try fetching results from Kitsu API, send error if not found
     try {
-      var results = await kitsu.searchAnime(anime)
+      const searchData = await kitsuAPI.anime(anime)
+
+      const url = `https://kitsu.io/anime/${searchData.attributes.slug}`
+
+      // Build embed and send
+      const embed = this.client.util.embed()
+        .setTitle(searchData.attributes.titles.en + ' | ' + searchData.attributes.titles.ja_jp)
+        .setURL(url)
+        .setDescription(`**Synopsis:**\n${searchData.attributes.synopsis.substring(0, 450)}...`)
+        .setColor(process.env.EMBED)
+        .setTimestamp()
+        .setFooter(`Requested by ${msg.author.tag} | Kitsu API`, `${msg.author.displayAvatarURL()}`)
+        .setThumbnail(searchData.attributes.posterImage.small)
+        .addField('❯ Type', searchData.attributes.showType, true)
+        .addField('❯ Average Score', `${searchData.attributes.averageRating}%`, true)
+        .addField('❯ # of Episodes', searchData.attributes.episodeCount, true)
+        .addField('❯ Duration', searchData.attributes.episodeLength + ' mins', true)
+        .addField('❯ Content Guide', `${searchData.attributes.ageRating} | ${searchData.attributes.ageRatingGuide}`)
+
+      msg.channel.send({ embed })
+        .then(msg.delete())
+        .then(m.delete())
     } catch (e) {
-      return m.edit(`${ohNo} I couldn't find that anime.`).then(msg.delete())
+      signale.error({ prefix: '[Anime Query]', message: e.message })
+      return m.edit(`${ohNo} Couldn't find that anime...`).then(msg.delete(), m.delete({ timeout: 5000 }))
     }
-
-    const url = `https://kitsu.io/anime/${results[0].slug}`
-
-    // Build embed and send
-    const embed = this.client.util.embed()
-      .setTitle(results[0].titles.english + ' | ' + results[0].titles.japanese)
-      .setURL(url)
-      .setDescription(`**Synopsis:**\n${results[0].synopsis.substring(0, 450)}...`)
-      .setColor(process.env.EMBED)
-      .setTimestamp()
-      .setFooter(`Requested by ${msg.author.tag} | Kitsu API`, `${msg.author.displayAvatarURL()}`)
-      .setThumbnail(results[0].posterImage.small)
-      .addField('❯ Type', results[0].showType, true)
-      .addField('❯ Average Score', `${results[0].averageRating}%`, true)
-      .addField('❯ # of Episodes', results[0].episodeCount, true)
-      .addField('❯ Duration', results[0].episodeLength + ' mins', true)
-      .addField('❯ Content Guide', `${results[0].ageRating} | ${results[0].ageRatingGuide}`)
-
-    m.edit({ embed }).then(msg.delete())
   }
 }
 module.exports = AnimeCommand

@@ -1,5 +1,5 @@
 const { Listener } = require('discord-akairo')
-const Logger = require('../../util/Logger')
+const signale = require('signale')
 const Starboard = require('../../struct/Starboard')
 // const BOATS = require('boats.js')
 // const Boats = new BOATS(process.env.BOAT_API)
@@ -19,7 +19,7 @@ class ReadyListener extends Listener {
     const client = this.client
 
     /* Log Information about the bot */
-    Logger.info(`${client.user.tag} is ready to serve!`, { tag: 'Client' })
+    signale.start({ prefix: '[Client]', message: `${client.user.tag} is ready to server!` })
 
     /* Post Intial Client Activity */
     client.user.setActivity(`Over ${this.client.guilds.cache.size} Realms`, { type: 'WATCHING' })
