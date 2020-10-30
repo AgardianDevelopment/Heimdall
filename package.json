@@ -8,7 +8,7 @@
     "css-build": "node-sass --omit-source-map-url ./src/dashboard/assets/css/scss/main.scss ./src/dashboard/assets/css/main.css",
     "css-watch": "npm run css-build -- --watch",
     "dashboard": "node ./src/dashboard/server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "yarn run css-build"
   },
   "contributors": [
     "VulgarBear",
@@ -41,7 +41,6 @@
     "discord-akairo": "^8.1.0",
     "discord.js": "^12.4.0",
     "dotenv": "^7.0.0",
-    "ejs": "^3.1.5",
     "express": "^4.17.1",
     "forever-monitor": "^3.0.1",
     "he": "^1.2.0",
@@ -50,6 +49,7 @@
     "node-emoji": "^1.10.0",
     "node-fetch": "^2.6.1",
     "pg": "^7.9.0",
+    "pug": "^3.0.0",
     "reddit-api-image-getter": "^1.0.9",
     "sequelize": "^5.22.3",
     "serve-favicon": "^2.5.0",

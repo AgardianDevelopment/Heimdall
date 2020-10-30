@@ -34,7 +34,7 @@ class StatsCommand extends Command {
     return `${days === '00' ? '' : `${days}:`}${hours}:${minutes}:${seconds}`
   }
 
-  async exec (message) {
+  async exec (msg) {
     const embed = this.client.util.embed()
       .setColor(process.env.EMBED)
       .setTitle('Heimdallr Statistics')
@@ -51,7 +51,8 @@ class StatsCommand extends Command {
         `**Akairo**: v${Akairo.version}`
       ], true)
 
-    return message.util.send({ embed })
+    return msg.util.send({ embed })
+      .then(msg.delete)
   }
 }
 

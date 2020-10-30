@@ -1,0 +1,61 @@
+head
+  title Your Multipurpose Viking Friend
+  link(rel='shortcut icon', type='image/png', href='../../assets/images/favicon.png')
+  link(rel='stylesheet', href='/assets/css/main.css')
+  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css')
+  nav.navbar.is-fixed-top(role='navigation', aria-label='main navigation')
+    .navbar-brand
+      div(style='position: absolute; left: 50%; margin-left: -100px; margin-top: 0; padding: 0; height: 100%; display: flex; align-items: center;')
+        img(src='/assets/images/logo.png', width='192', height='35')
+      a.navbar-burger.burger.is-link(data-target='navMenu', aria-label='menu', aria-expanded='false')
+        span(aria-hidden='true')
+        span(aria-hidden='true')
+        span(aria-hidden='true')
+    #navMenu.navbar-menu
+      .navbar-start
+        a.navbar-item(href='/')
+          i.fas.fa-home.mr-2
+          |  Home
+        a.navbar-item.is-hidden(title='Coming Soon...', disabled='')
+          i.fas.fa-info.mr-2
+          |  About
+        a.navbar-item(href='/commands')
+          i.fas.fa-code.mr-2
+          |  Commands
+      .navbar-end
+        .navbar-item.has-dropdown.is-hoverable
+          a.navbar-item
+            | Vote
+            i.fas.fa-angle-down.ml-2
+          .navbar-dropdown
+            a.navbar-item(href='https://top.gg/bot/391050398850613250/vote')
+              | Top.gg
+            a.navbar-item(href='https://discord.boats/bot/391050398850613250/vote')
+              | Discord.boats
+        .navbar-item
+          .buttons
+            a.button.is-primary.is-hidden(title='Coming Soon...', disabled='')
+              i.fas.fa-sign-in-alt.mr-2
+              strong Log In
+            a.button.is-primary(href='https://patreon.com/jotunndev')
+              i.fab.fa-patreon.fa-fw
+              |  atreon
+script.
+  document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+  // Check if there are any navbar burgers
+  if ($navbarBurgers.length > 0) {
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+  el.addEventListener('click', () => {
+  // Get the target from the "data-target" attribute
+  const target = el.dataset.target;
+  const $target = document.getElementById(target);
+  // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+  el.classList.toggle('is-active');
+  $target.classList.toggle('is-active');
+  });
+  });
+  }
+  });

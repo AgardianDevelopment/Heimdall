@@ -1,0 +1,38 @@
+doctype
+html(lang='en')
+  head
+    include includes/header.pug
+
+  body
+    section.hero.is-medium
+      .hero-body
+        .container
+          .columns.is-vcenter
+            .column.is-5.mr-6
+              h1.title.is-light.is-title.is-size-1.has-text-weight-bold Heimdallr, Ever Watching
+              p.subtitle.is-4.has-margin-top-20.is-family-primary
+                | Discord bot that you can utilize for community engagement, NSFW deviants, server moderation, and much more.
+              div
+                a(href='https://top.gg/bot/391050398850613250/invite')
+                  button.button.is-primary.is-large.is-rounded.mr-2
+                    i.fas.fa-external-link-alt
+                    strong Invite Heimdallr
+                a(href='https://top.gg/bot/391050398850613250/invite')
+                  button.button.is-primary.is-large.is-rounded
+                    i.fas.fa-external-link-alt.mr-2
+                    strong Support Server
+              .columns.is-vcenter
+            .column.is-3.has-text-centered.ml-6
+              figure.image
+                img(src='/assets/images/viking.png', alt='Viking Friend', width='200', height='200')
+    section.cta.section
+      p.has-text-centered.is-size-6
+        span.tag.is-danger
+          | Disclaimer
+        span.is-size-7(style='color:#FFF')
+          |
+          | Heimdallr (the bot) has never been formally certified to warn of the Ragnar&ouml;k. Please keep
+          | a close watch out for supernaturally large snakes, fen dwellers, and mischievous gods.
+
+  footer
+    include includes/footer.pug
