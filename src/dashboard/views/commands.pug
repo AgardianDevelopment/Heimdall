@@ -3,6 +3,10 @@ html(lang='en')
   head
     include includes/header.pug
 
+    script(src='../assets/js/commands.js', defer)
+    script(defer)
+      let commands = !{commandString}
+
   body
     section.section.hero
     .hero
@@ -22,12 +26,19 @@ html(lang='en')
               li(style='color:#FFF')
                 code &lt;&gt;
                 |  required parameter
+
+    section.cta.section
+      p.has-text-centered.is-size-6
+        span.tag.is-warning
+          | Disclaimer: This section is not feature complete.
+        span.is-size-7(style='color:#FFF')
+
     section.section.columns
       .column.is-offset-one-fifth.is-3
         aside.menu
           p.menu-label
             | Commands
           ul
-            span#categoryList
+            li.is-active
       .column.is-9
         | Commands Text
