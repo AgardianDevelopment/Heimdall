@@ -19,7 +19,7 @@ class CuteCommand extends Command {
         }
       ],
       description: {
-        content: 'Fetches you up something cute (dog, fox, cat)',
+        content: 'Fetches you up something cute (dog, fox, cat, or bird)',
         useage: '<prefix>',
         examples: ['dog', 'cat', 'fox', 'bird']
       }
@@ -45,23 +45,23 @@ class CuteCommand extends Command {
       const res = await fetch(dogURL).then(res => res.json())
       if (!res[0]) return m.edit(`${ohNo} I couldn't find anycute dogs.`).then(msg.delete())
       const randomImage = res[Math.floor(Math.random() * res.length)]
-      const cuteImage = 'https://random.dog/' + randomImage
-      const sourceAPI = 'random.dog'
+      var cuteImage = 'https://random.dog/' + randomImage
+      var sourceAPI = 'random.dog'
     } else if (cuteType === 'fox') {
       const res = await fetch(foxURL).then(res => res.json())
       if (!res.image) return m.edit(`${ohNo} I couldn't find any cute foxes.`).then(msg.delete())
-      const cuteImage = res.image
-      const sourceAPI = 'randomfox.ca'
+      var cuteImage = res.image
+      var sourceAPI = 'randomfox.ca'
     } else if (cuteType === 'cat') {
       const res = await fetch(catURL).then(res => res.json())
       if (!res[0].url) return m.edit(`${ohNo} I couldn't find anycute cats.`).then(msg.delete())
-      const cuteImage = res[0].url
-      const sourceAPI = 'thecatapi.com'
+      var cuteImage = res[0].url
+      var sourceAPI = 'thecatapi.com'
     } else if (cuteType === 'bird') {
       const res = await fetch(birbURL).then(res => res.json())
       if (!res[0]) return m.edit(`${ohNo} I couldn't find anycute birbss.`).then(msg.delete())
-      const cuteImage = res[0]
-      const sourceAPI = 'shibe.online'
+      var cuteImage = res[0]
+      var sourceAPI = 'shibe.online'
     } else return m.edit(`${ohNo} Something went wrong!.`).then(msg.delete())
 
     // Build embed and send
