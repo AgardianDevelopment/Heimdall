@@ -35,7 +35,6 @@ class GelBooruCommand extends Command {
 
     const search = await searchTerm.split(' ').join('_')
     const searchData = await booru.gelbooru(search)
-    console.log(searchData)
 
     if (searchData === undefined) return m.edit(`${ohNo} Your dreams were too big and I couldn't find ${searchTerm}.`).then(m.delete({ timeout: 5000 })).then(msg.delete())
 

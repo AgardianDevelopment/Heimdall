@@ -36,7 +36,7 @@ class E621Command extends Command {
     const search = await searchTerm.split(' ').join('_')
     const searchData = await booru.e621(search)
 
-    if (!searchData.fileUrl) return m.edit(`${ohNo} Your dreams were too big and I couldn't find ${searchTerm}.`).then(m.delete({ timeout: 5000 })).then(msg.delete())
+    if (searchData === undefined) return m.edit(`${ohNo} Your dreams were too big and I couldn't find ${searchTerm}.`).then(m.delete({ timeout: 5000 })).then(msg.delete())
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
