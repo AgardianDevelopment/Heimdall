@@ -42,7 +42,6 @@
     "discord.js": "^12.4.0",
     "dotenv": "^7.0.0",
     "express": "^4.17.1",
-    "forever-monitor": "^3.0.1",
     "he": "^1.2.0",
     "is-image-url": "^1.1.8",
     "moment": "^2.29.1",

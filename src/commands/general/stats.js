@@ -52,7 +52,7 @@ class StatsCommand extends Command {
       ], true)
 
     return msg.util.send({ embed })
-      .then(msg.delete)
+      .then(msg.delete())
   }
 }
 
