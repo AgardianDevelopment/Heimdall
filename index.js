@@ -19,9 +19,3 @@ process.on('unhandledRejection', (err) => {
   signale.warn({ prefix: '[Client]', message: 'An unhandled promise rejection occured' })
   signale.log({ prefix: '[Client]', message: err.message })
 })
-
-if (process.env.ENABLED === 'true') {
-  require('./src/dashboard/server')
-} else {
-  signale.log({ prefix: '[Web-Server]', message: 'Dashboard was not started, to run set process.env.ENABLED to "true"' })
-}

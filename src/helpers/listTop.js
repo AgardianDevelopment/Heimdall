@@ -7,7 +7,7 @@ module.exports = {
   init (client) {
     // If Key exists post stats to Top.gg every ten minutes
     if (TOP_API === undefined) {
-      signale.warn({ prefix: '[D.Boats]', message: 'Unable to post stats, will no longer try.' })
+      signale.pause({ prefix: '[Top.gg]', message: 'Unable to post stats, will no longer try.' })
     } else {
       const topStats = new DBL(TOP_API, client)
       setInterval(function () {
