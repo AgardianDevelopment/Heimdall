@@ -17,6 +17,7 @@ class Rule34Command extends Command {
       ],
       description: {
         content: 'Search for a random result from rule34.xxx.',
+        type: 'rest',
         usage: '[search term]',
         examples: ['red panda']
       },
@@ -33,8 +34,7 @@ class Rule34Command extends Command {
     const ohNo = await this.client.emojis.resolve(`${process.env.CROSS}`)
     const m = await msg.channel.send(`${loading} **Looking for ${searchTerm} on rule34.xxx.**`)
 
-    const search = await searchTerm.split(' ').join('_')
-    const searchData = await booru.r34(search)
+    const searchData = await booru.r34(searchTerm)
 
     if (searchData === undefined) return m.edit(`${ohNo} Your dreams were too big and I couldn't find ${searchTerm}.`).then(m.delete({ timeout: 5000 })).then(msg.delete())
 

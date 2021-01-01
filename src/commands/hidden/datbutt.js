@@ -55,7 +55,7 @@ class DatbuttCommand extends Command {
       .setURL(resPhoto)
       .setColor(process.env.EMBED)
       .setImage(resPhoto)
-      .setFooter('Requested by REDACTED | via REDACTED • REDATED at XX:XX GMT', 'https://just.vulgarity.xyz/CWtyugHIu6oVFuYN.png')
+      .setFooter('Requested by REDACTED | via REDACTED • REDATED at XX:XX GMT', 'https://i.imgur.com/GfqYVlU.png')
 
     msg.channel.send({ embed })
       .then(msg.delete())

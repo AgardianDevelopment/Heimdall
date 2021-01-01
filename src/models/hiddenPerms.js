@@ -13,15 +13,23 @@ const HiddenPerms = db.define('hiddenPerms', {
   },
   datbutt: {
     type: Sequelize.STRING,
-    allowNull: true
+    allowNull: true,
+    default: 'false'
   },
   kimchi: {
     type: Sequelize.STRING,
-    allowNull: true
+    allowNull: true,
+    default: 'false'
   },
   tentai: {
     type: Sequelize.STRING,
-    allowNull: true
+    allowNull: true,
+    default: 'false'
+  },
+  angel: {
+    type: Sequelize.STRING,
+    allowNull: true,
+    default: 'false'
   }
 })
 
