@@ -2,7 +2,7 @@ const { Command } = require('discord-akairo')
 const isImageUrl = require('is-image-url')
 const redditApiImageGetter = require('reddit-api-image-getter')
 const getter = new redditApiImageGetter()
-const Perms = require('../../models/perms.js')
+const Perms = require('../../models/hiddenPerms.js')
 
 class TentaiCommand extends Command {
   constructor () {
@@ -19,12 +19,11 @@ class TentaiCommand extends Command {
     const nsfwMode = this.client.settings.get(msg.guild.id, 'nsfw', [])
     if (!nsfwMode || nsfwMode === false || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
 
-    const permission = await Perms.findAll({ where: { userID: msg.author.id } })
+    const permission = await Perms.findAll({ where: { userID: msg.author.id, tentai: 'true' } })
 
     const insult = ['くそくらえ', 'でぶ', 'This is what you get for getting a A- in math', 'いやらしい']
 
     if (permission.length === 0) return msg.channel.send(insult[Math.floor(Math.random() * insult.length)]).then(msg.delete())
-    if (permission[0].dataValues.tentai === 'false') return msg.channel.send(insult[Math.floor(Math.random() * insult.length)]).then(msg.delete())
 
     const loading = await this.client.emojis.resolve(process.env.LOADING)
     const ohNo = await this.client.emojis.resolve(process.env.CROSS)

@@ -1,7 +1,7 @@
 const { db } = require('../struct/Database')
 const Sequelize = require('sequelize')
 
-const Perms = db.define('hidden_perms', {
+const HiddenPerms = db.define('hiddenPerms', {
   userID: {
     type: Sequelize.STRING,
     primaryKey: true,
@@ -13,19 +13,16 @@ const Perms = db.define('hidden_perms', {
   },
   datbutt: {
     type: Sequelize.STRING,
-    allowNull: false,
-    defaultValue: 'false'
+    allowNull: true
   },
   kimchi: {
     type: Sequelize.STRING,
-    allowNull: false,
-    defaultValue: 'false'
+    allowNull: true
   },
   tentai: {
     type: Sequelize.STRING,
-    allowNull: false,
-    defaultValue: 'false'
+    allowNull: true
   }
 })
 
-module.exports = Perms
+module.exports = HiddenPerms
