@@ -39,18 +39,19 @@ class ReloadCommand extends Command {
     return { type, mod }
   }
 
-  exec (message, { type, mod }) {
+  exec (msg, { type, mod }) {
+    msg.delete()
     if (!mod) {
-      return message.util.reply(`Invalid ${type} ${type === 'command' ? 'alias' : 'ID'} specified to reload.`)
+      return msg.util.reply(`Invalid ${type} ${type === 'command' ? 'alias' : 'ID'} specified to reload.`)
     }
 
     try {
       mod.reload()
-      return message.util.reply(`Sucessfully reloaded ${type} \`${mod.id}\`.`)
+      return msg.util.reply(`Sucessfully reloaded ${type} \`${mod.id}\`.`)
     } catch (err) {
       Logger.error(`Error occured reloading ${type} ${mod.id}`)
       Logger.stacktrace(err)
-      return message.util.reply(`Failed to reload ${type} \`${mod.id}\`.`)
+      return msg.util.reply(`Failed to reload ${type} \`${mod.id}\`.`)
     }
   }
 }

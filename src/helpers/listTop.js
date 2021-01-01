@@ -1,5 +1,4 @@
 const DBL = require('dblapi.js')
-
 const signale = require('signale')
 const TOP_API = process.env.TOP_API
 

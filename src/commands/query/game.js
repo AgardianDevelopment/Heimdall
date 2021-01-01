@@ -1,5 +1,7 @@
 const { Command } = require('discord-akairo')
 const fetch = require('node-fetch')
+const axios = require('axios')
+const Auths = require('../../models/auths.js')
 
 class GameCommand extends Command {
   constructor () {
@@ -24,6 +26,16 @@ class GameCommand extends Command {
   }
 
   async exec (msg, { game }) {
+    // Load Twitch Auth Token From DB
+    const tokenConfig = {
+      method: 'post',
+      url: `https://id.twitch.tv/oauth2/token?client_id=${process.env.TWITCH_ID}&client_secret=${process.env.TWITCH_SECRET}&grant_type=client_credentials`,
+      headers: { }
+    }
+
+    const tokenFetch = await axios(tokenConfig)
+    const tokenData = tokenFetch.data.access_token
+
     // Loading emojis from emoji server
     const loading = await this.client.emojis.resolve(process.env.LOADING)
     const ohNo = await this.client.emojis.resolve(process.env.CROSS)
@@ -31,14 +43,13 @@ class GameCommand extends Command {
     // Send default pending message
     const m = await msg.channel.send(`${loading} **Checking IGDB for ${game}**`)
     game.split(' ').join('+')
-
     // Fetch Configuration for Game
     var gameRequestOptions = {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Client-ID': process.env.TWITCH_ID,
-        Authorization: process.env.TWITCH_AUTH
+        Authorization: `Bearer ${tokenData}`
       },
       redirect: 'follow'
     }

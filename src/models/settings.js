@@ -14,7 +14,7 @@ const Setting = db.define('settings', {
   },
   caseNumber: {
     type: Sequelize.INTEGER,
-    defaultValue: 1
+    defaultValue: 0
   }
 })
 

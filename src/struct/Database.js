@@ -16,9 +16,9 @@ class Database {
       signale.success({ prefix: '[Postgres]', message: 'Connection to database has been established successfully.' })
       await this.loadModels(path.join(__dirname, '..', 'models'))
     } catch (err) {
-      signale.err({ prefix: '[Postgres]', message: 'Unable to connect to the datbase:' })
+      signale.error({ prefix: '[Postgres]', message: 'Unable to connect to the datbase:' })
       signale.log({ prefix: '[Postgres]', message: err })
-      signale.ino({ prefix: '[Postgres]', message: 'Attempting to connect again in 5 seconds...' })
+      signale.info({ prefix: '[Postgres]', message: 'Attempting to connect again in 5 seconds...' })
       setTimeout(this.authenticate, 5000)
     }
   }
