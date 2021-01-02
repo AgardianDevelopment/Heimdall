@@ -47,7 +47,7 @@ class ReloadCommand extends Command {
 
     try {
       mod.reload()
-      return msg.util.reply(`Sucessfully reloaded ${type} \`${mod.id}\`.`)
+      return msg.util.reply(`Sucessfully reloaded ${type} \`${mod.id}\`.`).then(msg => { msg.delete({ timeout: 5000 }) })
     } catch (err) {
       Logger.error(`Error occured reloading ${type} ${mod.id}`)
       Logger.stacktrace(err)

@@ -1,5 +1,5 @@
 const { Listener } = require('discord-akairo')
-const Logger = require('../../util/Logger')
+const signale = require('signale')
 
 class CommandStartedListener extends Listener {
   constructor () {
@@ -12,7 +12,7 @@ class CommandStartedListener extends Listener {
 
   exec (message, command) {
     const tag = message.guild ? message.guild.name : `${message.author.tag}/PM`
-    Logger.log(`=> ${command.id}`, { tag })
+    signale.info(`=> ${command.id} on`, tag)
   }
 }
 

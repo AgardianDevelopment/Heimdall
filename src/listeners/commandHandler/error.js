@@ -1,5 +1,5 @@
 const { Listener } = require('discord-akairo')
-const Logger = require('../../util/Logger')
+const signale = require('signale')
 
 class ErrorListener extends Listener {
   constructor () {
@@ -11,11 +11,11 @@ class ErrorListener extends Listener {
   }
 
   exec (err, message) {
-    Logger.error('An error occured in a command.')
+    signale.error('An error occured in a command.')
 
     const tag = message.guild ? message.guild.name : `${message.author.tag}/PM`
-    Logger.error(message.content, { tag })
-    Logger.stacktrace(err)
+    signale.error(message.content, { tag })
+    signale.debug(err)
 
     if (message.guild ? message.channel.permissionsFor(this.client.user).has('SEND_MESSAGES') : true) {
       message.channel.send([

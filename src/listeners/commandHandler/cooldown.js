@@ -1,5 +1,5 @@
 const { Listener } = require('discord-akairo')
-const Logger = require('../../util/Logger')
+const signale = require('signale')
 
 class CooldownListener extends Listener {
   constructor () {
@@ -13,7 +13,7 @@ class CooldownListener extends Listener {
   exec (message, command, remaining) {
     const time = remaining / 1000
     const tag = message.guild ? message.guild.name : `${message.author.tag}/PM`
-    Logger.log(`=> ${command.id} ~ ${time}`, { tag })
+    signale.log(`=> ${command.id} ~ ${time}`, tag)
 
     if (message.guild ? message.channel.permissionsFor(this.client.user).has('SEND_MESSAGES') : true) {
       message.reply(`You can use that command again in ${time} seconds.`)

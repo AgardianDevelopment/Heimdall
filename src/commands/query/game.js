@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo')
-const fetch = require('node-fetch')
 const axios = require('axios')
 const Auths = require('../../models/auths.js')
 
@@ -27,14 +26,7 @@ class GameCommand extends Command {
 
   async exec (msg, { game }) {
     // Load Twitch Auth Token From DB
-    const tokenConfig = {
-      method: 'post',
-      url: `https://id.twitch.tv/oauth2/token?client_id=${process.env.TWITCH_ID}&client_secret=${process.env.TWITCH_SECRET}&grant_type=client_credentials`,
-      headers: { }
-    }
-
-    const tokenFetch = await axios(tokenConfig)
-    const tokenData = tokenFetch.data.access_token
+    const auth = await Auths.findOne({ where: { service: 'twitchAPI' } })
 
     // Loading emojis from emoji server
     const loading = await this.client.emojis.resolve(process.env.LOADING)
@@ -44,23 +36,31 @@ class GameCommand extends Command {
     const m = await msg.channel.send(`${loading} **Checking IGDB for ${game}**`)
     game.split(' ').join('+')
     // Fetch Configuration for Game
-    var gameRequestOptions = {
-      method: 'POST',
+    const config = {
+      method: 'post',
+      url: `https://api.igdb.com/v4/games/?search=${game}&limit=1&fields=id,age_ratings,franchise,first_release_date,name,platforms,rating,screenshots,slug,summary,url,cover.url`,
       headers: {
-        Accept: 'application/json',
         'Client-ID': process.env.TWITCH_ID,
-        Authorization: `Bearer ${tokenData}`
-      },
-      redirect: 'follow'
+        Authorization: `Bearer ${auth.token}`,
+        Accept: 'application/json'
+      }
     }
 
-    var gameRes = await fetch('https://api.igdb.com/v4/games/?search=' + game + '&fields=id,age_ratings,franchise,first_release_date,name,platforms,rating,screenshots,slug,summary,url,cover&limit=1', gameRequestOptions).then(res => res.json())
-    var gameSearch = gameRes[0]
+    const gameRes = await axios(config)
+    const gameSearch = gameRes.data[0]
 
     // Error message is no game is found
-    if (!gameSearch.summary) return m.edit(`${ohNo} I couldn't find that game.`).then(msg.delete())
+    if (gameSearch === undefined) {
+      return m.edit(`${ohNo} I couldn't find that game.`).then(msg.delete()).then(m.delete({ timeout: 5000 }))
+    } else {
+      var summary = gameSearch.summary
+    }
 
-    const gameSummary = gameSearch.summary
+    if (!gameSearch.cover) {
+      var gameCover = 'https://i.imgur.com/k9k4szN.png'
+    } else {
+      var gameCover = 'https:' + gameSearch.cover.url
+    }
 
     // Convert Epoch date to Human readable
     const releaseDate = new Date(gameSearch.first_release_date * 1000).toLocaleDateString('en-US')
@@ -70,8 +70,9 @@ class GameCommand extends Command {
       .setTitle(gameSearch.name)
       .setColor(process.env.EMBED)
       .setTimestamp()
+      .setThumbnail(gameCover)
       .setFooter(`Requested by ${msg.author.tag} | IGDB API`, `${msg.author.displayAvatarURL()}`)
-      .addField('Summary', `${gameSummary.substring(0, 350)}...`)
+      .addField('Summary', `${summary.substring(0, 350)}...`)
       .addField('Ratings', `${Math.round(gameSearch.rating)}%`, true)
       .addField('Release Date', releaseDate, true)
       .addField('More Info', `[IGDB Results](${gameSearch.url})`, true)

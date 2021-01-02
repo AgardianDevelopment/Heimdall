@@ -1,5 +1,5 @@
 const { Listener } = require('discord-akairo')
-const Logger = require('../../util/Logger')
+const signale = require('signale')
 
 class MissingPermissionsListener extends Listener {
   constructor () {
@@ -23,7 +23,7 @@ class MissingPermissionsListener extends Listener {
     }[type]
 
     const tag = message.guild ? message.guild.name : `${message.author.tag}/PM`
-    Logger.log(`=> ${command.id} ~ ${type}Permissions`, { tag })
+    signale.log(`=> ${command.id} ~ ${type}Permissions`, tag)
 
     if (!text) return
     if (message.guild ? message.channel.permissionsFor(this.client.user).has('SEND_MESSAGES') : true) {

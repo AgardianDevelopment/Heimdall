@@ -1,5 +1,5 @@
 const { Listener } = require('discord-akairo')
-const Logger = require('../../util/Logger')
+const signale = require('signale')
 
 class CommandBlockedListener extends Listener {
   constructor () {
@@ -17,7 +17,7 @@ class CommandBlockedListener extends Listener {
     }[reason]
 
     const tag = message.guild ? message.guild.name : `${message.author.tag}/PM`
-    Logger.log(`=> ${command.id} ~ ${reason}`, { tag })
+    signale.log(`=> ${command.id} ~ ${reason}`, tag)
 
     if (!text) return
     if (message.guild ? message.channel.permissionsFor(this.client.user).has('SEND_MESSAGES') : true) {
