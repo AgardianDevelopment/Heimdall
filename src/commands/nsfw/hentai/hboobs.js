@@ -16,7 +16,8 @@ class HBoobsCommand extends Command {
 
   async exec (msg) {
     const nsfwMode = this.client.settings.get(msg.guild.id, 'nsfw', [])
-    if (nsfwMode !== true || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.')
+    msg.delete()
+    if (nsfwMode !== true || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.').then(msg => { msg.delete({ timeout: 5000 }) })
 
     const loading = await this.client.emojis.resolve(process.env.LOADING)
     const m = await msg.channel.send(`${loading} **Them motherfuckers still jiggly.**`)

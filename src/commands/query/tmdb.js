@@ -1,5 +1,6 @@
 const { Command } = require('discord-akairo')
-const fetch = require('node-fetch')
+const tmdbAPI = require('../../helpers/tmdbAPI')
+const signale = require('signale')
 
 class tmdbCommand extends Command {
   constructor () {
@@ -44,84 +45,67 @@ class tmdbCommand extends Command {
     // Send default pending message
     const m = await msg.channel.send(`${loading} **Searching on TMDB...**`)
 
-    // Build url based on type
-    const movieURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + process.env.TMDB + '&query=' + search + '&page=1&include_adult=false'
-    const seriesURL = 'https://api.themoviedb.org/3/search/tv?api_key=' + process.env.TMDB + '&query=' + search + '&page=1'
-    const actorURL = 'https://api.themoviedb.org/3/search/person?api_key=' + process.env.TMDB + '&query=' + search + '&page=1&include_adult=false'
-
     // Try fetching results from TMDB API for movies, error is none found
     if (mediaType === 'movie') {
       try {
-        var movie = await fetch(movieURL).then(res => res.json())
-      } catch (e) {
-        return m.edit(`${ohNo} I couldn't find that movie.`).then(msg.delete()).then(console.log(e))
+        const movieResults = await tmdbAPI.movie(searchTerm)
+
+        const embed = this.client.util.embed()
+          .setTitle(movieResults.title)
+          .setColor(process.env.EMBED)
+          .setTimestamp()
+          .setFooter(`Requested by ${msg.author.tag} | TMDB API`, `${msg.author.displayAvatarURL()}`)
+          .setDescription(movieResults.overview)
+          .setThumbnail('https://image.tmdb.org/t/p/w500' + movieResults.poster_path)
+          .addField('User Rating', `${movieResults.vote_average}/10`, true)
+          .addField('Release Date', movieResults.release_date, true)
+          .addField('More Info', `[TMDB](https://www.themoviedb.org/movie/${movieResults.id})`)
+
+        m.edit({ embed }).then(msg.delete())
+      } catch (err) {
+        signale.error({ prefix: '[Movie Query]', message: err.message })
+        return m.edit(`${ohNo} Couldn't find that movie...`).then(msg.delete(), m.delete({ timeout: 5000 }))
       }
-
-      if (movie.results[0] === undefined) {
-        return m.edit(`${ohNo} I couldn't find that movie.`).then(msg.delete())
-      }
-
-      // Build embed and send
-      const embed = this.client.util.embed()
-        .setTitle(movie.results[0].title)
-        .setColor(process.env.EMBED)
-        .setTimestamp()
-        .setFooter(`Requested by ${msg.author.tag} | TMDB API`, `${msg.author.displayAvatarURL()}`)
-        .setDescription(movie.results[0].overview)
-        .setThumbnail('https://image.tmdb.org/t/p/w500' + movie.results[0].poster_path)
-        .addField('User Rating', `${movie.results[0].vote_average}/10`, true)
-        .addField('Release Date', movie.results[0].release_date, true)
-        .addField('More Info', `[TMDB](https://www.themoviedb.org/movie/${movie.results[0].id})`)
-
-      m.edit({ embed }).then(msg.delete())
       // Try fetching results from TMDB API if for series, error if none found
     } else if (mediaType === 'series') {
       try {
-        var series = await fetch(seriesURL).then(res => res.json())
-      } catch (e) {
-        return m.edit(`${ohNo} I couldn't find that series.`).then(msg.delete())
+        const seriesResults = await tmdbAPI.series(searchTerm)
+
+        const embed = this.client.util.embed()
+          .setTitle(seriesResults.name)
+          .setColor(process.env.EMBED)
+          .setTimestamp()
+          .setFooter(`Requested by ${msg.author.tag} | TMDB API`, `${msg.author.displayAvatarURL()}`)
+          .setDescription(seriesResults.overview)
+          .setThumbnail('https://image.tmdb.org/t/p/w500' + seriesResults.poster_path)
+          .addField('User Rating', `${seriesResults.vote_average}/10`, true)
+          .addField('Air Date', seriesResults.first_air_date, true)
+          .addField('More Info', `[TMDB](https://www.themoviedb.org/tv/${seriesResults.id})`)
+
+        m.edit({ embed }).then(msg.delete())
+      } catch (err) {
+        signale.error({ prefix: '[Series Query]', message: err.message })
+        return m.edit(`${ohNo} Couldn't find that series...`).then(msg.delete(), m.delete({ timeout: 5000 }))
       }
-
-      if (series.results[0] === undefined) {
-        return m.edit(`${ohNo} I couldn't find that series.`).then(msg.delete())
-      }
-
-      // Build embed and send
-      const embed = this.client.util.embed()
-        .setTitle(series.results[0].name)
-        .setColor(process.env.EMBED)
-        .setTimestamp()
-        .setFooter(`Requested by ${msg.author.tag} | TMDB API`, `${msg.author.displayAvatarURL()}`)
-        .setDescription(series.results[0].overview)
-        .setThumbnail('https://image.tmdb.org/t/p/w500' + series.results[0].poster_path)
-        .addField('User Rating', `${series.results[0].vote_average}/10`, true)
-        .addField('Air Date', series.results[0].first_air_date, true)
-        .addField('More Info', `[TMDB](https://www.themoviedb.org/tv/${series.results[0].id})`)
-
-      m.edit({ embed }).then(msg.delete())
       // Fetch results from TMDB API for actors, error if none found
     } else if (mediaType === 'actor') {
       try {
-        var actor = await fetch(actorURL).then(res => res.json())
-      } catch (e) {
-        return m.edit(`${ohNo} I couldn't find that actor.`).then(msg.delete())
+        const actorResults = await tmdbAPI.actor(searchTerm)
+
+        const embed = this.client.util.embed()
+          .setTitle(actorResults.name)
+          .setColor(process.env.EMBED)
+          .setTimestamp()
+          .setFooter(`Requested by ${msg.author.tag} | TMDB API`, `${msg.author.displayAvatarURL()}`)
+          .setThumbnail('https://image.tmdb.org/t/p/w500' + actorResults.profile_path)
+          .addField('Known For', `${actorResults.known_for[0].title}, ${actorResults.known_for[1].title}, ${actorResults.known_for[2].title}`)
+          .addField('More Info', `[TMDB](https://www.themoviedb.org/person/${actorResults.id})`)
+
+        m.edit({ embed }).then(msg.delete())
+      } catch (err) {
+        signale.error({ prefix: '[Actor Query]', message: err.message })
+        return m.edit(`${ohNo} Couldn't find that actor...`).then(msg.delete(), m.delete({ timeout: 5000 }))
       }
-
-      if (actor.results[0] === undefined) {
-        return m.edit(`${ohNo} I couldn't find that actor.`).then(msg.delete())
-      }
-
-      // Build embed and send
-      const embed = this.client.util.embed()
-        .setTitle(actor.results[0].name)
-        .setColor(process.env.EMBED)
-        .setTimestamp()
-        .setFooter(`Requested by ${msg.author.tag} | TMDB API`, `${msg.author.displayAvatarURL()}`)
-        .setThumbnail('https://image.tmdb.org/t/p/w500' + actor.results[0].profile_path)
-        .addField('Known For', `${actor.results[0].known_for[0].title}, ${actor.results[0].known_for[1].title}, ${actor.results[0].known_for[2].title}`)
-        .addField('More Info', `[TMDB](https://www.themoviedb.org/person/${actor.results[0].id})`)
-
-      m.edit({ embed }).then(msg.delete())
       // Catch all error message
     } else return m.edit(`${ohNo} Something went wrong I'm sorry.`).then(msg.delete())
   }
