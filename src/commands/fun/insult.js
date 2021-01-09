@@ -1,5 +1,6 @@
 const { Command } = require('discord-akairo')
-const fetch = require('node-fetch')
+const funHelper = require('../../helpers/funHelper')
+const signale = require('signale')
 
 class InsultCommand extends Command {
   constructor () {
@@ -34,13 +35,13 @@ class InsultCommand extends Command {
 
     const m = await msg.channel.send(`${loading} looking for a savage insult!`)
 
-    // Query API for insult response and format
-    const res = await fetch('https://evilinsult.com/generate_insult.php?lang=en&type=json').then(res => res.json())
-    if (!res) return msg.util.reply(`${ohNo} There seems to be a problem sorry.`).then(msg.delete())
-    const insult = res.insult
-    const insultRes = insult.toLowerCase()
-
-    m.edit(`${member}, ${insultRes}.`).then(msg.delete())
+    try {
+      const searchData = await funHelper.insult()
+      m.edit(`${member}, ${searchData}`).then(msg.delete())
+    } catch (err) {
+      signale.error({ prefix: '[Insult]', message: err.message })
+      return m.edit(`${ohNo} Couldn't find a sick enough burn...`).then(msg.delete(), m.delete({ timeout: 5000 }))
+    }
   }
 }
 module.exports = InsultCommand
