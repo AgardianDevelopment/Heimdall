@@ -35,8 +35,8 @@ class PollCommand extends Command {
 
     // Send Embed and add reactions for voting
     const m = await msg.channel.send({ embed }).then(function (m) {
-      m.react(goodEmoji.id)
-      m.react(badEmoji.id)
+      m.react(goodEmoji)
+      m.react(badEmoji)
       msg.delete()
     })
   }
