@@ -1,13 +1,13 @@
 const { Command } = require('discord-akairo')
 const nekoAPI = require('../../../helpers/nekoAPIs')
 
-class YuriCommand extends Command {
+class YaoiCommand extends Command {
   constructor () {
-    super('yuri', {
-      aliases: ['yuri'],
+    super('yaoi', {
+      aliases: ['yaoi'],
       category: 'nsfw',
       description: {
-        content: 'Welcome to yuri.'
+        content: 'Returns a random naughty yaoi.'
       },
       cooldown: 3000,
       ratelimit: 2
@@ -20,21 +20,21 @@ class YuriCommand extends Command {
     if (nsfwMode !== true || !msg.channel.nsfw) return msg.util.reply(':underage: We gotta go someplace NSFW for this sorta thing.').then(msg => { msg.delete({ timeout: 5000 }) })
 
     const loading = await this.client.emojis.resolve(process.env.LOADING)
-    const m = await msg.channel.send(`${loading} **I love you so much that I even touch myself with the pen I stole from you.**`)
+    const m = await msg.channel.send(`${loading} **Docking sequence engaged.**`)
 
-    const searchData = await nekoAPI.nekoLife('yuri')
+    const searchData = await nekoAPI.nekoBot('yaoi')
 
     const embed = this.client.util.embed()
       .setTitle('Image didn\'t load click here.')
-      .setURL(searchData.url)
+      .setURL(searchData.message)
       .setColor(process.env.EMBED)
       .setTimestamp()
-      .setImage(searchData.url)
-      .setFooter(`Requested by ${msg.author.tag} | NekosLife API`, `${msg.author.displayAvatarURL()}`)
+      .setImage(searchData.message)
+      .setFooter(`Requested by ${msg.author.tag} | NekoBot API`, `${msg.author.displayAvatarURL()}`)
 
     msg.channel.send({ embed })
       .then(msg.delete())
       .then(m.delete())
   }
 }
-module.exports = YuriCommand
+module.exports = YaoiCommand

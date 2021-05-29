@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo')
-const fetch = require('node-fetch')
+const drep = require('../../helpers/drep')
 
 class DisRepCommand extends Command {
   constructor () {
@@ -31,9 +31,6 @@ class DisRepCommand extends Command {
   }
 
   async exec (msg, { member }) {
-    // Fetch guild member
-    const guildMember = msg.guild.member(member)
-
     // Loading emojis from emoji server
     const loading = await this.client.emojis.resolve(process.env.LOADING)
 
@@ -41,16 +38,7 @@ class DisRepCommand extends Command {
     const m = await msg.channel.send(`${loading} **Checking DiscordRep for this user**`)
 
     // Calling API for User's Rep
-    var requestOptions = {
-      method: 'get',
-      headers: {
-        Accept: 'application/json',
-        Authorization: process.env.DREP
-      },
-      redirect: 'follow'
-    }
-
-    var userRep = await fetch(`https://discordrep.com/api/v3/rep/${guildMember.id}`, requestOptions).then(res => res.json())
+    const searchData = await drep.reputation(member)
 
     // Build embeded message
     const embed = this.client.util.embed()
@@ -60,14 +48,16 @@ class DisRepCommand extends Command {
       .setThumbnail('https://discordrep.com/favicon.png')
       .setFooter(`Requested by ${msg.author.tag} | DiscordRep API`, `${msg.author.displayAvatarURL()}`)
       .addField(`${member.tag}`, [
-        `**❯ Upvotes**: ${userRep.upvotes}`,
-        `**❯ Downvotes**: ${userRep.downvotes}`,
-        `**❯ XP**: ${userRep.xp}`,
-        `**❯ Rank**: ${userRep.rank}`
+        `**❯ Upvotes**: ${searchData.upvotes}`,
+        `**❯ Downvotes**: ${searchData.downvotes}`,
+        `**❯ XP**: ${searchData.xp}`,
+        `**❯ Rank**: ${searchData.rank}`
       ])
       .addField('DiscordRep Link', `https://discordrep.com/u/${member.id}`)
     // Send edited embed message
-    m.edit({ embed }).then(msg.delete())
+    msg.channel.send({ embed })
+      .then(msg.delete())
+      .then(m.delete())
   }
 }
 

@@ -61,7 +61,9 @@ class tmdbCommand extends Command {
           .addField('Release Date', movieResults.release_date, true)
           .addField('More Info', `[TMDB](https://www.themoviedb.org/movie/${movieResults.id})`)
 
-        m.edit({ embed }).then(msg.delete())
+        msg.channel.send({ embed })
+          .then(msg.delete())
+          .then(m.delete())
       } catch (err) {
         signale.error({ prefix: '[Movie Query]', message: err.message })
         return m.edit(`${ohNo} Couldn't find that movie...`).then(msg.delete(), m.delete({ timeout: 5000 }))
