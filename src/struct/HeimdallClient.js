@@ -4,6 +4,7 @@ const Database = require('./Database')
 const path = require('path')
 const SettingsProvider = require('./SettingsProviders')
 const Setting = require('../models/settings')
+const { Client: StatcordClient } = require('statcord.js')
 
 class HeimdallClient extends AkairoClient {
   constructor (config) {
@@ -14,6 +15,14 @@ class HeimdallClient extends AkairoClient {
       disableEveryone: true,
       disabledEvents: ['TYPING_START'],
       partials: ['MESSAGE']
+    })
+
+    this.statCord = new StatcordClient({
+      client: this,
+      key: process.env.STATCORD,
+      postCpuStatistics: true,
+      postMemStatistics: true,
+      postNetworkStatistics: true
     })
 
     this.commandHandler = new CommandHandler(this, {
@@ -56,7 +65,8 @@ class HeimdallClient extends AkairoClient {
     this.listenerHandler.setEmitters({
       commandHandler: this.commandHandler,
       inhibitorHandler: this.inhibitorHandler,
-      listenerHandler: this.listenerHandler
+      listenerHandler: this.listenerHandler,
+      statCord: this.statCord
     })
 
     this.commandHandler.loadAll()

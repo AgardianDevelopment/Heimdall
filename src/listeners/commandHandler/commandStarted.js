@@ -12,6 +12,7 @@ class CommandStartedListener extends Listener {
 
   exec (message, command) {
     const tag = message.guild ? message.guild.name : `${message.author.tag}/PM`
+    this.client.statCord.postCommand(command.id, message.author.id)
     signale.info(`=> ${command.id} on`, tag)
   }
 }

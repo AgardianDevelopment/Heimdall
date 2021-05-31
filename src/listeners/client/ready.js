@@ -23,6 +23,7 @@ class ReadyListener extends Listener {
 
     /* Post Intial Client Activity */
     client.user.setActivity(`Over ${this.client.guilds.cache.size} Realms`, { type: 'WATCHING' })
+    this.client.statCord.autopost()
 
     /* Bot Listings STATS */
     const topStats = require('../../helpers/listTop')
